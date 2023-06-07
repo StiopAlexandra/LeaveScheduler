@@ -1,0 +1,106 @@
+export const countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Cape Verde", "Cayman Islands", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cruise Ship", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kuwait", "Kyrgyz Republic", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Mauritania", "Mauritius", "Mexico", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Namibia", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "Norway", "Oman", "Pakistan", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre &amp; Miquelon", "Samoa", "San Marino", "Satellite", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sri Lanka", "St Kitts &amp; Nevis", "St Lucia", "St Vincent", "St. Lucia", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad &amp; Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks &amp; Caicos", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "Uruguay", "Uzbekistan", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
+
+//export const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+
+export const weekDays = [
+  {label:'Sunday', value: 0},
+  {label:'Monday', value: 1},
+  {label:'Tuesday', value: 2},
+  {label:'Wednesday', value: 3},
+  {label:'Thursday', value: 4},
+  {label:'Friday', value: 5},
+  {label:'Saturday', value: 6}
+]
+export const dateFormats = [
+  {label:'mm/dd/yyyy', value:'MM/d/Y'},
+  {label:'dd/mm/yyyy', value:'d/MM/Y'},
+  {label:'dd.mm.yyyy', value:'d.MM.Y'},
+  {label:'yyyy-mm-dd', value:'Y-MM-d'}
+]
+
+export const timeFormats = [
+  {label:'24-Hour Day', value:'H:i'},
+  {label:'12-Hour Day', value:'h:i a'}
+]
+
+export const timezones = [
+  {label:'International Date Line West (UTC-12:00)',value:'Etc/GMT+12'},
+  {label:'Midway Island Samoa (UTC-11:00)',value:'Pacific/Midway'},
+  {label:'Hawaii (UTC-10:00)', value:'US/Hawaii'},
+  {label:'Alaska (UTC-09:00)', value:'US/Alaska'},
+  {label:'Pacific Time  (US & Canada); Tijuana (UTC-08:00)', value:'US/Pacific'},
+  {label:'Arizona (UTC-07:00)', value:'US/Arizona'},
+  {label:'Chihuahua, La Paz, Mazatla (UTC-07:00)', value:'America/Chihuahua'},
+  {label:'Mountain Time (US & Canada) (UTC-07:00)', value:'US/Mountain'},
+  {label:'Central America (UTC-06:00)', value:'Mexico/General'},
+  {label:'Central Time (US & Canada) (UTC-06:00)', value:'US/Central'},
+  {label:'Guadalajara, Mexico City, Monterrey (UTC-06:00)', value:'America/Monterrey'},
+  {label:'Saskatchewan (UTC-06:00)', value:'Canada/Saskatchewan'},
+  {label:'Bogota, Lima, Quito (UTC-05:00)', value:'America/Bogota'},
+  {label:'Eastern Time (US & Canada) (UTC-05:00)', value:'US/Eastern'},
+  {label:'Indiana (East) (UTC-05:00)', value:'US/East-Indiana'},
+  {label:'Caracas (UTC-04:30)', value:'America/Caracas'},
+  {label:'Atlantic Time (Canada) (UTC-04:00)', value:'Canada/Atlantic'},
+  {label:'La Paz (UTC-04:00)', value:'America/La_Paz'},
+  {label:'Santiago (UTC-04:00)', value:'America/Santiago'},
+  {label:'Newfoundland (UTC-03:30)', value:'America/St_Johns'},
+  {label:'Brasilia (UTC-03:00)', value:'Brazil/East'},
+  {label:'Buenos Aires, Georgetown (UTC-03:00)', value:'America/Buenos_Aires'},
+  {label:'Mid-Atlantic (UTC-02:00)', value:'Etc/GMT+2'},
+  {label:'Azores (UTC-01:00)', value:'Atlantic/Azores'},
+  {label:'Cape Verde Is. (UTC-01:00)', value:'Atlantic/Cape_Verde'},
+  {label:'Casablanca, Monrovia (UTC)', value:'Africa/Casablanca'},
+  {label:'Greenwich Mean Time: Dublin, Lisbon, London (UTC)', value:'Europe/London'},
+  {label:'Amsterdam, Berlin, Rome, Stockholm (UTC+01:00)', value:'Europe/Amsterdam'},
+  {label:'Belgrade, Budapest, Ljubljana, Prague (UTC+01:00)', value:'Europe/Budapest'},
+  {label:'Brussels, Copenhagen, Madrid, Paris (UTC+01:00)', value:'Europe/Madrid'},
+  {label:'Sarajevo, Skopje, Warsaw, Zagreb (UTC+01:00)', value:'Europe/Sarajevo'},
+  {label:'West Central Africa (UTC+01:00)', value:'Africa/Kinshasa'},
+  {label:'Athens, Istanbul, Minsk (UTC+02:00)', value:'Europe/Athens'},
+  {label:'Bucharest (UTC+02:00)', value:'Europe/Bucharest'},
+  {label:'Cairo (UTC+02:00)', value:'Africa/Cairo'},
+  {label:'Harare, Pretoria (UTC+02:00)', value:'Africa/Harare'},
+  {label:'Helsinki, Kyiv, Riga, Sofia, Tallinn (UTC+02:00)', value:'Europe/Helsinki'},
+  {label:'Jerusalem (UTC+02:00)', value:'Asia/Jerusalem'},
+  {label:'Baghdad (UTC+03:00)', value:'Asia/Baghdad'},
+  {label:'Kuwait, Riyadh (UTC+03:00)', value:'Asia/Kuwait'},
+  {label:'Nairobi (UTC+03:00)', value:'Africa/Nairobi'},
+  {label:'Moscow, St. Petersburg, Volgograd (UTC+03:00)', value:'Europe/Moscow'},
+  {label:'Tehran (UTC+03:30)', value:'Asia/Tehran'},
+  {label:'Abu Dhabi, Muscat (UTC+04:00)', value:'Asia/Muscat'},
+  {label:'Baku, Tbilisi, Yerevan (UTC+04:00)', value:'Asia/Baku'},
+  {label:'Kabul (UTC+04:30)', value:'Asia/Kabul'},
+  {label:'Ekaterinburg (UTC+05:00)', value:'Asia/Yekaterinburg'},
+  {label:'Islamabad, Karachi, Tashkent (UTC+05:00)', value:'Asia/Tashkent'},
+  {label:'Chennai, Kolkata, Mumbai, New Delhi (UTC+05:30)', value:'Asia/Calcutta'},
+  {label:'Kathmandu (UTC+05:45)', value:'Asia/Katmandu'},
+  {label:'Almaty, Novosibirsk (UTC+06:00)', value:'Asia/Novosibirsk'},
+  {label:'Astana, Dhaka (UTC+06:00)', value:'Asia/Dhaka'},
+  {label:'Sri Lanka (UTC+05:30)', value:'Asia/Colombo'},
+  {label:'Rangoon (UTC+06:30)', value:'Asia/Rangoon'},
+  {label:'Bangkok, Hanoi, Jakarta (UTC+07:00)', value:'Asia/Bangkok'},
+  {label:'Krasnoyarsk (UTC+07:00)', value:'Asia/Krasnoyarsk'},
+  {label:'Beijing, Chongging, Hong Kong, Urumgi (UTC+08:00)', value:'Asia/Chongqing'},
+  {label:'Irkutsk, Ulaan Bataar (UTC+08:00)', value:'Asia/Irkutsk'},
+  {label:'Kuala Lumpur, Singapore (UTC+08:00)', value:'Asia/Kuala_Lumpur'},
+  {label:'Perth (UTC+08:00)', value:'Australia/Perth'},
+  {label:'Taipei (UTC+08:00)', value:'Asia/Taipei'},
+  {label:'Osaka, Sapporo, Tokyo (UTC+09:00)', value:'Asia/Tokyo'},
+  {label:'Seoul (UTC+09:00)', value:'Asia/Seoul'},
+  {label:'Yakutsk (UTC+09:00)', value:'Asia/Yakutsk'},
+  {label:'Adelaide (UTC+09:30)', value:'Australia/Adelaide'},
+  {label:'Darwin (UTC+09:30)', value:'Australia/Darwin'},
+  {label:'Brisbane (UTC+10:00)', value:'Australia/Brisbane'},
+  {label:'Canberra, Melbourne, Sydney (UTC+10:00)', value:'Australia/Canberra'},
+  {label:'Guam, Port Moresby (UTC+10:00)', value:'Pacific/Port_Moresby'},
+  {label:'Hobart (UTC+10:00)', value:'Australia/Hobart'},
+  {label:'Vladivostok (UTC+10:00)', value:'Asia/Vladivostok'},
+  {label:'Magadan (UTC+11:00)', value:'Asia/Magadan'},
+  {label:'Solomon Is., New Caledonia (UTC+11:00)', value:'Pacific/Noumea'},
+  {label:'Auckland, Wellington (UTC+12:00)', value:'Pacific/Auckland'},
+  {label:'Kamchatka (UTC+12:00)', value:'Asia/Kamchatka'},
+  {label:'Fiji, Marshall Is. (UTC+12:00)', value:'Pacific/Fiji'},
+  {label:'Nuku\'alofa (UTC+13:00)', value:'Pacific/Tongatapu'}
+]
+
+export const userTypes = ['Full-time', 'Part-time', 'Contractor', 'Internship']
