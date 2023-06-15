@@ -4,6 +4,7 @@ export const typeDefs = gql`
     type UserLeave {
         _id: ID!
         notes: String
+        reason: String
         status: String!
         startDate: Date!
         endDate: Date!
@@ -39,6 +40,7 @@ export const typeDefs = gql`
         id: ID!
         status: String
         notes: String
+        reason: String
         startDate: Date
         endDate: Date
         leaveType: ID

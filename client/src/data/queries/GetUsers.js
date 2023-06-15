@@ -7,6 +7,17 @@ export default gql`
             name
             email
             manager
+            department {
+                name
+                color
+            }
+            phone
+            address
+            role
+            type
+            dateOfBirth
+            dateOfEmployment
+            status
         }
     }
 `

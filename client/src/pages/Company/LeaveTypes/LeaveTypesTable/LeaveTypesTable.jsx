@@ -115,8 +115,7 @@ const LeaveTypesTable = () => {
         fetchPolicy: 'network-only',
     })
 
-    const connectionField = 'getLeaveTypes'
-    const leaveTypes = useMemo(() => data?.[connectionField] || [], [data])
+    const leaveTypes = data?.getLeaveTypes || []
 
     const onClose = useCallback(
         () => {

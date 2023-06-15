@@ -1,5 +1,6 @@
 import React, {useContext, useCallback, useState} from 'react'
 import {alpha} from '@mui/material/styles'
+import {useQuery} from '@apollo/client'
 import {Box, Divider, Typography, MenuItem, Avatar, IconButton, Popover} from '@mui/material'
 import avatar from '../../resources/images/avatar.jpg'
 import { useTranslation } from 'react-i18next'
@@ -7,11 +8,23 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined'
 import {NavLink as RouterLink} from 'react-router-dom'
 import UserContext from '../../contexts/UserContext'
+import GetUser from "../../data/queries/GetUser";
 
-export default function AccountPopover() {
+const AccountPopover = () => {
     const [open, setOpen] = useState(null)
-    const {user} = useContext(UserContext)
+    const context = useContext(UserContext);
+    const id =  context?.user?._id
     const { t } = useTranslation()
+
+    const {
+        data
+    } = useQuery(GetUser, {
+        variables: {
+            id
+        },
+        fetchPolicy: 'network-only',
+    })
+    const user = data?.getUser
 
     const handleOpen = useCallback((event) => {
         setOpen(event.currentTarget)
@@ -94,3 +107,5 @@ export default function AccountPopover() {
         </>
     )
 }
+
+export default AccountPopover

@@ -38,6 +38,10 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now,
     },
+    status: {
+        type: String,
+        default: 'active',
+    },
     phone: {
         type: String,
     },

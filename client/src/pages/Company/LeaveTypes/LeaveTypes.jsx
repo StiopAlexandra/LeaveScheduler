@@ -1,11 +1,10 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {useTranslation} from 'react-i18next';
 import { styled } from '@mui/material'
 import Button from "../../../components/common/Button/Button";
 import useOpenState from "../../../hooks/useOpenState";
 import {LeaveTypesTable} from "./LeaveTypesTable";
 import AddLeaveType from "./AddLeaveType";
-import EditLeaveType from "./EditLeaveType";
 
 const StyledContainer = styled('div')(({theme}) => ({
     padding: '20px',

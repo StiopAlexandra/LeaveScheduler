@@ -12,12 +12,22 @@ import EditLeave from "./EditLeave";
 import CalendarHeader from "./CalendarHeader";
 import ConfigsContext from "../../../../contexts/ConfigsContext";
 import GetCompanyLeaves from "../../../../data/queries/GetCompanyLeaves";
-import {differenceInDays} from 'date-fns';
 
 const StyledContainer = styled('div')(({theme}) => ({
-    maxWidth: '1150px',
     margin: 'auto',
-    padding: '25px',
+    boxSizing: 'border-box',
+    [theme?.breakpoints.up('sm')]: {
+        padding: '25px',
+    },
+    [theme?.breakpoints.down('sm')]: {
+        padding: '25px 0px',
+    },
+    [theme?.breakpoints.up('md')]: {
+        maxWidth: '1150px',
+    },
+    [theme?.breakpoints.down('md')]: {
+        width: '100%',
+    },
     borderRadius: '10px',
     background: theme.palette.background.default,
 }))
@@ -57,11 +67,6 @@ const Leaves = ({userId}) => {
     })
 
     const userLeaves = userData?.getUserLeaves || []
-
-    const userHoliday = userLeaves.filter(({leaveType}) => leaveType.name === 'Holiday')
-    const totalHoliday = userHoliday.reduce((acc, { days}) => {
-        return acc + days
-    }, 0)
 
     const events = [...userLeaves, ...companyLeaves].map(({_id: id, title, startDate, endDate, leaveType, notes}, index) => {
         return {
@@ -109,7 +114,7 @@ const Leaves = ({userId}) => {
 
     return (
         <StyledContainer>
-            <CalendarHeader calendarRef={calendarRef} onShowAdd={onShowAdd} totalHoliday={totalHoliday} userLeaves={userLeaves}/>
+            <CalendarHeader calendarRef={calendarRef} onShowAdd={onShowAdd} userLeaves={userLeaves}/>
             <FullCalendar
                 ref={calendarRef}
                 events={events}

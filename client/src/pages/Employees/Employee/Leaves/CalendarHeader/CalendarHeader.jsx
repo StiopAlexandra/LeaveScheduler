@@ -2,11 +2,13 @@ import React, {useEffect, useState} from 'react'
 import {useTranslation} from 'react-i18next';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import {Button, IconButton, SvgIcon, styled, Stack, Typography} from '@mui/material'
+import {Button, IconButton, styled, Typography} from '@mui/material'
 import {getYear} from 'date-fns';
 import HolidayChart from "./HolidayChart";
 import GetLeaveTypes from "../../../../../data/queries/GetLeaveTypes";
-import {useMutation, useQuery} from '@apollo/client'
+import {useQuery} from '@apollo/client'
+import {differenceInDays} from 'date-fns';
+import HistoryTable from "./HistoryTable";
 
 const PREFIX = 'LeavesHeader'
 const classes = {
@@ -26,15 +28,31 @@ const StyledHeader = styled('div')(({theme}) => ({
         justifyContent: 'space-between'
     },
     [`& .${classes.grid}`]: {
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr 1fr',
-        padding: theme?.spacing(3),
+        display: 'flex',
+        [theme?.breakpoints.up('md')]: {
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            padding: theme?.spacing(3),
+        },
+        [theme?.breakpoints.down('md')]: {
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: theme?.spacing(3, 0),
+            gap: theme?.spacing(3),
+        },
     },
     [`& .${classes.table}`]: {
-        gridColumn: 'span 2'
+        [theme?.breakpoints.up('sm')]: {
+           width: '555px',
+        },
+        [theme?.breakpoints.down('sm')]: {
+            width: '100%',
+        },
     },
     [`& .${classes.chart}`]: {
-        gridColumn: 1 / 2
+        display: 'flex',
+        flexDirection: 'column',
     },
     [`& .${classes.year}`]: {
         display: 'flex',
@@ -71,6 +89,44 @@ const CalendarHeader = ({calendarRef, onShowAdd, userLeaves}) => {
     })
 
     const holiday = data?.getLeaveTypes[0]
+
+    const currentYearUserLeaves = userLeaves.filter(({startDate}) => getYear(date) === getYear(new Date(startDate)))
+
+    const groups = {};
+
+    currentYearUserLeaves.forEach((userLeave) => {
+        const { leaveType, startDate, endDate, days } = userLeave;
+        const { name, color } = leaveType;
+        const total = differenceInDays(new Date(endDate), new Date(startDate))
+        if (!groups[name]) {
+            groups[name] = [];
+        }
+        groups[name].push({
+            color,
+            total,
+            days
+        });
+    });
+
+    const history = []
+
+    for (let [key, value] of Object.entries(groups)) {
+        const total = value.reduce((acc, { total }) => {
+            return acc + total
+        }, 0)
+        const days = value.reduce((acc, { days }) => {
+            return acc + days
+        }, 0)
+
+        const color = value[0].color
+
+        history.push({
+            name: key,
+            total,
+            days,
+            color
+        })
+    }
 
     const userHoliday = userLeaves.filter(({leaveType, startDate}) => leaveType.name === 'Holiday' && getYear(date) === getYear(new Date(startDate)))
     const totalHoliday = userHoliday.reduce((acc, { days}) => {
@@ -126,11 +182,12 @@ const CalendarHeader = ({calendarRef, onShowAdd, userLeaves}) => {
             </div>
             <div className={classes.grid}>
                 <div className={classes.chart}>
-                    <Typography align={'center'} variant={'h5'} sx={{paddingBottom: '15px'}}>{t('Holiday Allowance')}</Typography>
+                    <Typography align={'center'} variant={'h5'} sx={{paddingBottom: '25px'}}>{t('Holiday Allowance')}</Typography>
                     <HolidayChart totalHoliday={totalHoliday} holiday={holiday}/>
                 </div>
                 <div className={classes.table}>
-                    <Typography align={'center'} variant={'h5'} sx={{paddingBottom: '15px'}}>{t('Leave History')}</Typography>
+                    <Typography align={'center'} variant={'h5'} sx={{paddingBottom: '25px'}}>{t('Leave History')}</Typography>
+                    <HistoryTable history={history}/>
                 </div>
             </div>
         </StyledHeader>

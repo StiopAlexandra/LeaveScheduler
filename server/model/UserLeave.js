@@ -10,6 +10,9 @@ const userLeaveSchema = new Schema({
     notes: {
         type: String,
     },
+    reason: {
+        type: String,
+    },
     status: {
         type: String,
         required: true

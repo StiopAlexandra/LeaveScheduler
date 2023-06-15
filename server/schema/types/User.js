@@ -14,6 +14,7 @@ export const typeDefs = gql`
         address: String
         role: String
         type: String
+        status: String
         dateOfBirth: Date
         dateOfEmployment: Date
     }
@@ -43,6 +44,7 @@ export const typeDefs = gql`
         address: String
         role: String
         type: String
+        status: String
         dateOfBirth: Date
         dateOfEmployment: Date
     }
@@ -56,6 +58,7 @@ export const typeDefs = gql`
         address: String
         role: String
         type: String
+        status: String
         dateOfBirth: Date
         dateOfEmployment: Date
     }

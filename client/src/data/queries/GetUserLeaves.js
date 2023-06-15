@@ -9,10 +9,19 @@ export default gql`
             startDate
             endDate
             days
+            reason
             leaveType {
                 _id
                 name
                 color
+                allowanceDays
+            }
+            user {
+                name
+                department {
+                    name
+                    color
+                }
             }
         }
     }

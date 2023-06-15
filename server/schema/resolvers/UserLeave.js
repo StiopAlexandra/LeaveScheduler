@@ -1,6 +1,7 @@
 import Company from '../../model/Company.js'
 import UserLeave from '../../model/UserLeave.js'
 import LeaveType from '../../model/LeaveType.js'
+import User from "../../model/User.js";
 
 export const resolvers = {
     Query: {
@@ -18,8 +19,6 @@ export const resolvers = {
         createUserLeave: async (_, args, context) => {
             const { input } = args;
             const {companyId} = context
-
-            console.log(input)
 
             try {
                 const userLeave = await UserLeave.create({

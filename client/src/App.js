@@ -40,6 +40,7 @@ const adminPages = [
 
 const App = () => {
     const context = useContext(UserContext);
+    const id =  context?.user?._id
 
     const pages = useMemo(() => {
         return context?.user?.manager ? adminPages : employeePages
@@ -60,8 +61,9 @@ const App = () => {
                 })}
                 <Route path="/employees/:id/:type" element={<Employee />} />
                 <Route path="/company/:type" element={<Company />} />
+                <Route path="/requests/:type" element={<Requests />} />
                 <Route path="/" element={<Navigate to="/dashboard" replace/>}/>
-                <Route path="/settings" element={<Settings/>}/>
+                <Route path="/settings" element={<Settings id={id}/>}/>
             </Route>
             <Route path="/reset-password/:resetToken" element={<ResetPassword/>} />
             <Route path="/login" element={<SignIn/>}/>

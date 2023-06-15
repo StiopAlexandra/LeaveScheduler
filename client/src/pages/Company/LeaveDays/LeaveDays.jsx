@@ -1,19 +1,24 @@
-import React, {useCallback, useState} from 'react'
+import React, {createRef, useCallback, useState} from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import multiMonthPlugin from '@fullcalendar/multimonth'
 import interactionPlugin from '@fullcalendar/interaction'
 import { styled } from '@mui/material'
-import {weekDays} from "../../../data/static/constants";
 import useOpenState from "../../../hooks/useOpenState";
 import AddLeave from "./AddLeave";
 import {useQuery} from '@apollo/client'
 import GetCompanyLeaves from "../../../data/queries/GetCompanyLeaves";
 import EditLeave from "./EditLeave";
+import CalendarHeader from "./CalendarHeader";
 
 const StyledContainer = styled('div')(({theme}) => ({
     maxWidth: '1150px',
     margin: 'auto',
-    padding: '25px',
+    [theme?.breakpoints.up('sm')]: {
+        padding: '25px',
+    },
+    [theme?.breakpoints.down('sm')]: {
+        padding: '25px 0px',
+    },
     borderRadius: '10px',
     background: theme.palette.background.default,
 }))
@@ -24,6 +29,7 @@ const LeaveDays = ({company}) => {
     const [start, setStart] = useState('')
     const [end, setEnd] = useState('')
     const [editItem, setEditItem] = useState({})
+    const calendarRef = createRef();
 
     const {
         data
@@ -74,18 +80,16 @@ const LeaveDays = ({company}) => {
 
     return (
         <StyledContainer>
+            <CalendarHeader calendarRef={calendarRef} onShowAdd={onShowAdd}/>
             <FullCalendar
+                ref={calendarRef}
                 events={events}
                 height={'auto'}
                 plugins={[multiMonthPlugin, interactionPlugin]}
                 initialView="multiMonthYear"
                 selectable={true}
                 selectMirror={true}
-                headerToolbar={{
-                    start: 'today',
-                    center: 'title',
-                    end: 'prev,next'
-                }}
+                headerToolbar={false}
                 longPressDelay={1}
                 editable={false}
                 multiMonthMinWidth={350}

@@ -220,6 +220,16 @@ const getTheme = (mode) => {
                 fontSize: pxToRem(14),
                 textTransform: 'capitalize',
             },
+            tag: {
+                height: 24,
+                maxHeight: 24,
+                display: 'inline-flex',
+                alignItems: 'center',
+                padding: '0 10px',
+                fontSize: '12px',
+                fontWeight: 600,
+                borderRadius: '12px'
+            }
         }
     })
 

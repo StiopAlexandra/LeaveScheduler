@@ -12,6 +12,8 @@ const useColumnsInitializer = (columnsState, cellConfigs) => {
         let columnItem = {
             field: key,
             sortable: false,
+            headerAlign: 'center',
+            align: 'center',
             ...cellConfigs[key],
             ...value,
             ...(cellConfigs[key]?.headerName ? { headerName: t(cellConfigs[key].headerName) } : {})

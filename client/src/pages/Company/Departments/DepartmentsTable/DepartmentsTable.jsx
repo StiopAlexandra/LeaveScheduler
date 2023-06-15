@@ -114,8 +114,7 @@ const DepartmentsTable = () => {
         fetchPolicy: 'network-only',
     })
 
-    const connectionField = 'getDepartments'
-    const departments = useMemo(() => data?.[connectionField] || [], [data])
+    const departments = data?.getDepartments|| []
 
     const onClose = useCallback(
         () => {

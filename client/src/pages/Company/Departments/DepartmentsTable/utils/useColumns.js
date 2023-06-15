@@ -6,23 +6,23 @@ import CircleIcon from '@mui/icons-material/Circle';
 const useColumns = ({onDelete, onEdit}) => {
 	return useMemo(() => {
 		return {
-			name: {
-				hide: false,
-				seq: 0,
-				minWidth: 150,
-				headerName: 'Name',
-				sortable: true,
-			},
 			color: {
 				hide: false,
-				seq: 1,
-				width: 100,
-				headerName: 'Color',
+				seq: 0,
+				width: 55,
+				headerName: '',
 				renderCell: (params) => {
 					return (
 						<CircleIcon sx={{color: params.value}}/>
 					)
 				}
+			},
+			name: {
+				hide: false,
+				seq: 1,
+				minWidth: 170,
+				headerName: 'Name',
+				sortable: true,
 			},
 			maxAbsentEmployees: {
 				hide: false,

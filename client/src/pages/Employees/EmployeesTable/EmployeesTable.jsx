@@ -12,12 +12,12 @@ import {useQuery, useMutation} from '@apollo/client'
 import GetUsers from "../../../data/queries/GetUsers";
 import useColumns from "./utils/useColumns";
 import UserUIDefaultState from "./utils/UserUIDefaultState";
-import useColumnsInitializer from "./utils/useColumnsInitializer";
 
 import {Typography, styled} from '@mui/material'
-import {useMUILocales} from "./utils/useMUILocales";
 import CustomToolbar from "./components/CustomToolbar";
 import DeleteUser from "../../../data/mutations/DeleteUser";
+import useColumnsInitializer from "../../../hooks/useColumnsInitializer";
+import useMUILocales from "../../../hooks/useMUILocales";
 
 const StyledGridOverlay = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -115,8 +115,7 @@ const EmployeesTable = () => {
         fetchPolicy: 'network-only',
     })
 
-    const connectionField = 'getUsers'
-    const users = useMemo(() => data?.[connectionField] || [], [data])
+    const users = data?.getUsers || []
 
     const columnSpecificCellConfigs = useColumns()
 
@@ -237,7 +236,6 @@ const EmployeesTable = () => {
                 }}
                 onCellClick={onItemClick}
                 disableRowSelectionOnClick
-                //onRowClick={onRowClick}
                 localeText={gridLocales}
                 checkboxSelection
                 disableColumnMenu

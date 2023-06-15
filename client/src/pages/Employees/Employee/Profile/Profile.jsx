@@ -386,15 +386,15 @@ const Profile = ({user, refetch, queryLoading, dateFormat = 'd/MM/Y'}) => {
                                 render={({field: {onChange, value}, fieldState: {error}}) => {
                                     return (
                                         <FormControl error={!!error}>
-                                            <InputLabel shrink>{t('Type')}</InputLabel>
-                                            <InputLabel>{t('Type')}</InputLabel>
+                                            <InputLabel shrink>{t('Employment')}</InputLabel>
+                                            <InputLabel>{t('Employment')}</InputLabel>
                                             <Select
                                                 fullWidth
                                                 notched={true}
                                                 value={value || ''}
                                                 onChange={onChange}
-                                                label={t('Type')}
-                                                input={<OutlinedInput label={t('Type')}/>}
+                                                label={t('Employment')}
+                                                input={<OutlinedInput label={t('Employment')}/>}
                                             >
                                                 {userTypes.map((type) => (
                                                     <MenuItem
