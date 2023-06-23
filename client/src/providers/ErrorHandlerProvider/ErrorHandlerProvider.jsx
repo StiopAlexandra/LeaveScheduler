@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { ErrorBoundary } from '../../components/Error'
+import { ApolloErrorHandler, ErrorBoundary } from '../../components/Error'
 
 const ErrorHandlerProvider = ({ children }) => {
 	return (
 		<ErrorBoundary>
-			{children}
+			<ApolloErrorHandler>{children}</ApolloErrorHandler>
 		</ErrorBoundary>
 	)
 }

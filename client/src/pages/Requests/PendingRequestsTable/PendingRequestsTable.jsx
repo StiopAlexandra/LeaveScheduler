@@ -133,7 +133,7 @@ const PendingRequestsTable = ({year}) => {
                         variables: {
                             input: {
                                 id,
-                                status: 'approved',
+                                status: 'accepted',
                             }
                         }
                     })
@@ -148,7 +148,7 @@ const PendingRequestsTable = ({year}) => {
         onShowDialog()
     }, [onShowDialog])
 
-    const columnSpecificCellConfigs = useColumns({onApprove, onReject})
+    const columnSpecificCellConfigs = useColumns()
 
     const [columns] = useColumnsInitializer(
         PendingRequestUIDefaultState.PendingRequestsTableUIKey.columns,

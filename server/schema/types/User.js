@@ -10,6 +10,7 @@ export const typeDefs = gql`
         company: Company!
         created: DateTime!
         department: Department
+        userLeave: [UserLeave]
         phone: String
         address: String
         role: String

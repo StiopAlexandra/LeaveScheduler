@@ -2,19 +2,56 @@ import mongoose from 'mongoose';
 import {ApolloServer} from 'apollo-server-express';
 import express from 'express';
 import cors from 'cors'
+import http from 'http';
 
 import config from "./config.js";
 import schema from './schema/index.js';
 import getUser from "./utils/context.js";
+import User from "./model/User.js";
+import tokenUtil from "./utils/token.js";
 
 mongoose.set("strictQuery", true);
 
+const app = express();
+
+app.use(cors());
+
 const server = new ApolloServer({
     schema,
-    context: async ({req}) => {
-        return await getUser(req)
+    context: async ({req, connection}) => {
+        if (connection) {
+            const { user, companyId } = connection.context;
+            return {
+                user,
+                companyId,
+            };
+        } else {
+            return await getUser(req)
+        }
+    },
+    subscriptions: {
+        onConnect: async(connectionParams) => {
+            const authParam = connectionParams[`Authorization`];
+            if (authParam) {
+                const decodedToken = await tokenUtil.getDecodedToken(
+                    authParam.replace('Bearer ', '')
+                );
+                return {
+                    user: await User.findOne({id: decodedToken.userId}),
+                    companyId: decodedToken.companyId
+                }
+            }
+        },
     },
 });
+
+server.applyMiddleware({
+    app,
+    path: '/graphql',
+});
+
+const httpServer = http.createServer(app);
+server.installSubscriptionHandlers(httpServer);
 
 mongoose.connect(config.MongoDbURI, {
     useNewUrlParser: true,
@@ -23,19 +60,9 @@ mongoose.connect(config.MongoDbURI, {
     .then(() => {
         console.log('MongoDB Connected');
 
-        const app = express();
-
-        app.use(cors())
-
-        server.applyMiddleware({
-            app,
-            path: '/',
+        httpServer.listen(config.Port, () => {
+            console.log(`GraphQL server running on http://localhost:${config.Port}/graphql`);
         });
-
-        return app.listen(config.Port);
-    })
-    .then(() => {
-        console.log(`GraphQL server running at ${config.Port}`);
     })
     .catch((err) => {
         console.error(err);

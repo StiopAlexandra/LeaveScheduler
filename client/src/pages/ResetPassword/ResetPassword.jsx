@@ -52,7 +52,6 @@ const ResetPassword = () => {
 
     const token = jwtDecode(resetToken)
     const id = token.userId
-    console.log(token.userId)
     const [showPassword, setShowPassword] = useState(false);
 
     const schema = Yup.object().shape({

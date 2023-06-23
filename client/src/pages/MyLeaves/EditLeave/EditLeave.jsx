@@ -84,7 +84,7 @@ const EditLeave = ({data, open, onClose, refetch}) => {
 
     const {
         control,
-        formState: {errors},
+        formState: {errors, isDirty},
         handleSubmit,
         getValues
     } = useForm({
@@ -109,6 +109,10 @@ const EditLeave = ({data, open, onClose, refetch}) => {
     const [updateUserLeave, {loading}] = useMutation(UpdateUserLeave)
 
     const onSubmit = useCallback(({notes, startDate, endDate, leaveType}) => {
+        if (!isDirty) {
+            onClose()
+            return
+        }
         const leaveTypeId = leaveTypes.find(item => item.name === leaveType)?._id
         const days = calculateWorkingDays(startDate, endDate, companySettings?.workingDays)
         updateUserLeave({
@@ -126,7 +130,7 @@ const EditLeave = ({data, open, onClose, refetch}) => {
             refetch()
             onClose()
         })
-    }, [onClose, updateUserLeave, leaveTypes, id, companySettings]);
+    }, [onClose, updateUserLeave, leaveTypes, id, companySettings, isDirty]);
 
 
     return (
@@ -180,7 +184,7 @@ const EditLeave = ({data, open, onClose, refetch}) => {
                             validate: {
                                 lessThanendDate: (date) => {
                                     if(getValues("endDate"))
-                                        return date < getValues("endDate")
+                                        return new Date(date) < new Date(getValues("endDate"))
                                 },
                             },
                         }}
@@ -191,8 +195,8 @@ const EditLeave = ({data, open, onClose, refetch}) => {
                                     disableMaskedInput={true}
                                     inputFormat={dateFormat}
                                     label={t('Start date')}
-                                    value={value}
                                     defaultValue={startDate}
+                                    value={value}
                                     onChange={onChange}
                                     renderInput={(params) =>
                                         <TextField
@@ -211,7 +215,7 @@ const EditLeave = ({data, open, onClose, refetch}) => {
                             validate: {
                                 moreThanStartDate: (date) => {
                                     if(getValues("startDate"))
-                                        return date > getValues("startDate")
+                                        return new Date(date) > new Date(getValues("startDate"))
                                 },
                             },
                         }}
@@ -222,8 +226,8 @@ const EditLeave = ({data, open, onClose, refetch}) => {
                                     disableMaskedInput={true}
                                     inputFormat={dateFormat}
                                     label={t('End date')}
-                                    value={value}
                                     defaultValue={endDate}
+                                    value={value}
                                     onChange={onChange}
                                     renderInput={(params) =>
                                         <TextField

@@ -4,7 +4,6 @@ import {
     alpha,
     FormControlLabel,
     Radio,
-    RadioGroup
 } from '@mui/material'
 import CircleIcon from '@mui/icons-material/Circle';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';

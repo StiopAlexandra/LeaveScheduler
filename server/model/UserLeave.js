@@ -5,7 +5,7 @@ const AutoIncrement = Inc(mongoose);
 
 const Schema = mongoose.Schema
 
-const userLeaveSchema = new Schema({
+export const userLeaveSchema = new Schema({
     _id: Number,
     notes: {
         type: String,

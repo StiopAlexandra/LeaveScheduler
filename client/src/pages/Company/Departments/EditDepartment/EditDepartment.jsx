@@ -78,7 +78,7 @@ const EditDepartment = ({data, open, onClose}) => {
 
     const {
         control,
-        formState: {errors},
+        formState: {errors, isDirty},
         handleSubmit,
     } = useForm({
         reValidateMode: 'onChange',
@@ -98,6 +98,10 @@ const EditDepartment = ({data, open, onClose}) => {
     })
 
     const onSubmit = useCallback(({name, maxAbsentEmployees}) => {
+        if (!isDirty && selectedColor === color) {
+            onClose()
+            return
+        }
         updateDepartment({
             variables: {
                 input: {
@@ -110,7 +114,7 @@ const EditDepartment = ({data, open, onClose}) => {
         }).then(() => {
             onClose()
         })
-    }, [onClose, updateDepartment, selectedColor, id]);
+    }, [onClose, updateDepartment, selectedColor, id, isDirty, color]);
 
     return (
         <StyledDialog

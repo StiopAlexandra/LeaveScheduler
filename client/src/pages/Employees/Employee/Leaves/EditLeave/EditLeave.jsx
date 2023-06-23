@@ -96,7 +96,7 @@ const EditLeave = ({open, onClose, editItem, dateFormat, refetch}) => {
 
     const {
         control,
-        formState: {isDirty, dirtyFields, errors},
+        formState: {isDirty, errors},
         handleSubmit,
         getValues
     } = useForm({
@@ -199,7 +199,7 @@ const EditLeave = ({open, onClose, editItem, dateFormat, refetch}) => {
                             validate: {
                                 lessThanendDate: (date) => {
                                     if(getValues("endDate"))
-                                        return date < getValues("endDate")
+                                        return new Date(date) < new Date(getValues("endDate"))
                                 },
                             },
                         }}
@@ -231,7 +231,7 @@ const EditLeave = ({open, onClose, editItem, dateFormat, refetch}) => {
                             validate: {
                                 moreThanStartDate: (date) => {
                                     if(getValues("startDate"))
-                                        return date > getValues("startDate")
+                                        return new Date(date) > new Date(getValues("startDate"))
                                 },
                             },
                         }}

@@ -62,6 +62,7 @@ const App = () => {
                 <Route path="/employees/:id/:type" element={<Employee />} />
                 <Route path="/company/:type" element={<Company />} />
                 <Route path="/requests/:type" element={<Requests />} />
+                <Route path="/team-scheduling/:type" element={<TeamScheduling />} />
                 <Route path="/" element={<Navigate to="/dashboard" replace/>}/>
                 <Route path="/settings" element={<Settings id={id}/>}/>
             </Route>

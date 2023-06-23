@@ -22,19 +22,19 @@ const withProviders = (Component) => {
             <React.StrictMode>
                 <ConfigsProvider appConfigs={appConfigs}>
                     <TranslationProvider>
-                        <ErrorHandlerProvider>
-                            <ApolloClientProvider httpEndPoint={httpEndPoint} authToken={authToken}>
-                                <Router history={history}>
-                                    <UserProvider authToken={authToken} authUser={authUser}>
-                                        <LocalizationProvider>
-                                            <ThemeProvider>
+                        <ThemeProvider>
+                            <ErrorHandlerProvider>
+                                <ApolloClientProvider httpEndPoint={httpEndPoint} authToken={authToken}>
+                                    <Router history={history}>
+                                        <UserProvider authToken={authToken} authUser={authUser}>
+                                            <LocalizationProvider>
                                                 <Component {...componentProps} />
-                                            </ThemeProvider>
-                                        </LocalizationProvider>
-                                    </UserProvider>
-                                </Router>
-                            </ApolloClientProvider>
-                        </ErrorHandlerProvider>
+                                            </LocalizationProvider>
+                                        </UserProvider>
+                                    </Router>
+                                </ApolloClientProvider>
+                            </ErrorHandlerProvider>
+                        </ThemeProvider>
                     </TranslationProvider>
                 </ConfigsProvider>
             </React.StrictMode>

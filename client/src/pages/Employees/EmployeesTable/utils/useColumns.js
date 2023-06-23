@@ -39,7 +39,7 @@ const useColumns = () => {
                 sortable: true,
                 renderCell: params => {
                     return (
-                        <Status name={params.value.name} color={params.value.color}/>
+                        params.value ? <Status name={params.value?.name} color={params.value?.color}/> : ''
                     )
                 }
             },

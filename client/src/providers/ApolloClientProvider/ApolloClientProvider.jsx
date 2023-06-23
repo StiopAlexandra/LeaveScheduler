@@ -1,49 +1,40 @@
-import {ApolloProvider, ApolloClient, InMemoryCache, createHttpLink} from '@apollo/client'
-import {setContext} from '@apollo/client/link/context';
-import {onError} from '@apollo/client/link/error';
-import React from 'react'
+import {ApolloProvider, InMemoryCache} from '@apollo/client'
+import React, {useContext, useEffect, useState, useCallback} from 'react'
 
-import history from '../../utils/history';
+import ErrorContext from "../../contexts/ErrorContext";
+import getClient from "../../data/ApolloClient";
 
 const ApolloClientProvider = ({children, authToken}) => {
+    const { setError } = useContext(ErrorContext)
+    const cache = new InMemoryCache({
+        addTypename: false
+    })
+    const [client, setClient] = useState(null)
 
-	const httpLink = createHttpLink({
-		uri: 'http://localhost:4000',
-	});
+    const createClient = useCallback(
+        (cache) =>
+            getClient({
+                authToken,
+                setError,
+                cache
+            }),
+        [authToken, setError]
+    )
 
-    const authLink = setContext((_, {headers}) => {
-        const token = localStorage.getItem(authToken);
-        return {
-            headers: {
-                ...headers,
-                authorization: token ? `Bearer ${token}` : '',
-            },
-        };
-    });
+    useEffect(() => {
+        const {client} = createClient(cache)
+        setClient(client)
+    }, [])
 
-    const errorLink = onError(({graphQLErrors, networkError}) => {
-        if (graphQLErrors) {
-            graphQLErrors.forEach(({message, locations, path}) => {
-                console.log(
-                    `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-                );
-            });
+    useEffect(() => {
+        return () => {
+            client?.stop()
         }
-        if (networkError) {
+    }, [client])
 
-            console.log(`[Network error]: ${networkError}`);
-            if ('statusCode' in networkError && networkError.statusCode === 401) {
-                history.push('/login');
-            }
-        }
-    });
-
-    const client = new ApolloClient({
-        link: authLink.concat(errorLink.concat(httpLink)),
-        cache: new InMemoryCache({
-            addTypename: false
-        })
-    });
+    if (!client) {
+        return null
+    }
 
     return <ApolloProvider client={client}>{children}</ApolloProvider>
 }

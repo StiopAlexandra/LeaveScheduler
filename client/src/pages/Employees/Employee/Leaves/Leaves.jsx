@@ -1,4 +1,4 @@
-import React, {useCallback, useState, createRef, useContext} from 'react'
+import React, {useCallback, useState, createRef, useContext, memo} from 'react'
 import {useTranslation} from 'react-i18next';
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import multiMonthPlugin from '@fullcalendar/multimonth'
@@ -141,4 +141,4 @@ const Leaves = ({userId}) => {
     )
 }
 
-export default Leaves
+export default memo(Leaves)

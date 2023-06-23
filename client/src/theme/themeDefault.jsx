@@ -60,6 +60,12 @@ const getTheme = (mode) => {
                         dark: alpha(secondary, 0.12),
                         contrastText: common.white,
                     },
+                    info: {
+                        main: secondary,
+                        light: alpha(secondary, 0.07),
+                        dark: alpha(secondary, 0.12),
+                        contrastText: common.white,
+                    },
                     warning: {
                         main: warning,
                         light: alpha(warning, 0.07),
@@ -104,6 +110,12 @@ const getTheme = (mode) => {
                         contrastText: common.white,
                     },
                     secondary: {
+                        main: secondary,
+                        light: alpha(secondary, 0.07),
+                        dark: alpha(secondary, 0.12),
+                        contrastText: common.white,
+                    },
+                    info: {
                         main: secondary,
                         light: alpha(secondary, 0.07),
                         dark: alpha(secondary, 0.12),

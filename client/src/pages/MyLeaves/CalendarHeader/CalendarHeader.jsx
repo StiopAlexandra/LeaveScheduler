@@ -173,7 +173,7 @@ const CalendarHeader = ({calendarRef, onShowAdd, userLeaves, requests, refetch})
                 </div>
                 <div className={classes.table}>
                     <Typography align={'center'} variant={'h5'}
-                                sx={{paddingBottom: '25px'}}>{t('Curren & Upcoming Leaves')}</Typography>
+                                sx={{paddingBottom: '25px'}}>{t('Current & Upcoming Leaves')}</Typography>
                     <UserLeavesTable userLeaves={upcomingUserLeaves}/>
                 </div>
                 <div className={classes.table}>

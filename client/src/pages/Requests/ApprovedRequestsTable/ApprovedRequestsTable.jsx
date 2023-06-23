@@ -107,7 +107,7 @@ const ApprovedRequestsTable = ({year}) => {
     } = useQuery(GetUserLeaves, {
         variables: {
             filter: {
-                status: 'approved'
+                status: 'accepted'
             },
         },
         fetchPolicy: 'network-only',

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react'
+import React, {useCallback, useEffect, memo} from 'react'
 import {useTranslation} from 'react-i18next'
 import {Controller, useForm} from 'react-hook-form'
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
@@ -434,4 +434,4 @@ const Profile = ({user, refetch, queryLoading, dateFormat = 'd/MM/Y'}) => {
     )
 }
 
-export default Profile
+export default memo(Profile)

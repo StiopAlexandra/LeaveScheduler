@@ -6,6 +6,7 @@ import generator from 'generate-password'
 import tokenUtil from '../../utils/token.js';
 import {template, transporter} from "../../utils/nodemailer.js";
 import Department from "../../model/Department.js";
+import UserLeave from "../../model/UserLeave.js";
 
 export const resolvers = {
     Query: {
@@ -190,6 +191,10 @@ export const resolvers = {
         department: async ({ department: department_id}) => {
             const department = await Department.findById(department_id).exec();
             return department;
+        },
+        userLeave: async ({ id: user_id}) => {
+            const userLeave = await UserLeave.find({user: user_id}).exec();
+            return userLeave;
         },
     }
 }

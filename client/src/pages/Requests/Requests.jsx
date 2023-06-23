@@ -9,7 +9,6 @@ import ApprovedRequestsTable from "./ApprovedRequestsTable/ApprovedRequestsTable
 import RejectedRequestsTable from "./RejectedRequestsTable/RejectedRequestsTable";
 import PendingRequestsTable from "./PendingRequestsTable/PendingRequestsTable";
 
-
 const StyledTabs = styled(Tabs)(({theme}) => ({
     [`& .${tabsClasses.flexContainer}`]: {
         [theme?.breakpoints.up("sm")]: {

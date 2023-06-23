@@ -78,7 +78,7 @@ const EditLeaveType = ({data, open, onClose}) => {
 
     const {
         control,
-        formState: {errors},
+        formState: {errors, isDirty},
         handleSubmit,
     } = useForm({
         reValidateMode: 'onChange',
@@ -98,6 +98,10 @@ const EditLeaveType = ({data, open, onClose}) => {
     })
 
     const onSubmit = useCallback((data) => {
+        if (!isDirty && selectedColor === color) {
+            onClose()
+            return
+        }
         updateLeaveType({
             variables: {
                 input: {
@@ -109,7 +113,7 @@ const EditLeaveType = ({data, open, onClose}) => {
         }).then(() => {
             onClose()
         })
-    }, [onClose, updateLeaveType, selectedColor, id]);
+    }, [onClose, updateLeaveType, selectedColor, id, isDirty, color]);
 
     return (
         <StyledDialog

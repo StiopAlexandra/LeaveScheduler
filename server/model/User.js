@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import Inc from 'mongoose-sequence'
+import UserLeave, {userLeaveSchema} from "./UserLeave.js";
 
 const AutoIncrement = Inc(mongoose);
 
@@ -29,10 +30,12 @@ const userSchema = new Schema({
         required: true
     },
     department: {
-        //type: Schema.Types.ObjectId,
         type: Number,
         ref: 'Department',
-        //required: true
+    },
+    userLeave: {
+        type: [userLeaveSchema],
+        //ref: 'UserLeave',
     },
     created: {
         type: Date,

@@ -80,9 +80,8 @@ const EditLeave = ({open, onClose, editItem, dateFormat}) => {
 
     const {
         control,
-        formState: {errors},
+        formState: {errors, isDirty},
         handleSubmit,
-        setValue,
         getValues
     } = useForm({
         reValidateMode: 'onChange',
@@ -112,6 +111,10 @@ const EditLeave = ({open, onClose, editItem, dateFormat}) => {
     })
 
     const onSubmit = useCallback(({title, startDate, endDate}) => {
+        if (!isDirty) {
+            onClose()
+            return
+        }
         updateCompanyLeave({
             variables: {
                 input: {
@@ -124,7 +127,7 @@ const EditLeave = ({open, onClose, editItem, dateFormat}) => {
         }).then(() => {
             onClose()
         })
-    }, [onClose, updateCompanyLeave, id]);
+    }, [onClose, updateCompanyLeave, id, isDirty]);
 
     const onDelete = useCallback(() => {
         deleteCompanyLeave({
@@ -182,7 +185,7 @@ const EditLeave = ({open, onClose, editItem, dateFormat}) => {
                             validate: {
                                 lessThanendDate: (date) => {
                                     if(getValues("endDate"))
-                                        return date < getValues("endDate")
+                                        return new Date(date) < new Date(getValues("endDate"))
                                 },
                             },
                         }}
@@ -214,7 +217,7 @@ const EditLeave = ({open, onClose, editItem, dateFormat}) => {
                             validate: {
                                 moreThanStartDate: (date) => {
                                     if(getValues("startDate"))
-                                        return date > getValues("startDate")
+                                        return new Date(date) > new Date(getValues("startDate"))
                                 },
                             },
                         }}
