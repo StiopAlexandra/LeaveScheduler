@@ -23,8 +23,14 @@ export const typeDefs = gql`
         user: User
         token: String!
     }
+    type Response {
+        message: String!
+    }
+    input UserFilter {
+        manager: Boolean
+    }
     extend type Query {
-        getUsers: [User],
+        getUsers(filter: UserFilter): [User],
         getUser(id: ID!): User
         me: User @isAuthenticated,
     }
@@ -32,6 +38,7 @@ export const typeDefs = gql`
         signin(email: String!, password: String!): AuthData
         signup(name: String!, email: String!, password: String!, manager: Boolean!, company: ID!): User
         createUser(input: CreateUserInput!): AuthData
+        requestResetPassword(email: String!): Response
         resetPassword(id: ID!, password: String!): User
         updateUser(input: UpdateUserInput!): User
         deleteUser(id: ID!): User

@@ -9,7 +9,7 @@ export const typeDefs = gql`
         _id: ID!
         company: Company!
         message: String!
-        created: Date!
+        created: DateTime!
         sender: User!
         receiver: [User]!
         read: [Read]

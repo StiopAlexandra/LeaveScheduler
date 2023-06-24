@@ -32,8 +32,10 @@ const StyledGridOverlay = styled('div')(({ theme }) => ({
 
 const DataGridStyledTable = styled(DataGrid)(({theme}) => ({
     border: 'none',
-    marginTop: '30px',
     height: 'auto',
+    width: 'auto',
+    maxWidth: '1930px',
+    margin: 'auto',
     backgroundColor: theme.palette.background.default,
     [`& .${gridClasses.virtualScroller}`]: {
         // safari (:

@@ -48,6 +48,7 @@ const CustomToolbar = ({
                 {t('Reject')}
             </RejectButtonStyled>
             <div style={{flex: 1}}/>
+            <div>
             <GridToolbarFilterButton
                 ref={setFilterButtonEl}
                 componentsProps={{
@@ -65,6 +66,7 @@ const CustomToolbar = ({
                 }}
             />
             <GridToolbarDensitySelector/>
+            </div>
         </GridToolbarContainerStyled>
     )
 }

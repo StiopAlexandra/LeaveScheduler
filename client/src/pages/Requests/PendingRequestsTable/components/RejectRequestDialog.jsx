@@ -16,6 +16,7 @@ import {
 import Button from "../../../../components/common/Button";
 import {useMutation} from '@apollo/client'
 import UpdateUserLeave from "../../../../data/mutations/UpdateUserLeave";
+import CreateNotification from "../../../../data/mutations/CreateNotification";
 
 const PREFIX = 'AddLeave'
 const classes = {
@@ -76,7 +77,7 @@ const StyledDialog = styled(Dialog)(({theme}) => ({
         },
 }))
 
-const RejectRequestDialog = ({open, onClose, selectedItems, refetch}) => {
+const RejectRequestDialog = ({open, onClose, selectedItems, refetch, userId}) => {
     const {t} = useTranslation();
 
     const {
@@ -88,11 +89,12 @@ const RejectRequestDialog = ({open, onClose, selectedItems, refetch}) => {
     })
 
     const [updateUserLeave, {loading}] = useMutation(UpdateUserLeave)
+    const [createNotification] = useMutation(CreateNotification)
 
-    const onSubmit = useCallback(async({reason}) => {
-        try{
+    const onSubmit = useCallback(async ({reason}) => {
+        try {
             await Promise.all(
-                selectedItems.map((id) =>
+                selectedItems.map(({id, user, leaveType}) =>
                     updateUserLeave({
                         variables: {
                             input: {
@@ -102,6 +104,17 @@ const RejectRequestDialog = ({open, onClose, selectedItems, refetch}) => {
                             },
                         }
                     })
+                        .then(() => {
+                            createNotification({
+                                variables: {
+                                    input: {
+                                        receiver: user._id,
+                                        message: `rejected your "${leaveType.name}" leave request, because "${reason}".`,
+                                        sender: userId
+                                    }
+                                }
+                            })
+                        })
                 )
             )
         } finally {
@@ -124,7 +137,8 @@ const RejectRequestDialog = ({open, onClose, selectedItems, refetch}) => {
             <FocusLock>
                 <DialogTitle className={classes.title}>{t('Reject Leave Requests')}</DialogTitle>
                 <DialogContent className={classes.content} tabIndex={-1}>
-                    <Typography variant={'subtitle1'}>{t('Are you sure you want to reject leave requests?')}</Typography>
+                    <Typography
+                        variant={'subtitle1'}>{t('Are you sure you want to reject leave requests?')}</Typography>
                     <Controller
                         name="reason"
                         control={control}

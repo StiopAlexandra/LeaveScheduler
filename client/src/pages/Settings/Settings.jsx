@@ -12,9 +12,8 @@ import {formatISO} from 'date-fns';
 import LoadingOverlay from "../../components/common/LoadingOverlay";
 import Button from "../../components/common/Button/Button";
 import UpdateUser from "../../data/mutations/UpdateUser";
-import {useMutation, useQuery, useSubscription} from '@apollo/client'
+import {useMutation, useQuery} from '@apollo/client'
 import GetUser from "../../data/queries/GetUser";
-import SubscriptionNotification from "../../data/subscriptions/Notification";
 import ConfigsContext from "../../contexts/ConfigsContext";
 
 const PREFIX = 'Settings'
@@ -80,10 +79,6 @@ const Settings = ({id}) => {
             id
         },
         fetchPolicy: 'network-only',
-    })
-
-    useSubscription(SubscriptionNotification, {
-        onData: (data) => console.log(data),
     })
 
     const user = data?.getUser

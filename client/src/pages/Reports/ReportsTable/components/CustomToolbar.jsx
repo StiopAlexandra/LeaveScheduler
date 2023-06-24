@@ -1,12 +1,12 @@
 import React, {memo} from 'react'
-
+import {styled} from '@mui/material'
 import {
     GridToolbarContainer,
     GridToolbarColumnsButton,
+    GridToolbarExport,
     GridToolbarFilterButton,
     GridToolbarDensitySelector
 } from '@mui/x-data-grid';
-import {styled} from '@mui/material'
 
 const GridToolbarContainerStyled = styled(GridToolbarContainer)(({theme}) => ({
     padding: '8px 15px'
@@ -20,6 +20,8 @@ const CustomToolbar = ({
 
     return (
         <GridToolbarContainerStyled>
+            <GridToolbarExport printOptions={{disableToolbarButton: true}}/>
+            <div style={{flex: 1}}/>
             <div>
             <GridToolbarFilterButton
                 ref={setFilterButtonEl}

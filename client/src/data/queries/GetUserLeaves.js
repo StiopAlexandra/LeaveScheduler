@@ -17,6 +17,7 @@ export default gql`
                 allowanceDays
             }
             user {
+                _id
                 name
                 department {
                     name

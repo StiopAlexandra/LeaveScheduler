@@ -9,10 +9,12 @@ export default gql`
                 _id
             }
             userLeave {
+                days
                 status
                 startDate
                 endDate
                 leaveType {
+                    _id
                     name
                     color
                 }

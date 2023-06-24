@@ -23,6 +23,9 @@ const useColumns = () => {
                 minWidth: 200,
                 headerName: 'Name',
                 sortable: true,
+                renderCell: params => {
+                    return params.value.name
+                }
             },
             department: {
                 hide: false,

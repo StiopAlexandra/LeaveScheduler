@@ -2,7 +2,7 @@ import React, {useState, useCallback, memo} from 'react';
 import {Snackbar, Alert as MuiAlert, Typography} from '@mui/material';
 import {useTranslation} from 'react-i18next'
 
-const Alert = ({severity, messages, onClose}) => {
+const Alert = ({severity, messages, onClose, duration}) => {
     const [open, setOpen] = useState(true);
     const {t} = useTranslation()
 
@@ -13,16 +13,16 @@ const Alert = ({severity, messages, onClose}) => {
         onClose();
         setOpen(false);
     }, [setOpen])
-
-
+    
     return (
-        <Snackbar open={open} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
+        <Snackbar open={open} autoHideDuration={duration} onClose={handleClose} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
             <MuiAlert
                 onClose={handleClose}
                 severity={severity}
                 variant={'outlined'}
                 color={severity}
                 sx={{
+                    background: (theme) => theme.palette.background.paper,
                     border: (theme) => `1px solid ${theme.palette[severity].main}`,
                     color: (theme) => theme.palette.text.primary,
                     '.MuiAlert-action': {

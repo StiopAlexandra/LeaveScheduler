@@ -2,13 +2,14 @@ import Company from '../../model/Company.js'
 import Notification from '../../model/Notification.js'
 import User from "../../model/User.js";
 import { PubSub } from 'graphql-subscriptions';
+import {template, transporter} from "../../utils/nodemailer.js";
 const pubsub = new PubSub();
 
 export const resolvers = {
     Query: {
         getNotifications: async (_, args, context) => {
             const {companyId} = context
-            const {sender, receiver} = args.filter
+            const {sender, receiver} = args?.filter || {}
             const query = { company: companyId };
             if (sender) query.sender = sender;
             if (receiver) query.receiver = { $in: receiver };
@@ -24,6 +25,7 @@ export const resolvers = {
     Mutation: {
         createNotification: async (_, args, context) => {
             const { input } = args;
+            const { sender, receiver, message} = input
             const {companyId} = context
 
             try {
@@ -33,6 +35,30 @@ export const resolvers = {
                 });
 
                 pubsub.publish('NOTIFICATION_ADDED', { notificationAdded: notification });
+
+                const emailTemplate = template('notification.hbs')
+
+                for (const item of receiver) {
+                    const to = await User.findById({ _id: item }).exec();
+                    const from = await User.findById({ _id: sender }).exec();
+                    const email = to.email
+                    const name = from.name
+                    const html = emailTemplate({ email, message, name })
+
+                    const mailOptions = {
+                        from: 'leavescheduler@gmail.com',
+                        to: email,
+                        subject: 'Notification',
+                        html: html
+                    };
+                    await transporter.sendMail(mailOptions, (error) => {
+                        if (error) {
+                            console.error(error);
+                        } else {
+                            console.log('Email sent!');
+                        }
+                    });
+                }
 
                 return notification
             } catch (error) {

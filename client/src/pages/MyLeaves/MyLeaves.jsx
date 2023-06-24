@@ -34,13 +34,12 @@ const StyledContainer = styled('div')(({theme}) => ({
 
 
 
-const MyLeaves = () => {
+const MyLeaves = ({id: userId}) => {
     const {t} = useTranslation();
     const { open: showAdd, onShow: onShowAdd, onClose: onCloseAdd } = useOpenState()
     const [start, setStart] = useState('')
     const [end, setEnd] = useState('')
 
-    const {user} = useContext(UserContext);
     const {companySettings} = useContext(ConfigsContext);
 
     const calendarRef = createRef();
@@ -59,7 +58,7 @@ const MyLeaves = () => {
     } = useQuery(GetUserLeaves, {
         variables: {
             filter: {
-                user: user._id,
+                user: userId,
             },
         },
         fetchPolicy: 'network-only',
@@ -113,7 +112,7 @@ const MyLeaves = () => {
                 select={onSelect}
             />
             {
-                showAdd && <AddLeave open={showAdd} onClose={handleCloseAdd} userId={user?._id} start={start} end={end} refetch={refetch}/>
+                showAdd && <AddLeave open={showAdd} onClose={handleCloseAdd} userId={userId} start={start} end={end} refetch={refetch} userLeaves={acceptedUserLeaves}/>
             }
         </StyledContainer>
     )

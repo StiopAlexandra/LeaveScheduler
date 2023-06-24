@@ -184,7 +184,7 @@ const CalendarHeader = ({calendarRef, onShowAdd, userLeaves, requests, refetch})
                 <div className={classes.pendingTable}>
                     <Typography align={'center'} variant={'h5'}
                                 sx={{paddingBottom: '25px'}}>{t('Pending for review')}</Typography>
-                    <PendingRequestTable requests={currentYearRequests} refetch={refetch}/>
+                    <PendingRequestTable userLeaves={userLeaves} requests={currentYearRequests} refetch={refetch}/>
                 </div>
             </div>
         </StyledHeader>

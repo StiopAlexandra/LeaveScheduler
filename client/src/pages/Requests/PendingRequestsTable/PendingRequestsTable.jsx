@@ -18,9 +18,9 @@ import CustomToolbar from "./components/CustomToolbar";
 import UpdateUserLeave from "../../../data/mutations/UpdateUserLeave";
 import GetUserLeaves from "../../../data/queries/GetUserLeaves";
 import {getYear} from 'date-fns';
-import AddLeave from "../../MyLeaves/AddLeave/AddLeave";
 import useOpenState from "../../../hooks/useOpenState";
 import RejectRequestDialog from "./components/RejectRequestDialog";
+import CreateNotification from "../../../data/mutations/CreateNotification";
 
 const StyledGridOverlay = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -36,6 +36,9 @@ const StyledGridOverlay = styled('div')(({ theme }) => ({
 const DataGridStyledTable = styled(DataGrid)(({theme}) => ({
     border: 'none',
     height: 'auto',
+    width: 'auto',
+    maxWidth: '1510px',
+    margin: 'auto',
     backgroundColor: theme.palette.background.default,
     [`& .${gridClasses.virtualScroller}`]: {
         // safari (:
@@ -96,7 +99,7 @@ const DataGridStyledTable = styled(DataGrid)(({theme}) => ({
 
 }))
 
-const PendingRequestsTable = ({year}) => {
+const PendingRequestsTable = ({year, userId}) => {
     const gridApiRef = useGridApiRef()
     const gridLocales = useMUILocales()
     const { t } = useTranslation()
@@ -124,11 +127,12 @@ const PendingRequestsTable = ({year}) => {
     const userLeaves = allUserLeaves.filter(({startDate}) => year === getYear(new Date(startDate)))
 
     const [updateUserLeave, {loading}] = useMutation(UpdateUserLeave)
+    const [createNotification] = useMutation(CreateNotification)
 
     const onApprove = useCallback(async() => {
         try{
             await Promise.all(
-                selectedItems.map((id) =>
+                selectedItems.map(({id, user, leaveType}) =>
                     updateUserLeave({
                         variables: {
                             input: {
@@ -136,13 +140,23 @@ const PendingRequestsTable = ({year}) => {
                                 status: 'accepted',
                             }
                         }
+                    }).then(() => {
+                        createNotification({
+                            variables: {
+                                input: {
+                                    receiver: user._id,
+                                    message: `accepted your "${leaveType.name}" leave request.`,
+                                    sender: userId
+                                }
+                            }
+                        })
                     })
                 )
             )
         } finally {
             refetch()
         }
-    }, [selectedItems, updateUserLeave, refetch])
+    }, [selectedItems, updateUserLeave, refetch, createNotification, userId])
 
     const onReject = useCallback(async() => {
         onShowDialog()
@@ -160,7 +174,7 @@ const PendingRequestsTable = ({year}) => {
             userLeaves.map(({_id: id, user, leaveType, startDate, endDate, days, notes}) => {
                 return {
                     id,
-                    user: user.name,
+                    user: user,
                     department: user.department,
                     leaveType: leaveType,
                     startDate: startDate,
@@ -185,8 +199,13 @@ const PendingRequestsTable = ({year}) => {
                 apiRef={gridApiRef}
                 columns={columns}
                 rows={memoizedRows}
+                onRowSelectionModelChange={(ids) => {
+                    const selectedIDs = new Set(ids);
+                    setSelectedItems(memoizedRows.filter((row) =>
+                        selectedIDs.has(row.id.toString())))
+                }}
                 loading={networkStatus === NetworkStatus.loading || loading}
-                onRowSelectionModelChange={(ids) => setSelectedItems(ids)}
+                //onRowSelectionModelChange={(ids) => setSelectedItems(ids)}
                 slots={{
                     toolbar: CustomToolbar,
                     noRowsOverlay: NoRowsOverlay,
@@ -253,7 +272,7 @@ const PendingRequestsTable = ({year}) => {
                 disableColumnMenu
             />
     {
-        showDialog && <RejectRequestDialog open={showDialog} onClose={onCloseDialog} selectedItems={selectedItems} refetch={refetch}/>
+        showDialog && <RejectRequestDialog open={showDialog} onClose={onCloseDialog} selectedItems={selectedItems} refetch={refetch} userId={userId}/>
     }
     </>
     )

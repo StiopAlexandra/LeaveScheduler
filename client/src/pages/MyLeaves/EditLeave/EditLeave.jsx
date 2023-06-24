@@ -1,4 +1,4 @@
-import React, {useCallback, memo, useContext} from 'react'
+import React, {useCallback, memo, useContext, useState} from 'react'
 import {useTranslation} from "react-i18next"
 import FocusLock from 'react-focus-lock'
 import {Controller, useForm} from "react-hook-form";
@@ -18,12 +18,14 @@ import {
     FormControl,
     InputLabel,
 } from '@mui/material'
+import {getYear} from 'date-fns';
 import Button from "../../../components/common/Button";
 import UpdateUserLeave from "../../../data/mutations/UpdateUserLeave";
 import {useMutation, useQuery} from '@apollo/client'
 import {calculateWorkingDays} from "../../../utils/workingDays";
 import GetLeaveTypes from "../../../data/queries/GetLeaveTypes";
 import ConfigsContext from "../../../contexts/ConfigsContext";
+import Alert from "../../../components/common/Alert/Alert";
 
 const PREFIX = 'EditLeave'
 const classes = {
@@ -75,10 +77,11 @@ const StyledDialog = styled(Dialog)(({theme}) => ({
     },
 }))
 
-const EditLeave = ({data, open, onClose, refetch}) => {
+const EditLeave = ({data, open, onClose, refetch, userLeaves}) => {
     const {t} = useTranslation();
     const {companySettings} = useContext(ConfigsContext);
     const dateFormat = companySettings?.dateFormat
+    const [openAlert, setOpenAlert]= useState('')
 
     const {id, startDate, endDate, notes, name} = data
 
@@ -113,8 +116,25 @@ const EditLeave = ({data, open, onClose, refetch}) => {
             onClose()
             return
         }
-        const leaveTypeId = leaveTypes.find(item => item.name === leaveType)?._id
+        const leaveTypeSelected = leaveTypes.find(item => item.name === leaveType)
+        const leaveTypeId= leaveTypeSelected?._id
         const days = calculateWorkingDays(startDate, endDate, companySettings?.workingDays)
+
+        const userLeaveType = userLeaves.filter(({
+                                                     leaveType: acceptedLeaveType,
+                                                     startDate: acceptedStartDate
+                                                 }) => acceptedLeaveType.name === leaveType && getYear(startDate) === getYear(new Date(acceptedStartDate)))
+        const totalDaysOfLeaveType = userLeaveType.reduce((acc, {days}) => {
+            return acc + days
+        }, 0)
+
+        const allowedDays = leaveTypeSelected?.allowanceDays - totalDaysOfLeaveType
+
+        if(leaveTypeSelected?.allowanceDays && totalDaysOfLeaveType + days > leaveTypeSelected?.allowanceDays){
+            setOpenAlert(t('You only have {{allowed}} days left of {{name}} type.', {allowed: allowedDays, name: leaveType}))
+            return
+        }
+
         updateUserLeave({
             variables: {
                 input: {
@@ -132,6 +152,9 @@ const EditLeave = ({data, open, onClose, refetch}) => {
         })
     }, [onClose, updateUserLeave, leaveTypes, id, companySettings, isDirty]);
 
+    const onCloseAlert = useCallback(() => {
+        setOpenAlert('')
+    }, [setOpenAlert])
 
     return (
         <StyledDialog
@@ -144,6 +167,9 @@ const EditLeave = ({data, open, onClose, refetch}) => {
                 className: classes.paper,
             }}
         >
+            {
+                openAlert && <Alert messages={[openAlert]} onClose={onCloseAlert} severity={'warning'}/>
+            }
             <FocusLock>
                 <DialogTitle className={classes.title}>{t('Edit Request')}</DialogTitle>
                 <DialogContent className={classes.content} tabIndex={-1}>

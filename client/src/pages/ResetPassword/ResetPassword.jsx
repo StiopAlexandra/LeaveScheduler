@@ -33,10 +33,10 @@ const FormBox = styled('div')(({theme}) => ({
     borderRadius: '15px',
     margin: theme?.spacing(2),
     [theme?.breakpoints.up("sm")]: {
-        padding: theme?.spacing(6),
+        padding: theme?.spacing(5),
     },
     [theme?.breakpoints.down("sm")]: {
-        padding: theme?.spacing(4),
+        padding: theme?.spacing(3),
     },
     boxShadow: '0px 10px 30px #00000012',
     maxWidth: '400px',
@@ -157,7 +157,7 @@ const ResetPassword = () => {
                             variant={'body'}
                             align={'center'}
                         >
-                            {t('Your invitations has expired or is no longer valid. ')}
+                            {t('Your invitation has expired or is no longer valid. ')}
                             {t('Please contact your project manager and ask for a new invite.')}
                         </Typography>
                 }

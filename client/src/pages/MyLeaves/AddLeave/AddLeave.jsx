@@ -1,4 +1,4 @@
-import React, {useCallback, memo, useContext} from 'react'
+import React, {useCallback, memo, useContext, useState} from 'react'
 import {useTranslation} from "react-i18next"
 import FocusLock from 'react-focus-lock'
 import {Controller, useForm} from "react-hook-form";
@@ -25,6 +25,10 @@ import GetLeaveTypes from "../../../data/queries/GetLeaveTypes";
 import CreateUserLeave from "../../../data/mutations/CreateUserLeave";
 import ConfigsContext from "../../../contexts/ConfigsContext";
 import {calculateWorkingDays} from "../../../utils/workingDays";
+import {getYear} from 'date-fns';
+import Alert from "../../../components/common/Alert/Alert";
+import CreateNotification from "../../../data/mutations/CreateNotification";
+import GetUsers from "../../../data/queries/GetUsers";
 
 const PREFIX = 'AddLeave'
 const classes = {
@@ -82,10 +86,11 @@ const StyledDialog = styled(Dialog)(({theme}) => ({
 
 
 
-const AddLeave = ({open, onClose, userId, start, end, refetch}) => {
+const AddLeave = ({open, onClose, userId, start, end, refetch, userLeaves}) => {
     const {t} = useTranslation();
     const {companySettings} = useContext(ConfigsContext);
     const dateFormat = companySettings?.dateFormat
+    const [openAlert, setOpenAlert]= useState('')
 
     const {
         control,
@@ -102,13 +107,43 @@ const AddLeave = ({open, onClose, userId, start, end, refetch}) => {
         fetchPolicy: 'network-only',
     })
 
+    const {
+        data: adminsData,
+    } = useQuery(GetUsers, {
+        variables: {
+            filter: {
+                manager: true
+            }
+        },
+        fetchPolicy: 'network-only',
+    })
+
     const leaveTypes = data?.getLeaveTypes?.filter((item) => item.name !== 'Public Holiday') || []
+    const admins = adminsData?.getUsers?.map(({_id}) => _id)
 
     const [createUserLeave, {loading}] = useMutation(CreateUserLeave)
+    const [createNotification] = useMutation(CreateNotification)
 
     const onSubmit = useCallback(({notes, startDate, endDate, leaveType}) => {
-        const leaveTypeId = leaveTypes.find(item => item.name === leaveType)?._id
+        const leaveTypeSelected = leaveTypes.find(item => item.name === leaveType)
+        const leaveTypeId= leaveTypeSelected?._id
         const days = calculateWorkingDays(startDate, endDate, companySettings?.workingDays)
+
+        const userLeaveType = userLeaves.filter(({
+                                                   leaveType: acceptedLeaveType,
+                                                   startDate: acceptedStartDate
+                                               }) => acceptedLeaveType.name === leaveType && getYear(startDate) === getYear(new Date(acceptedStartDate)))
+        const totalDaysOfLeaveType = userLeaveType.reduce((acc, {days}) => {
+            return acc + days
+        }, 0)
+
+        const allowedDays = leaveTypeSelected?.allowanceDays - totalDaysOfLeaveType
+
+        if(leaveTypeSelected?.allowanceDays && totalDaysOfLeaveType + days > leaveTypeSelected?.allowanceDays){
+            setOpenAlert(t('You only have {{allowed}} days left of {{name}} type.', {allowed: allowedDays, name: leaveType}))
+            return
+        }
+
         createUserLeave({
             variables: {
                 input: {
@@ -122,10 +157,23 @@ const AddLeave = ({open, onClose, userId, start, end, refetch}) => {
                 },
             },
         }).then(() => {
+            createNotification({
+                variables: {
+                    input: {
+                        receiver: admins,
+                        message: "send a leave request.",
+                        sender: userId
+                    }
+                }
+            })
             refetch()
             onClose()
         })
-    }, [onClose, createUserLeave, leaveTypes, userId, companySettings]);
+    }, [onClose, createUserLeave, leaveTypes, userId, companySettings, admins, createNotification]);
+
+    const onCloseAlert = useCallback(() => {
+        setOpenAlert('')
+    }, [setOpenAlert])
 
     return (
         <StyledDialog
@@ -138,6 +186,9 @@ const AddLeave = ({open, onClose, userId, start, end, refetch}) => {
                 className: classes.paper,
             }}
         >
+            {
+                openAlert && <Alert messages={[openAlert]} onClose={onCloseAlert} severity={'warning'}/>
+            }
             <FocusLock>
                 <DialogTitle className={classes.title}>{t('Send Request')}</DialogTitle>
                 <DialogContent className={classes.content} tabIndex={-1}>

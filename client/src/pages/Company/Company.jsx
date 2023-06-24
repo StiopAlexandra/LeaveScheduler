@@ -11,7 +11,6 @@ import LeaveTypes from "./LeaveTypes";
 import Departments from "./Departments";
 
 const StyleContainer = styled(Box)(({theme}) => ({
-    marginTop: '20px',
     display: 'flex',
     flexDirection: 'column',
 }))

@@ -21,6 +21,7 @@ import BusinessOutlinedIcon from '@mui/icons-material/BusinessOutlined';
 import PendingActionsOutlinedIcon from '@mui/icons-material/PendingActionsOutlined';
 import CalendarViewMonthOutlinedIcon from '@mui/icons-material/CalendarViewMonthOutlined';
 import ResetPassword from "./pages/ResetPassword";
+import ForgotPassword from "./pages/ForgotPassword";
 import Employee from "./pages/Employees/Employee";
 
 
@@ -54,19 +55,20 @@ const App = () => {
                     return (
                         <Route
                             path={getPageRoutePath({name})}
-                            element={<Page/>}
+                            element={<Page id={id}/>}
                             key={index}
                         />
                     )
                 })}
                 <Route path="/employees/:id/:type" element={<Employee />} />
                 <Route path="/company/:type" element={<Company />} />
-                <Route path="/requests/:type" element={<Requests />} />
+                <Route path="/requests/:type" element={<Requests id={id}/>} />
                 <Route path="/team-scheduling/:type" element={<TeamScheduling />} />
                 <Route path="/" element={<Navigate to="/dashboard" replace/>}/>
                 <Route path="/settings" element={<Settings id={id}/>}/>
             </Route>
             <Route path="/reset-password/:resetToken" element={<ResetPassword/>} />
+            <Route path="/forgot-password" element={<ForgotPassword/>} />
             <Route path="/login" element={<SignIn/>}/>
             <Route path="/register" element={<SignUp/>}/>
             {/*<Route path="*" element={<Navigate to="/dashboard" replace/>}/>*/}

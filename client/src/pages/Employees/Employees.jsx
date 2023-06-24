@@ -15,6 +15,7 @@ const Employees = () => {
                 color={'primary'}
                 variant={'contained'}
                 onClick={onShow}
+                sx={{marginBottom: '30px'}}
             >
                 {t('Add Employee')}
             </Button>

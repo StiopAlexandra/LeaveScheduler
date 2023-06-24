@@ -1,5 +1,4 @@
 import React, {memo} from 'react'
-import {useTranslation} from "react-i18next"
 
 import {
     GridToolbarContainer,
@@ -21,6 +20,7 @@ const CustomToolbar = ({
 
     return (
         <GridToolbarContainerStyled>
+            <div>
             <GridToolbarFilterButton
                 ref={setFilterButtonEl}
                 componentsProps={{
@@ -38,6 +38,7 @@ const CustomToolbar = ({
                 }}
             />
             <GridToolbarDensitySelector/>
+            </div>
         </GridToolbarContainerStyled>
     )
 }

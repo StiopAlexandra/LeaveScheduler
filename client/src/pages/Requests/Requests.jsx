@@ -28,7 +28,7 @@ const StyledTitle = styled('div')(({theme}) => ({
     gap: '15px'
 }))
 
-const Requests = () => {
+const Requests = ({id: userId}) => {
     const navigate = useNavigate()
     const {type = 'pending'} = useParams()
     const {t} = useTranslation();
@@ -69,7 +69,7 @@ const Requests = () => {
                     <Tab component={RouterLink} to={`/requests/approved`} label={t('Approved')} value={'approved'}/>
                     <Tab component={RouterLink} to={`/requests/rejected`} label={t('Rejected')} value={'rejected'}/>
                 </StyledTabs>
-                {type === 'pending' && <PendingRequestsTable year={year}/>}
+                {type === 'pending' && <PendingRequestsTable year={year} userId={userId}/>}
                 {type === 'approved' && <ApprovedRequestsTable year={year}/>}
                 {type === 'rejected' && <RejectedRequestsTable year={year}/>}
             </div>

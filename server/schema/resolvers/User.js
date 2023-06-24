@@ -12,7 +12,7 @@ export const resolvers = {
     Query: {
         getUsers: async (_, args, context) => {
             const {companyId} = context
-            const users = await User.find({company: companyId}).exec();
+            const users = await User.find({company: companyId, ...args.filter}).exec();
             return users;
         },
         getUser: async (_, args) => {
@@ -116,10 +116,10 @@ export const resolvers = {
                 const html = emailTemplate({ email, resetLink })
 
                 const mailOptions = {
-                    from: 'noreply@leave-scheduler.com',
+                    from: 'leavescheduler@gmail.com',
                     to: email,
                     //to: 'tteodora126@gmail.com',
-                    subject: 'Resetare parolă',
+                    subject: 'Reset password',
                     html: html
                 };
                 await transporter.sendMail(mailOptions, (error) => {
@@ -138,6 +138,48 @@ export const resolvers = {
                 throw new Error(error);
             }
         },
+        requestResetPassword: async (_, args) => {
+            const { email } = args;
+
+            try {
+                const user = await User.findOne({
+                    email,
+                });
+
+                if (!user) {
+                    throw new Error('User not found.')
+                }
+
+                const resetToken = await tokenUtil.create(user);
+
+                const emailTemplate = template('resetPassword.hbs')
+
+                const resetLink = `http://localhost:3000/reset-password/${resetToken}`;
+
+                const html = emailTemplate({ email, resetLink })
+
+                const mailOptions = {
+                    from: 'leavescheduler@gmail.com',
+                    to: email,
+                    subject: 'Reset password',
+                    html: html,
+                };
+                await transporter.sendMail(mailOptions, (error) => {
+                    if (error) {
+                        console.error(error);
+                    } else {
+                        console.log('Email sent!');
+                    }
+                });
+
+                return {
+                    message: 'Check your email'
+                };
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
+
         updateUser: async (_, args) => {
             const {
                 input: { id, ...restArgs }

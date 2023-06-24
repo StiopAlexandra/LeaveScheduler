@@ -24,11 +24,11 @@ const ApolloErrorHandler = ({ children }) => {
 		internalErrors.forEach(({ message }) => {
 			messages.push(message)
 		})
-		errorAlert = <Alert severity={'error'} onClose={onClose} messages={messages}/>
+		errorAlert = <Alert severity={'error'} onClose={onClose} messages={messages} duration={6000}/>
 	} else {
 		if(networkError || graphQLErrors.length){
 			messages.push('An error has occurred. Please try again later.')
-			errorAlert = <Alert severity={'error'} onClose={onClose} messages={messages}/>
+			errorAlert = <Alert severity={'error'} onClose={onClose} messages={messages} duration={6000}/>
 		}
 	}
 

@@ -27,7 +27,6 @@ const grey = {
     800: '#212B36',
     900: '#161C24',
 };
-const textPrimary = '#383838'
 
 const getTheme = (mode) => {
     const theme = createTheme({

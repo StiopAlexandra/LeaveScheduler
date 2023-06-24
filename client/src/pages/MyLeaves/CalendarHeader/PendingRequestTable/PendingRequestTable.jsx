@@ -88,7 +88,7 @@ const DataGridStyledTable = styled(DataGrid)(({theme}) => ({
     },
 }))
 
-const PendingRequestTable = ({requests, refetch}) => {
+const PendingRequestTable = ({requests, refetch, userLeaves}) => {
     const gridApiRef = useGridApiRef()
     const gridLocales = useMUILocales()
     const {t} = useTranslation()
@@ -165,7 +165,7 @@ const PendingRequestTable = ({requests, refetch}) => {
             localeText={gridLocales}
             disableColumnMenu
         />
-            {showEdit && <EditLeave open={showEdit} onClose={onClose} data={editItem} refetch={refetch}/>}
+            {showEdit && <EditLeave userLeaves={userLeaves} open={showEdit} onClose={onClose} data={editItem} refetch={refetch}/>}
         </>
     )
 }
