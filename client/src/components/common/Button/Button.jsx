@@ -3,8 +3,6 @@ import clsx from 'clsx'
 import * as PropTypes from 'prop-types'
 import React, { memo, forwardRef } from 'react'
 
-//import useCountDown from '@/hooks/useCountDown'
-
 const Button = forwardRef((props, ref) => {
 	const {
 		children,
@@ -16,7 +14,6 @@ const Button = forwardRef((props, ref) => {
 		className,
 		...buttonProps
 	} = props
-	//const timeLeft = useCountDown(countDown)
 	const timeLeft = 0
 
 	return (
@@ -53,17 +50,5 @@ const Button = forwardRef((props, ref) => {
 		</MuiButton>
 	)
 })
-
-Button.displayName = 'Button'
-
-Button.propTypes = {
-	children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-	loading: PropTypes.bool,
-	disabled: PropTypes.bool,
-	countDown: PropTypes.number,
-	color: PropTypes.string,
-	sx: PropTypes.object,
-	className: PropTypes.string,
-}
 
 export default memo(Button)

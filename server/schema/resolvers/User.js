@@ -118,7 +118,6 @@ export const resolvers = {
                 const mailOptions = {
                     from: 'leavescheduler@gmail.com',
                     to: email,
-                    //to: 'tteodora126@gmail.com',
                     subject: 'Reset password',
                     html: html
                 };
@@ -184,7 +183,7 @@ export const resolvers = {
             const {
                 input: { id, ...restArgs }
             } = args;
-            const user = await User.findOne({ id });
+            const user = await User.findById(id);
 
             if (!user) {
                 throw new Error('User not found.');

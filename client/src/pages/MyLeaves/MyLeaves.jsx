@@ -11,7 +11,6 @@ import GetUserLeaves from "../../data/queries/GetUserLeaves";
 import CalendarHeader from "./CalendarHeader";
 import ConfigsContext from "../../contexts/ConfigsContext";
 import GetCompanyLeaves from "../../data/queries/GetCompanyLeaves";
-import UserContext from "../../contexts/UserContext";
 
 const StyledContainer = styled('div')(({theme}) => ({
     margin: 'auto',

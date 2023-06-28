@@ -1,4 +1,4 @@
-import React, {createRef, useCallback, useState} from 'react'
+import React, {createRef, memo, useCallback, useState} from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import multiMonthPlugin from '@fullcalendar/multimonth'
 import interactionPlugin from '@fullcalendar/interaction'
@@ -108,4 +108,4 @@ const LeaveDays = ({company}) => {
     )
 }
 
-export default LeaveDays
+export default memo(LeaveDays)

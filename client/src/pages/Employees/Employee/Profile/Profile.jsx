@@ -138,8 +138,11 @@ const Profile = ({user, refetch, queryLoading, dateFormat = 'd/MM/Y'}) => {
             data,
             Object.keys(dirtyFields).map((field) => field)
         )
-        const {department, dateOfEmployment, dateOfBirth, ...rest} = modifiedData
+        const {_id, department, dateOfEmployment, dateOfBirth, ...rest} = data
         const departmentId = departments.find(item => item.name === department)?._id
+
+        console.log(user?._id)
+        console.log(_id)
 
         updateUser({
             variables: {

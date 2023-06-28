@@ -1,8 +1,4 @@
 import React, { useMemo } from 'react'
-import { GridActionsCellItem } from '@mui/x-data-grid';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import CircleIcon from '@mui/icons-material/Circle';
 import Status from "../../../../components/common/Status/Status";
 
 const useColumns = () => {

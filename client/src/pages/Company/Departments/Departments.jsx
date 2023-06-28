@@ -1,11 +1,10 @@
-import React, {useState} from 'react'
+import React, {memo} from 'react'
 import {useTranslation} from 'react-i18next';
 import { styled } from '@mui/material'
 import Button from "../../../components/common/Button/Button";
 import useOpenState from "../../../hooks/useOpenState";
 import {DepartmentsTable} from "./DepartmentsTable";
 import AddDepartment from "./AddDepartment";
-import EditDepartment from "./EditDepartment";
 
 const StyledContainer = styled('div')(({theme}) => ({
     padding: '20px',
@@ -40,4 +39,4 @@ const Departments = () => {
     )
 }
 
-export default Departments
+export default memo(Departments)

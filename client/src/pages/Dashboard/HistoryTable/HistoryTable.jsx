@@ -10,8 +10,8 @@ import useColumns from "./utils/useColumns";
 import HistoryUIDefaultState from "./utils/HistoryUIDefaultState";
 
 import {Typography, styled} from '@mui/material'
-import useColumnsInitializer from "../../../../../../hooks/useColumnsInitializer";
-import useMUILocales from "../../../../../../hooks/useMUILocales";
+import useColumnsInitializer from "../../../hooks/useColumnsInitializer";
+import useMUILocales from "../../../hooks/useMUILocales";
 
 const StyledGridOverlay = styled('div')(({theme}) => ({
     display: 'flex',
@@ -21,6 +21,22 @@ const StyledGridOverlay = styled('div')(({theme}) => ({
     color: theme.palette.grey[600],
     paddingLeft: 20,
     paddingRight: 20
+}))
+
+const StyledContainer = styled('div')(({theme}) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    background: `${theme.palette.background.paper}`,
+    padding: '20px',
+    borderRadius: '10px',
+    boxSizing: 'border-box',
+    [theme?.breakpoints.up('md')]: {
+        maxWidth: '655px',
+    },
+    [theme?.breakpoints.down('md')]: {
+        width: '100%',
+    },
+    //margin: 'auto',
 }))
 
 const DataGridStyledTable = styled(DataGrid)(({theme}) => ({
@@ -99,7 +115,11 @@ const HistoryTable = ({history}) => {
     )
 
     return (
-        <DataGridStyledTable
+        <StyledContainer>
+            <Typography align={'center'} variant={'h5'}
+                        sx={{paddingBottom: '25px'}}>{t('Leave history for current year')}</Typography>
+
+            <DataGridStyledTable
             autoHeight
             apiRef={gridApiRef}
             columns={columns}
@@ -108,15 +128,12 @@ const HistoryTable = ({history}) => {
             slots={{
                 noRowsOverlay: NoRowsOverlay,
             }}
-            initialState={{
-                pagination: {
-                    paginationModel: { pageSize: 2, page: 0 },
-                },
-            }}
             disableRowSelectionOnClick
             localeText={gridLocales}
             disableColumnMenu
+            hideFooter
         />
+        </StyledContainer>
     )
 }
 

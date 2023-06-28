@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {memo, useEffect, useState} from 'react'
 import {useTranslation} from 'react-i18next';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -89,4 +89,4 @@ const CalendarHeader = ({calendarRef, onShowAdd}) => {
     )
 }
 
-export default CalendarHeader
+export default memo(CalendarHeader)

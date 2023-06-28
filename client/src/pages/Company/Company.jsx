@@ -1,4 +1,4 @@
-import React, {memo, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import {useTranslation} from 'react-i18next';
 import {useNavigate, useParams, Link as RouterLink} from 'react-router-dom'
 import {styled, Tab, Tabs, tabsClasses, Typography, Box} from '@mui/material'
@@ -77,4 +77,4 @@ const Company = () => {
     )
 }
 
-export default memo(Company)
+export default Company

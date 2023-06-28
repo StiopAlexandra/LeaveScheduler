@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Doughnut} from 'react-chartjs-2';
 import {useTheme, Typography} from '@mui/material'
 import {useTranslation} from 'react-i18next';
@@ -30,7 +30,7 @@ const HolidayChart = ({totalHoliday, holiday}) => {
     };
 
     return (
-        <div style={{position: 'relative', width: '100%', height: 'auto'}}>
+        <div style={{position: 'relative', width: '100%', height: 'auto', margin: 'auto'}}>
             <Doughnut data={data} options={options} width={200} style={{display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
@@ -53,4 +53,4 @@ const HolidayChart = ({totalHoliday, holiday}) => {
 };
 
 
-export default HolidayChart;
+export default memo(HolidayChart);

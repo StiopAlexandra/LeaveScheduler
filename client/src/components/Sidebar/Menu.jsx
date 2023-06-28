@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Box, List } from '@mui/material'
 import MenuItem from './MenuItem'
 

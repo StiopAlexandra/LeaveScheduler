@@ -1,4 +1,4 @@
-import React, {useCallback, memo, useEffect, useContext} from 'react'
+import React, {useCallback, memo, useContext} from 'react'
 import {useTranslation} from "react-i18next"
 import FocusLock from 'react-focus-lock'
 import {Controller, useForm} from "react-hook-form";
@@ -27,7 +27,7 @@ import DeleteUserLeave from "../../../../../data/mutations/DeleteUserLeave";
 import {calculateWorkingDays} from "../../../../../utils/workingDays";
 import ConfigsContext from "../../../../../contexts/ConfigsContext";
 
-const PREFIX = 'AddLeave'
+const PREFIX = 'EditLeave'
 const classes = {
     paper: `${PREFIX}-paper`,
     title: `${PREFIX}-title`,
@@ -135,7 +135,7 @@ const EditLeave = ({open, onClose, editItem, dateFormat, refetch}) => {
             refetch()
             onClose()
         })
-    }, [onClose, updateUserLeave, leaveTypes, id]);
+    }, [onClose, updateUserLeave, leaveTypes, id, isDirty, companySettings?.workingDays]);
 
     const onDelete = useCallback(() => {
         deleteUserLeave({
@@ -146,7 +146,7 @@ const EditLeave = ({open, onClose, editItem, dateFormat, refetch}) => {
             refetch()
             onClose()
         })
-    }, [id, deleteUserLeave, onClose])
+    }, [id, deleteUserLeave, onClose, refetch])
 
     return (
         <StyledDialog

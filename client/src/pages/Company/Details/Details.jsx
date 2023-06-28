@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react'
+import React, {useCallback, useEffect, memo} from 'react'
 import {useTranslation} from 'react-i18next'
 import {Controller, useForm} from 'react-hook-form'
 
@@ -105,7 +105,7 @@ const Details = ({company, refetch, queryLoading}) => {
 
     const [updateCompany, {loading}] = useMutation(UpdateCompany)
 
-    const onSubmit = useCallback(({_id, rest}) => {
+    const onSubmit = useCallback(({_id, ...rest}) => {
         if (!isDirty) {
             return
         }
@@ -417,4 +417,4 @@ const Details = ({company, refetch, queryLoading}) => {
     )
 }
 
-export default Details
+export default memo(Details)

@@ -101,7 +101,8 @@ export const resolvers = {
 
                 const filterFn = (payload) => {
                     const notificationCompanyId = payload.notificationAdded.company;
-                    return companyId === notificationCompanyId;
+                    console.log(notificationCompanyId.equals(companyId))
+                    return notificationCompanyId.equals(companyId);
                 };
 
                 const filteredIterator = {

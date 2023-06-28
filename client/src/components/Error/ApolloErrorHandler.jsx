@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import ErrorContext from '../../contexts/ErrorContext'
 import Alert from "../common/Alert/Alert";
 
-
 const ApolloErrorHandler = ({ children }) => {
 	const { t } = useTranslation()
 	const [error, setError] = useState({})

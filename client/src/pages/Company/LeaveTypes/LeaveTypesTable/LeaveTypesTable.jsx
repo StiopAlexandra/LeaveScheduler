@@ -13,7 +13,6 @@ import LeaveTypeUIDefaultState from "./utils/LeaveTypeUIDefaultState";
 
 import {Typography, styled} from '@mui/material'
 import GetLeaveTypes from "../../../../data/queries/GetLeaveTypes";
-import DeleteUser from "../../../../data/mutations/DeleteUser";
 import useColumnsInitializer from "../../../../hooks/useColumnsInitializer";
 import useMUILocales from "../../../../hooks/useMUILocales";
 import DeleteLeaveType from "../../../../data/mutations/DeleteLeaveType";

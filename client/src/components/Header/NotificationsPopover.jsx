@@ -4,7 +4,6 @@ import DoneAllOutlinedIcon from '@mui/icons-material/DoneAllOutlined'
 import {useTranslation} from 'react-i18next'
 import {useMutation, useSubscription, useQuery} from '@apollo/client'
 
-import {set, sub} from 'date-fns'
 import React, {useState, useCallback, useContext} from 'react'
 import {
     Box,
@@ -25,56 +24,7 @@ import {fToNow} from '../../utils/formatTime'
 import GetNotifications from "../../data/queries/GetNotifications";
 import UserContext from "../../contexts/UserContext";
 import SubscriptionNotification from "../../data/subscriptions/Notification";
-import UpdateUserLeave from "../../data/mutations/UpdateUserLeave";
 import UpdateNotification from "../../data/mutations/UpdateNotification";
-
-const NOTIFICATIONS = [
-    {
-        id: '1',
-        title: 'Your order is placed',
-        description: 'waiting for shipping',
-        avatar: null,
-        type: 'order_placed',
-        createdAt: set(new Date(), {hours: 10, minutes: 30}),
-        isUnRead: true,
-    },
-    {
-        id: '2',
-        title: 'Minimal',
-        description: 'answered to your comment on the Minimal',
-        avatar: '/assets/images/avatars/avatar_2.jpg',
-        type: 'friend_interactive',
-        createdAt: sub(new Date(), {hours: 3, minutes: 30}),
-        isUnRead: true,
-    },
-    {
-        id: '3',
-        title: 'You have new message',
-        description: '5 unread messages',
-        avatar: null,
-        type: 'chat_message',
-        createdAt: sub(new Date(), {days: 1, hours: 3, minutes: 30}),
-        isUnRead: false,
-    },
-    {
-        id: '4',
-        title: 'You have new mail',
-        description: 'sent from Guido Padberg',
-        avatar: null,
-        type: 'mail',
-        createdAt: sub(new Date(), {days: 2, hours: 3, minutes: 30}),
-        isUnRead: false,
-    },
-    {
-        id: '5',
-        title: 'Delivery processing',
-        description: 'Your order is being shipped',
-        avatar: null,
-        type: 'order_shipped',
-        createdAt: sub(new Date(), {days: 3, hours: 3, minutes: 30}),
-        isUnRead: false,
-    },
-]
 
 export default function NotificationsPopover() {
     const {t} = useTranslation()

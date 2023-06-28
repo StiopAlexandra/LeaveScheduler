@@ -4,7 +4,6 @@ import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import {Button, IconButton, styled, Typography} from '@mui/material'
 import {getYear} from 'date-fns';
-import HolidayChart from "./HolidayChart";
 import GetLeaveTypes from "../../../data/queries/GetLeaveTypes";
 import {useQuery} from '@apollo/client'
 import {compareAsc} from 'date-fns';
@@ -34,15 +33,16 @@ const StyledHeader = styled('div')(({theme}) => ({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: theme?.spacing(3),
+        gap: theme?.spacing(3.5),
         [theme?.breakpoints.up('md')]: {
-            padding: theme?.spacing(3),
+            padding: theme?.spacing(4, 3),
         },
         [theme?.breakpoints.down('md')]: {
             padding: theme?.spacing(3, 0),
         },
     },
     [`& .${classes.table}`]: {
+        borderBottom: `1px solid ${theme.palette.divider}`,
         [theme?.breakpoints.up('sm')]: {
             width: '715px',
         },
@@ -57,6 +57,7 @@ const StyledHeader = styled('div')(({theme}) => ({
         [theme?.breakpoints.down('sm')]: {
             width: '100%',
         },
+        borderBottom: `1px solid ${theme.palette.divider}`,
     },
     [`& .${classes.chart}`]: {
     },
@@ -110,14 +111,6 @@ const CalendarHeader = ({calendarRef, onShowAdd, userLeaves, requests, refetch})
                                                                  endDate
                                                              }) => compareAsc(new Date(startDate), new Date()) >= 0 || compareAsc(new Date(endDate), new Date()) >= 0)
 
-    const userHoliday = userLeaves.filter(({
-                                               leaveType,
-                                               startDate
-                                           }) => leaveType.name === 'Holiday' && getYear(date) === getYear(new Date(startDate)))
-    const totalHoliday = userHoliday.reduce((acc, {days}) => {
-        return acc + days
-    }, 0)
-
     const handleDateChange = (direction) => {
         const calApi = calendarRef.current?.getApi();
         if (calApi) {
@@ -166,10 +159,10 @@ const CalendarHeader = ({calendarRef, onShowAdd, userLeaves, requests, refetch})
                 </Button>
             </div>
             <div className={classes.grid}>
-                <div className={classes.chart}>
+                <div className={classes.pendingTable}>
                     <Typography align={'center'} variant={'h5'}
-                                sx={{paddingBottom: '25px'}}>{t('Holiday Allowance')}</Typography>
-                    <HolidayChart totalHoliday={totalHoliday} holiday={holiday}/>
+                                sx={{paddingBottom: '25px'}}>{t('Pending for review')}</Typography>
+                    <PendingRequestTable userLeaves={userLeaves} requests={currentYearRequests} refetch={refetch}/>
                 </div>
                 <div className={classes.table}>
                     <Typography align={'center'} variant={'h5'}
@@ -180,11 +173,6 @@ const CalendarHeader = ({calendarRef, onShowAdd, userLeaves, requests, refetch})
                     <Typography align={'center'} variant={'h5'}
                                 sx={{paddingBottom: '25px'}}>{t('Past Leaves')}</Typography>
                     <UserLeavesTable userLeaves={pastUserLeaves}/>
-                </div>
-                <div className={classes.pendingTable}>
-                    <Typography align={'center'} variant={'h5'}
-                                sx={{paddingBottom: '25px'}}>{t('Pending for review')}</Typography>
-                    <PendingRequestTable userLeaves={userLeaves} requests={currentYearRequests} refetch={refetch}/>
                 </div>
             </div>
         </StyledHeader>

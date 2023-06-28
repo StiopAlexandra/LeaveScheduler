@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {
     styled,
     alpha,
@@ -146,7 +146,6 @@ const UngroupTable = ({daysOfMounth, daysInMonth, currentYearUserLeaves}) => {
             </TableContainer>
         </StyledDiv>
     )
-        ;
 }
 
-export default UngroupTable;
+export default memo(UngroupTable)

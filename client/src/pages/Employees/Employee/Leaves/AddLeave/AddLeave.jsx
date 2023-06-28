@@ -3,7 +3,7 @@ import {useTranslation} from "react-i18next"
 import FocusLock from 'react-focus-lock'
 import {Controller, useForm} from "react-hook-form";
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
-import {formatISO, differenceInDays, addDays, getDay} from 'date-fns';
+import {formatISO, addDays} from 'date-fns';
 
 import {
     Dialog,

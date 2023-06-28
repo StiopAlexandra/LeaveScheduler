@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, memo} from 'react'
 import {useTranslation} from 'react-i18next';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -32,7 +32,8 @@ const StyledHeader = styled('div')(({theme}) => ({
         [theme?.breakpoints.up('md')]: {
             flexDirection: 'row',
             justifyContent: 'space-around',
-            padding: theme?.spacing(3),
+            padding: theme?.spacing(4, 3),
+            height: 270,
         },
         [theme?.breakpoints.down('md')]: {
             flexDirection: 'column',
@@ -194,4 +195,4 @@ const CalendarHeader = ({calendarRef, onShowAdd, userLeaves}) => {
     )
 }
 
-export default CalendarHeader
+export default memo(CalendarHeader)

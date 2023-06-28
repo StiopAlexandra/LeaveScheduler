@@ -1,13 +1,10 @@
 import {
     alpha, buttonClasses,
     createTheme, darken,
-    inputAdornmentClasses,
-    inputLabelClasses,
     lighten,
-    outlinedInputClasses
 } from '@mui/material'
 
-import {getThemeZIndex, pxToRem, responsiveFontSizes} from './utils'
+import {pxToRem, responsiveFontSizes} from './utils'
 import {common} from "@mui/material/colors";
 
 const spacing = 10
@@ -273,55 +270,6 @@ const getTheme = (mode) => {
                     disableRipple: true,
                     disableElevation: true,
                 },
-
-                styleOverrides: {
-                    // startIcon: {
-                    //     marginLeft: 0,
-                    //     marginRight: theme.spacing(0.8),
-                    //     '& > *:nth-of-type(1)': {
-                    //         fontSize: '14px',
-                    //     },
-                    // },
-                    // endIcon: {
-                    //     marginRight: 0,
-                    //     marginLeft: theme.spacing(0.8),
-                    //     '& > *:nth-of-type(1)': {
-                    //         fontSize: '14px',
-                    //     },
-                    // },
-                    // root: {
-                    //     borderRadius: '3px',
-                    //     fontSize: theme.typography.button.fontSize,
-                    //     lineHeight: '19px', //theme.typography.button.lineHeight,
-                    //     minWidth: 0,
-                    //     textOverflow: 'ellipsis',
-                    //     overflow: 'hidden',
-                    //     whiteSpace: 'nowrap',
-                    //     fontWeight: 600,
-                    // },
-                    // sizeSmall: {
-                    //     height: 25,
-                    //     padding: theme.spacing(0.3, 1),
-                    // },
-                    // sizeMedium: {
-                    //     height: 35,
-                    //     padding: theme.spacing(0.8, 1.5),
-                    // },
-                    // sizeLarge: {
-                    //     height: 40,
-                    //     padding: theme.spacing(0.8, 2),
-                    //     fontSize: pxToRem(16),
-                    // },
-                    // outlinedSizeSmall: {
-                    //     padding: theme.spacing(0.2, 1),
-                    // },
-                    // outlinedMediumLarge: {
-                    //     padding: theme.spacing(0.7, 1.5),
-                    // },
-                    // outlinedSizeLarge: {
-                    //     padding: theme.spacing(0.7, 2),
-                    // },
-                },
                 variants: [
                     ...['default', 'primary', 'secondary', 'error'].map((color) => ({
                         props: {variant: 'text', color},
@@ -345,43 +293,6 @@ const getTheme = (mode) => {
                             },
                         },
                     })),
-                    // ...['default', 'primary', 'secondary', 'error'].map((color) => {
-                    //     const paletteColor =
-                    //         theme.palette[color]?.main || theme.palette.secondary.main
-                    //
-                    //     return {
-                    //         props: {
-                    //             variant: 'outlined',
-                    //             color,
-                    //         },
-                    //         style: {
-                    //             backgroundColor: theme.palette.background.paper,
-                    //             border: `1px solid ${lighten(paletteColor, 0.83)}`,
-                    //             '&:hover': {
-                    //                 backgroundColor: theme.palette.background.paper,
-                    //                 border: `1px solid ${lighten(paletteColor, 0.575)}`,
-                    //             },
-                    //             '&:active': {
-                    //                 backgroundColor: lighten(paletteColor, 0.935),
-                    //                 border: `1px solid ${lighten(paletteColor, 0.83)}`,
-                    //             },
-                    //             [`&.${buttonClasses.focusVisible}`]: {
-                    //                 boxShadow: `0px 0px 0px 3px ${lighten(
-                    //                     theme.palette.secondary.main,
-                    //                     0.5
-                    //                 )}`,
-                    //             },
-                    //             [`&.${buttonClasses.disabled}`]: {
-                    //                 border: `1px solid ${lighten(
-                    //                     theme.palette.default.main,
-                    //                     0.83
-                    //                 )}`,
-                    //                 boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.05)',
-                    //                 color: alpha(theme.palette.default.main, 0.25),
-                    //             },
-                    //         },
-                    //     }
-                    // }),
                     ...['default', 'primary', 'secondary', 'error'].map((color) => ({
                         props: {variant: 'contained', color},
                         style: {
@@ -408,187 +319,6 @@ const getTheme = (mode) => {
                     })),
                 ],
             },
-            // 	MuiOutlinedInput: {
-            // 		styleOverrides: {
-            // 			root: {
-            // 				fontSize: '16px', // label shrink fix: 16px * 0.75(scale) = 12px
-            // 				backgroundColor: theme.palette.background.default,
-            // 				[`&.${outlinedInputClasses.focused}`]: {
-            // 					[`& .${outlinedInputClasses.notchedOutline}`]: {
-            // 						borderWidth: 1,
-            // 						borderColor: theme.palette.secondary.main,
-            // 					},
-            // 				},
-            // 				[`&.${outlinedInputClasses.error}`]: {
-            // 					[`& .${outlinedInputClasses.notchedOutline}`]: {
-            // 						borderWidth: 1,
-            // 						borderColor: theme.palette.error.main,
-            // 					},
-            // 				},
-            // 				[`& .${inputAdornmentClasses.root}`]: {
-            // 					fontSize: 12,
-            // 				},
-            // 				[`&.${outlinedInputClasses.disabled}`]: {
-            // 					opacity: 0.5,
-            // 					[`& .${outlinedInputClasses.notchedOutline}`]: {
-            // 						borderColor: theme.palette.grey.border3,
-            // 					},
-            // 				},
-            // 			},
-            // 			adornedStart: {
-            // 				paddingLeft: 10,
-            // 				paddingRight: 15,
-            // 				[`& .${outlinedInputClasses.input}`]: {
-            // 					paddingLeft: 0,
-            // 				},
-            // 			},
-            // 			notchedOutline: {
-            // 				'& > legend': {
-            // 					height: 9,
-            // 				},
-            // 			},
-            // 		},
-            // 		variants: [
-            // 			...['default', 'primary', 'secondary'].map((color) => {
-            // 				const paletteColor =
-            // 					theme.palette[color]?.main || theme.palette.secondary.main
-            //
-            // 				return {
-            // 					props: { color },
-            // 					style: {
-            // 						[`&:not(.${outlinedInputClasses.disabled})`]: {
-            // 							[`& .${inputAdornmentClasses.positionStart}`]: {
-            // 								color: lighten(paletteColor, 0.49),
-            // 							},
-            // 							[`& .${inputAdornmentClasses.positionEnd}`]: {
-            // 								color: lighten(paletteColor, 0.42),
-            // 							},
-            // 							[`&:not(.${outlinedInputClasses.focused}):hover .${outlinedInputClasses.notchedOutline}`]:
-            // 								{
-            // 									borderColor: lighten(paletteColor, 0.575),
-            // 								},
-            // 						},
-            // 						[`& .${outlinedInputClasses.input}::placeholder`]: {
-            // 							color: lighten(paletteColor, 0.49),
-            // 						},
-            // 						[`& .${outlinedInputClasses.notchedOutline}`]: {
-            // 							borderColor: lighten(paletteColor, 0.83),
-            // 						},
-            // 					},
-            // 				}
-            // 			}),
-            // 		],
-            // 	},
-            // 	MuiInputLabel: {
-            // 		styleOverrides: {
-            // 			root: {
-            // 				color: 'inherit',
-            // 				[`&.${inputLabelClasses.focused}`]: {
-            // 					color: 'inherit',
-            // 					[`&.${inputLabelClasses.outlined}`]: {
-            // 						color: theme.palette.secondary.main,
-            // 					},
-            // 				},
-            // 			},
-            // 			asterisk: {
-            // 				color: theme.palette.error.main,
-            // 			},
-            // 		},
-            // 	},
-            // 	MuiTextField: {
-            // 		defaultProps: {
-            // 			color: 'default',
-            // 			size: 'large',
-            // 		},
-            // 		styleOverrides: {
-            // 			root: {
-            // 				input: {
-            // 					height: '1.25em',
-            // 					lineHeight: '1.25em',
-            // 					fontSize: theme.typography.body1.fontSize,
-            // 				},
-            // 			},
-            // 		},
-            // 		variants: [
-            // 			...['default', 'primary', 'secondary', 'error'].map((color) => {
-            // 				const paletteColor =
-            // 					theme.palette[color]?.main || theme.palette.secondary.main
-            //
-            // 				return {
-            // 					props: { color, size: 'small' },
-            // 					style: {
-            // 						input: {
-            // 							fontSize: theme.typography.body2.fontSize,
-            // 							padding: theme.spacing(0.5),
-            // 						},
-            // 						[`& .${inputLabelClasses.root}`]: {
-            // 							color: lighten(paletteColor, 0.32),
-            // 							fontSize: theme.typography.body2.fontSize,
-            // 							transform: 'translate(5px, 4px) scale(1)',
-            // 							[`&.${inputLabelClasses.disabled}`]: {
-            // 								opacity: 0.5,
-            // 								color: lighten(textPrimary, 0.49),
-            // 							},
-            // 						},
-            // 						[`& .${inputLabelClasses.shrink}`]: {
-            // 							transform: 'translate(14px, -9px) scale(0.75)',
-            // 							fontSize: '16px',
-            // 						},
-            // 					},
-            // 				}
-            // 			}),
-            // 			...['default', 'primary', 'secondary', 'error'].map((color) => {
-            // 				const paletteColor =
-            // 					theme.palette[color]?.main || theme.palette.secondary.main
-            //
-            // 				return {
-            // 					props: { color, size: 'medium' },
-            // 					style: {
-            // 						input: {
-            // 							padding: theme.spacing(0.875, 1.5),
-            // 						},
-            // 						[`& .${inputLabelClasses.root}`]: {
-            // 							color: lighten(paletteColor, 0.32),
-            // 							transform: 'translate(15px, 8px) scale(1)',
-            // 							[`&.${inputLabelClasses.disabled}`]: {
-            // 								opacity: 0.5,
-            // 								color: lighten(textPrimary, 0.49),
-            // 							},
-            // 						},
-            // 						[`& .${inputLabelClasses.shrink}`]: {
-            // 							transform: 'translate(14px, -10px) scale(0.75)',
-            // 							fontSize: '16px',
-            // 						},
-            // 					},
-            // 				}
-            // 			}),
-            // 			...['default', 'primary', 'secondary', 'error'].map((color) => {
-            // 				const paletteColor =
-            // 					theme.palette[color]?.main || theme.palette.secondary.main
-            //
-            // 				return {
-            // 					props: { color, size: 'large' },
-            // 					style: {
-            // 						input: {
-            // 							padding: theme.spacing(1.375, 1.5),
-            // 						},
-            // 						[`& .${inputLabelClasses.root}`]: {
-            // 							color: lighten(paletteColor, 0.32),
-            // 							transform: 'translate(15px, 12px) scale(1)',
-            // 							[`&.${inputLabelClasses.disabled}`]: {
-            // 								opacity: 0.5,
-            // 								color: lighten(textPrimary, 0.49),
-            // 							},
-            // 						},
-            // 						[`& .${inputLabelClasses.shrink}`]: {
-            // 							transform: 'translate(14px, -10px) scale(0.75)',
-            // 							fontSize: '16px',
-            // 						},
-            // 					},
-            // 				}
-            // 			}),
-            // 		],
-            // 	},
         },
     })
 }

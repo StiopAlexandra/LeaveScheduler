@@ -1,9 +1,7 @@
-import PropTypes from 'prop-types';
 import { NavLink as RouterLink } from 'react-router-dom'
 import { ListItemText, ListItemIcon, ListItemButton, styled, alpha } from '@mui/material'
 import {getPageRoutePath} from '../../utils/path'
 import { useTranslation } from 'react-i18next'
-
 
 const StyledNavItem = styled((props) => <ListItemButton disableGutters {...props} />)(({ theme }) => ({
     ...theme.typography.body2,

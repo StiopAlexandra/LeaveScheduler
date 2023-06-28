@@ -1,4 +1,4 @@
-import React, {memo} from 'react'
+import React from 'react'
 import Button from "../../components/common/Button";
 import { useTranslation } from "react-i18next"
 import useOpenState from "../../hooks/useOpenState";
@@ -25,4 +25,4 @@ const Employees = () => {
     )
 }
 
-export default memo(Employees)
+export default Employees

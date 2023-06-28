@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import {useTranslation} from 'react-i18next';
 import { styled } from '@mui/material'
 import Button from "../../../components/common/Button/Button";
@@ -39,4 +39,4 @@ const LeaveTypes = () => {
     )
 }
 
-export default LeaveTypes
+export default memo(LeaveTypes)

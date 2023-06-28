@@ -31,7 +31,7 @@ import GetUsers from "../../../data/queries/GetUsers";
 import useResponsive from "../../../hooks/useResponsive";
 import {userTypes} from "../../../data/static/constants";
 
-const PREFIX = 'Addemployee'
+const PREFIX = 'AddEmployee'
 const classes = {
     paper: `${PREFIX}-paper`,
     title: `${PREFIX}-title`,

@@ -14,7 +14,7 @@ const StyledTitle = styled('div')(({theme}) => ({
     gap: '15px'
 }))
 
-const Reports = ({id: userId}) => {
+const Reports = () => {
     const {t} = useTranslation();
 
     const [year, setYear] = useState(getYear(new Date()))

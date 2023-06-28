@@ -12,11 +12,6 @@ import {
     DialogActions,
     styled,
     TextField,
-    Select,
-    MenuItem,
-    OutlinedInput,
-    FormControl,
-    InputLabel,
     outlinedInputClasses
 } from '@mui/material'
 import Button from "../../../../components/common/Button";
@@ -230,35 +225,6 @@ const AddLeave = ({open, onClose, start, end, dateFormat}) => {
                             )
                         }}
                     />
-                    {/*<Controller*/}
-                    {/*    name="leaveType"*/}
-                    {/*    control={control}*/}
-                    {/*    rules={{*/}
-                    {/*        required: true,*/}
-                    {/*    }}*/}
-                    {/*    render={({field: {onChange, value}, fieldState: {error}}) => {*/}
-                    {/*        return (*/}
-                    {/*            <FormControl error={!!error}>*/}
-                    {/*                <InputLabel>{t('Leave type')}</InputLabel>*/}
-                    {/*                <Select*/}
-                    {/*                    fullWidth*/}
-                    {/*                    value={value || ''}*/}
-                    {/*                    onChange={onChange}*/}
-                    {/*                    input={<OutlinedInput label={t('Leave type')}/>}*/}
-                    {/*                >*/}
-                    {/*                    {leaveTypes.map(({_id, name}) => (*/}
-                    {/*                        <MenuItem*/}
-                    {/*                            key={_id}*/}
-                    {/*                            value={name}*/}
-                    {/*                        >*/}
-                    {/*                            {name}*/}
-                    {/*                        </MenuItem>*/}
-                    {/*                    ))}*/}
-                    {/*                </Select>*/}
-                    {/*            </FormControl>*/}
-                    {/*        )*/}
-                    {/*    }}*/}
-                    {/*/>*/}
                 </DialogContent>
                 <DialogActions className={classes.actions}>
                     <Button variant="contained" color="primary" onClick={handleSubmit(onSubmit)} loading={loading}>

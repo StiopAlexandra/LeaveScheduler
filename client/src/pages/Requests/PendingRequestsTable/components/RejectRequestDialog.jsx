@@ -18,7 +18,7 @@ import {useMutation} from '@apollo/client'
 import UpdateUserLeave from "../../../../data/mutations/UpdateUserLeave";
 import CreateNotification from "../../../../data/mutations/CreateNotification";
 
-const PREFIX = 'AddLeave'
+const PREFIX = 'RejectRequest'
 const classes = {
     paper: `${PREFIX}-paper`,
     title: `${PREFIX}-title`,
@@ -121,7 +121,7 @@ const RejectRequestDialog = ({open, onClose, selectedItems, refetch, userId}) =>
             onClose()
             refetch()
         }
-    }, [onClose, selectedItems, updateUserLeave, refetch]);
+    }, [onClose, selectedItems, updateUserLeave, refetch, createNotification, userId]);
 
     return (
         <StyledDialog

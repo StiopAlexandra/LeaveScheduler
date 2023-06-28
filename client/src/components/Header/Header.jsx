@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
 import { bgBlur } from '../../utils/cssStyles';
@@ -7,7 +6,6 @@ import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import AccountPopover from './AccountPopover';
 import NotificationsPopover from './NotificationsPopover';
 import LanguagePopover from "./LanguagePopover";
-import ThemeDefault from "../../theme/themeDefault";
 import ThemeSwitch from "./ThemeSwitch";
 
 

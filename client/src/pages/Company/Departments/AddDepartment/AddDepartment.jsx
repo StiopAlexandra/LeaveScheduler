@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react'
+import React, {memo, useCallback, useState} from 'react'
 import {useTranslation} from "react-i18next"
 import FocusLock from 'react-focus-lock'
 import {Controller, useForm} from "react-hook-form";
@@ -199,4 +199,4 @@ const AddDepartment = ({open, onClose}) => {
     )
 }
 
-export default AddDepartment
+export default memo(AddDepartment)

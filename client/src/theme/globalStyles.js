@@ -1,5 +1,5 @@
 import { GlobalStyles as MUIGlobalStyles } from '@mui/material';
-import { lighten, alpha, darken, useTheme } from '@mui/material'
+import { alpha, useTheme } from '@mui/material'
 
 export default function GlobalStyles() {
     const theme = useTheme();
@@ -16,29 +16,11 @@ export default function GlobalStyles() {
                     background: `${theme.palette.background.neutral}!important`,
                 },
                 '.fc-multiMonthYear-view': {
+                    borderRadius: '10px!important',
                     background: `${theme.palette.background.paper}!important`,
                 },
-                '.fc-today-button':{
-                    marginRight: '30.56px !important',
-                    backgroundColor: '#26c644 !important',
-                    borderColor: '#26c644 !important',
-                    '&:focus': {
-                        boxShadow: 'none !important',
-                        backgroundColor: `${darken(theme.palette.primary.main, 0.04)}!important`,
-                    }
-                },
-                '.fc-next-button':{
-                    '&:focus': {
-                        boxShadow: 'none !important',
-                    }
-                },
-                '.fc-prev-button':{
-                    '&:focus': {
-                        boxShadow: 'none !important',
-                    }
-                },
                 '.fc-day-today':{
-                    backgroundColor: `${alpha(theme.palette.primary.main, 0.5)}!important`,
+                    backgroundColor: `${alpha(theme.palette.primary.main, 0.4)}!important`,
                 },
                 '.fc-highlight ':{
                     backgroundColor: `${alpha(theme.palette.primary.main, 0.16)}!important`,

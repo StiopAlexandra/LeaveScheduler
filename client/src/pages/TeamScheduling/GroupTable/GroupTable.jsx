@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from 'react';
+import React, {memo, useState, useCallback, useEffect} from 'react';
 import {
     styled,
     alpha,
@@ -142,30 +142,6 @@ const GroupTable = ({daysOfMounth, daysInMonth, currentYearUserLeaves}) => {
         setToggle({...toggle, [department]: !toggle[department]});
     }, [setToggle, toggle])
 
-    const departmentss = [
-        {
-            name: 'Marketing', users: [
-                {
-                    name: 'John',
-                    leaveDays: [{startDay: 5, endDay: 8, color: '#22d0b8'}, {
-                        startDay: 15,
-                        endDay: 17,
-                        color: '#22d0b8'
-                    }]
-                },
-                {
-                    name: 'Jane',
-                    leaveDays: [{startDay: 10, endDay: 12, color: '#22d0b8'}, {
-                        startDay: 25,
-                        endDay: 27,
-                        color: '#22d0b8'
-                    }]
-                },
-            ],
-            color: '#673ab7'
-        },
-    ];
-
     return (
         <StyledDiv>
             <TableContainer className={classes.container}>
@@ -226,4 +202,4 @@ const GroupTable = ({daysOfMounth, daysInMonth, currentYearUserLeaves}) => {
     );
 }
 
-export default GroupTable;
+export default memo(GroupTable);
