@@ -1,4 +1,4 @@
-import React, {useMemo, useCallback, memo, useState} from 'react'
+import React, {useMemo, useCallback, memo, useState, useContext} from 'react'
 import {useTranslation} from 'react-i18next'
 import {NetworkStatus} from '@apollo/client'
 import {useNavigate} from 'react-router-dom'
@@ -6,17 +6,17 @@ import {getYear} from 'date-fns';
 
 import {useGridApiRef} from '@mui/x-data-grid'
 import {
-    DataGrid, gridClasses, GRID_CHECKBOX_SELECTION_COL_DEF
+    DataGrid, gridClasses, roRO, enUS
 } from '@mui/x-data-grid';
 import {useQuery} from '@apollo/client'
 
 import {Typography, styled} from '@mui/material'
 import CustomToolbar from "./components/CustomToolbar";
-import useMUILocales from "../../../hooks/useMUILocales";
 import GetLeaveTypes from "../../../data/queries/GetLeaveTypes";
 import employee from "../../Employees/Employee";
 import GetUsersLeaves from "../../../data/queries/GetUsersLeaves";
 import Status from "../../../components/common/Status/Status";
+import ConfigsContext from "../../../contexts/ConfigsContext";
 
 const StyledGridOverlay = styled('div')(({theme}) => ({
     display: 'flex',
@@ -97,7 +97,7 @@ const DataGridStyledTable = styled(DataGrid)(({theme}) => ({
 
 const ReportsTable = ({year}) => {
     const gridApiRef = useGridApiRef()
-    const gridLocales = useMUILocales()
+    const {lng} = useContext(ConfigsContext)
     const {t} = useTranslation()
     const navigate = useNavigate()
 
@@ -190,7 +190,7 @@ const ReportsTable = ({year}) => {
 
     gridColumns.unshift({
         field: 'employee',
-        headerName: 'Employee',
+        headerName: t('Employees'),
         width: 220,
         sortable: true,
         headerAlign: 'center',
@@ -298,7 +298,7 @@ const ReportsTable = ({year}) => {
             }}
             onCellClick={onItemClick}
             disableRowSelectionOnClick
-            localeText={gridLocales}
+            localeText={lng === 'ro' ? roRO.components.MuiDataGrid.defaultProps.localeText : enUS.components.MuiDataGrid.defaultProps.localeText}
             disableColumnMenu
         />
     )

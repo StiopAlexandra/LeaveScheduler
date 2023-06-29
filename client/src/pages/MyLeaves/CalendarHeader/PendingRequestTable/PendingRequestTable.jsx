@@ -1,9 +1,9 @@
-import React, {useMemo, useCallback, memo, useState} from 'react'
+import React, {useMemo, useCallback, memo, useState, useContext} from 'react'
 import {useTranslation} from 'react-i18next'
 
 import {useGridApiRef} from '@mui/x-data-grid'
 import {
-    DataGrid, gridClasses,
+    DataGrid, gridClasses, roRO, enUS
 } from '@mui/x-data-grid';
 import {useMutation} from '@apollo/client'
 
@@ -12,10 +12,10 @@ import PendingRequestTableUIDefaultState from "./utils/PendingRequestTableUIDefa
 
 import {Typography, styled} from '@mui/material'
 import useColumnsInitializer from "../../../../hooks/useColumnsInitializer";
-import useMUILocales from "../../../../hooks/useMUILocales";
 import DeleteUserLeave from "../../../../data/mutations/DeleteUserLeave";
 import useOpenState from "../../../../hooks/useOpenState";
 import EditLeave from "../../EditLeave";
+import ConfigsContext from "../../../../contexts/ConfigsContext";
 
 const StyledGridOverlay = styled('div')(({theme}) => ({
     display: 'flex',
@@ -90,7 +90,7 @@ const DataGridStyledTable = styled(DataGrid)(({theme}) => ({
 
 const PendingRequestTable = ({requests, refetch, userLeaves}) => {
     const gridApiRef = useGridApiRef()
-    const gridLocales = useMUILocales()
+    const {lng} = useContext(ConfigsContext)
     const {t} = useTranslation()
     const [editItem, setEditItem] = useState({})
     const { open: showEdit, onShow: onShowEdit, onClose: onCloseEdit } = useOpenState()
@@ -162,7 +162,7 @@ const PendingRequestTable = ({requests, refetch, userLeaves}) => {
                 noRowsOverlay: NoRowsOverlay,
             }}
             disableRowSelectionOnClick
-            localeText={gridLocales}
+            localeText={lng === 'ro' ? roRO.components.MuiDataGrid.defaultProps.localeText : enUS.components.MuiDataGrid.defaultProps.localeText}
             disableColumnMenu
         />
             {showEdit && <EditLeave userLeaves={userLeaves} open={showEdit} onClose={onClose} data={editItem} refetch={refetch}/>}

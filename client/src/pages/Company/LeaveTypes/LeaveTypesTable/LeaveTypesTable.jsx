@@ -1,10 +1,10 @@
-import React, {useMemo, useCallback, memo, useState} from 'react'
+import React, {useMemo, useCallback, memo, useState, useContext} from 'react'
 import {useTranslation} from 'react-i18next'
 import {NetworkStatus} from '@apollo/client'
 
 import {useGridApiRef} from '@mui/x-data-grid'
 import {
-    DataGrid, gridClasses,
+    DataGrid, gridClasses, roRO, enUS
 } from '@mui/x-data-grid';
 import {useQuery, useMutation} from '@apollo/client'
 
@@ -14,10 +14,10 @@ import LeaveTypeUIDefaultState from "./utils/LeaveTypeUIDefaultState";
 import {Typography, styled} from '@mui/material'
 import GetLeaveTypes from "../../../../data/queries/GetLeaveTypes";
 import useColumnsInitializer from "../../../../hooks/useColumnsInitializer";
-import useMUILocales from "../../../../hooks/useMUILocales";
 import DeleteLeaveType from "../../../../data/mutations/DeleteLeaveType";
 import EditLeaveType from "../EditLeaveType";
 import useOpenState from "../../../../hooks/useOpenState";
+import ConfigsContext from "../../../../contexts/ConfigsContext";
 
 const StyledGridOverlay = styled('div')(({theme}) => ({
     display: 'flex',
@@ -93,7 +93,7 @@ const DataGridStyledTable = styled(DataGrid)(({theme}) => ({
 
 const LeaveTypesTable = () => {
     const gridApiRef = useGridApiRef()
-    const gridLocales = useMUILocales()
+    const {lng} = useContext(ConfigsContext)
     const {t} = useTranslation()
     const [editItem, setEditItem] = useState({})
     const { open: showEdit, onShow: onShowEdit, onClose: onCloseEdit } = useOpenState()
@@ -147,9 +147,10 @@ const LeaveTypesTable = () => {
 
     const memoizedRows = useMemo(
         () =>
-            leaveTypes.map(({_id, ...rest}) => {
+            leaveTypes.map(({_id, name, ...rest}) => {
                 return {
                     id: _id,
+                    name: t(name),
                     ...rest
                 }
             }),
@@ -181,7 +182,7 @@ const LeaveTypesTable = () => {
                 },
             }}
             disableRowSelectionOnClick
-            localeText={gridLocales}
+            localeText={lng === 'ro' ? roRO.components.MuiDataGrid.defaultProps.localeText : enUS.components.MuiDataGrid.defaultProps.localeText}
             disableColumnMenu
             disableColumnSelector
             rowSelection={false}

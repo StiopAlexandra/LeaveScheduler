@@ -1,9 +1,9 @@
-import React, {useMemo, memo} from 'react'
+import React, {useMemo, memo, useContext} from 'react'
 import {useTranslation} from 'react-i18next'
 
 import {useGridApiRef} from '@mui/x-data-grid'
 import {
-    DataGrid, gridClasses,
+    DataGrid, gridClasses, roRO, enUS
 } from '@mui/x-data-grid';
 
 import useColumns from "./utils/useColumns";
@@ -11,7 +11,7 @@ import HistoryUIDefaultState from "./utils/HistoryUIDefaultState";
 
 import {Typography, styled} from '@mui/material'
 import useColumnsInitializer from "../../../hooks/useColumnsInitializer";
-import useMUILocales from "../../../hooks/useMUILocales";
+import ConfigsContext from "../../../contexts/ConfigsContext";
 
 const StyledGridOverlay = styled('div')(({theme}) => ({
     display: 'flex',
@@ -90,7 +90,7 @@ const DataGridStyledTable = styled(DataGrid)(({theme}) => ({
 
 const HistoryTable = ({history}) => {
     const gridApiRef = useGridApiRef()
-    const gridLocales = useMUILocales()
+    const {lng} = useContext(ConfigsContext)
     const {t} = useTranslation()
 
     const columnSpecificCellConfigs = useColumns()
@@ -129,7 +129,7 @@ const HistoryTable = ({history}) => {
                 noRowsOverlay: NoRowsOverlay,
             }}
             disableRowSelectionOnClick
-            localeText={gridLocales}
+            localeText={lng === 'ro' ? roRO.components.MuiDataGrid.defaultProps.localeText : enUS.components.MuiDataGrid.defaultProps.localeText}
             disableColumnMenu
             hideFooter
         />

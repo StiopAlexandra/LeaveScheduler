@@ -20,7 +20,7 @@ const DepartmentChart = ({users}) => {
 
     const groupsByDepartment = {}
     users.forEach(({department}) => {
-        const name = department?.name || 'Undefined'
+        const name = department?.name || t('Undefined')
         if (!groupsByDepartment[name]) {
             groupsByDepartment[name] = [];
         }

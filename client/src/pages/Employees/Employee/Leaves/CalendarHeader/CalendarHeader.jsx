@@ -39,7 +39,7 @@ const StyledHeader = styled('div')(({theme}) => ({
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: theme?.spacing(3, 0),
+            padding: theme?.spacing(3, 1),
             gap: theme?.spacing(3),
         },
     },

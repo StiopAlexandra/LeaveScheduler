@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next'
 
 import {useGridApiRef} from '@mui/x-data-grid'
 import {
-    DataGrid, gridClasses,
+    DataGrid, gridClasses, roRO, enUS
 } from '@mui/x-data-grid';
 
 import useColumns from "./utils/useColumns";
@@ -11,7 +11,6 @@ import UserLeavesUIDefaultState from "./utils/UserLeavesUIDefaultState";
 
 import {Typography, styled} from '@mui/material'
 import useColumnsInitializer from "../../../../hooks/useColumnsInitializer";
-import useMUILocales from "../../../../hooks/useMUILocales";
 import ConfigsContext from "../../../../contexts/ConfigsContext";
 
 const StyledGridOverlay = styled('div')(({theme}) => ({
@@ -74,9 +73,8 @@ const DataGridStyledTable = styled(DataGrid)(({theme}) => ({
 
 const UserLeavesTable = ({userLeaves}) => {
     const gridApiRef = useGridApiRef()
-    const gridLocales = useMUILocales()
     const {t} = useTranslation()
-    const {companySettings} = useContext(ConfigsContext);
+    const {lng} = useContext(ConfigsContext);
 
     const columnSpecificCellConfigs = useColumns()
 
@@ -116,7 +114,7 @@ const UserLeavesTable = ({userLeaves}) => {
                 noRowsOverlay: NoRowsOverlay,
             }}
             disableRowSelectionOnClick
-            localeText={gridLocales}
+            localeText={lng === 'ro' ? roRO.components.MuiDataGrid.defaultProps.localeText : enUS.components.MuiDataGrid.defaultProps.localeText}
             disableColumnMenu
         />
     )

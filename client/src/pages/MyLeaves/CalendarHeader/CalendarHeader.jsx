@@ -38,23 +38,23 @@ const StyledHeader = styled('div')(({theme}) => ({
             padding: theme?.spacing(4, 3),
         },
         [theme?.breakpoints.down('md')]: {
-            padding: theme?.spacing(3, 0),
+            padding: theme?.spacing(3, 1),
         },
     },
     [`& .${classes.table}`]: {
         borderBottom: `1px solid ${theme.palette.divider}`,
-        [theme?.breakpoints.up('sm')]: {
+        [theme?.breakpoints.up('md')]: {
             width: '715px',
         },
-        [theme?.breakpoints.down('sm')]: {
+        [theme?.breakpoints.down('md')]: {
             width: '100%',
         },
     },
     [`& .${classes.pendingTable}`]: {
-        [theme?.breakpoints.up('sm')]: {
+        [theme?.breakpoints.up('md')]: {
             width: '815px',
         },
-        [theme?.breakpoints.down('sm')]: {
+        [theme?.breakpoints.down('md')]: {
             width: '100%',
         },
         borderBottom: `1px solid ${theme.palette.divider}`,

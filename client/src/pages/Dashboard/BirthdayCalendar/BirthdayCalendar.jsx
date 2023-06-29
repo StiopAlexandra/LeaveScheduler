@@ -3,6 +3,7 @@ import React, {createRef, memo, useCallback, useContext} from 'react'
 import {useTranslation} from 'react-i18next'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import allLocales from '@fullcalendar/core/locales-all'
 import ConfigsContext from "../../../contexts/ConfigsContext";
 import {setYear, getYear, formatISO, format} from 'date-fns';
 import tippy from 'tippy.js'
@@ -41,7 +42,7 @@ const StyledContainer = styled('div')(({theme}) => ({
 const BirthdayCalendar = ({users}) => {
     const {t} = useTranslation()
     const calendarRef = createRef();
-    const {companySettings} = useContext(ConfigsContext);
+    const {companySettings, lng} = useContext(ConfigsContext);
 
     const events = users.map(({name, department, dateOfBirth}, index) => {
         return {
@@ -68,6 +69,8 @@ const BirthdayCalendar = ({users}) => {
                         sx={{paddingBottom: '25px'}}>{t('Birthday in ') + t(format(new Date(), 'MMMM yyyy'))}</Typography>
             <FullCalendar
                 ref={calendarRef}
+                locales={allLocales}
+                locale={lng}
                 events={events}
                 height={450}
                 plugins={[dayGridPlugin]}

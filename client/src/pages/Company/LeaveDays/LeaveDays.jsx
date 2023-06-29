@@ -1,6 +1,7 @@
-import React, {createRef, memo, useCallback, useState} from 'react'
+import React, {createRef, memo, useCallback, useContext, useState} from 'react'
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import multiMonthPlugin from '@fullcalendar/multimonth'
+import allLocales from '@fullcalendar/core/locales-all'
 import interactionPlugin from '@fullcalendar/interaction'
 import { styled } from '@mui/material'
 import useOpenState from "../../../hooks/useOpenState";
@@ -9,6 +10,7 @@ import {useQuery} from '@apollo/client'
 import GetCompanyLeaves from "../../../data/queries/GetCompanyLeaves";
 import EditLeave from "./EditLeave";
 import CalendarHeader from "./CalendarHeader";
+import ConfigsContext from "../../../contexts/ConfigsContext";
 
 const StyledContainer = styled('div')(({theme}) => ({
     maxWidth: '1150px',
@@ -30,6 +32,7 @@ const LeaveDays = ({company}) => {
     const [end, setEnd] = useState('')
     const [editItem, setEditItem] = useState({})
     const calendarRef = createRef();
+    const {lng} = useContext(ConfigsContext)
 
     const {
         data
@@ -82,6 +85,8 @@ const LeaveDays = ({company}) => {
         <StyledContainer>
             <CalendarHeader calendarRef={calendarRef} onShowAdd={onShowAdd}/>
             <FullCalendar
+                locales={allLocales}
+                locale={lng}
                 ref={calendarRef}
                 events={events}
                 height={'auto'}

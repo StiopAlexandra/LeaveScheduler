@@ -113,9 +113,9 @@ export default function NotificationsPopover() {
             >
                 <Box sx={{display: 'flex', alignItems: 'center', py: 2, px: 2.5}}>
                     <Box sx={{flexGrow: 1}}>
-                        <Typography variant="subtitle1">Notifications</Typography>
+                        <Typography variant="subtitle1">{t('Notifications')}</Typography>
                         <Typography variant="body2" sx={{color: 'text.secondary'}}>
-                            {t('You have {{count}} unread message', {count: unread})}
+                            {t('You have {{unread}} unread messages', {unread: unread})}
                         </Typography>
                     </Box>
 

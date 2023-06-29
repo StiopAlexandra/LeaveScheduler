@@ -359,7 +359,7 @@ const Details = ({company, refetch, queryLoading}) => {
                                                         key={label}
                                                         value={value}
                                                     >
-                                                        {label}
+                                                        {t(label)}
                                                     </MenuItem>
                                                 ))}
                                             </Select>
@@ -385,7 +385,7 @@ const Details = ({company, refetch, queryLoading}) => {
                                                 renderValue={(selected) => (
                                                     <Box sx={{display: 'flex', flexWrap: 'wrap', gap: 0.5}}>
                                                         {selected.map((value) => (
-                                                            <Chip key={value} label={weekDays.find((item) => item.value === value).label}/>
+                                                            <Chip key={value} label={t(weekDays.find((item) => item.value === value).label)}/>
                                                         ))}
                                                     </Box>
                                                 )}
@@ -395,7 +395,7 @@ const Details = ({company, refetch, queryLoading}) => {
                                                         key={label}
                                                         value={value}
                                                     >
-                                                        {label}
+                                                        {t(label)}
                                                     </MenuItem>
                                                 ))}
                                             </Select>

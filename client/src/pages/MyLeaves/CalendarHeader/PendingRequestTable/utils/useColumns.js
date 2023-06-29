@@ -28,14 +28,14 @@ const useColumns = ({onDelete, onEdit}) => {
 				hide: false,
 				seq: 2,
 				minWidth: 160,
-				headerName: 'Start Day',
+				headerName: 'Start Date',
 				sortable: true,
 			},
 			endDate: {
 				hide: false,
 				seq: 3,
 				minWidth: 160,
-				headerName: 'End Day',
+				headerName: 'End Date',
 				sortable: true,
 			},
 			days: {

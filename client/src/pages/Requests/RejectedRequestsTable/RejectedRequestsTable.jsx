@@ -1,10 +1,10 @@
-import React, {useMemo, memo, useState} from 'react'
+import React, {useMemo, memo, useState, useContext} from 'react'
 import { useTranslation } from 'react-i18next'
 import { NetworkStatus } from '@apollo/client'
 
 import {useGridApiRef} from '@mui/x-data-grid'
 import {
-    DataGrid, gridClasses, GRID_CHECKBOX_SELECTION_COL_DEF
+    DataGrid, gridClasses, roRO, enUS
 } from '@mui/x-data-grid';
 import {useQuery} from '@apollo/client'
 
@@ -13,10 +13,10 @@ import RejectedRequestsUIDefaultState from "./utils/RejectedRequestsUIDefaultSta
 import useColumnsInitializer from "../../../hooks/useColumnsInitializer";
 
 import {Typography, styled} from '@mui/material'
-import useMUILocales from "../../../hooks/useMUILocales";
 import CustomToolbar from "./components/CustomToolbar";
 import GetUserLeaves from "../../../data/queries/GetUserLeaves";
 import {getYear} from 'date-fns';
+import ConfigsContext from "../../../contexts/ConfigsContext";
 
 const StyledGridOverlay = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -97,7 +97,7 @@ const DataGridStyledTable = styled(DataGrid)(({theme}) => ({
 
 const RejectedRequestsTable = ({year}) => {
     const gridApiRef = useGridApiRef()
-    const gridLocales = useMUILocales()
+    const {lng} = useContext(ConfigsContext)
     const { t } = useTranslation()
 
     const [isFilterActive, setFilterActive] = useState(false);
@@ -214,7 +214,7 @@ const RejectedRequestsTable = ({year}) => {
                         },
                     },
                 }}
-                localeText={gridLocales}
+                localeText={lng === 'ro' ? roRO.components.MuiDataGrid.defaultProps.localeText : enUS.components.MuiDataGrid.defaultProps.localeText}
                 disableColumnMenu
                 disableRowSelectionOnClick
             />

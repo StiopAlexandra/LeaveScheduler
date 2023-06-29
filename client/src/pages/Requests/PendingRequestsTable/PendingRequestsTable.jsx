@@ -1,10 +1,10 @@
-import React, {useMemo, useCallback, memo, useState} from 'react'
+import React, {useMemo, useCallback, memo, useState, useContext} from 'react'
 import { useTranslation } from 'react-i18next'
 import { NetworkStatus } from '@apollo/client'
 
 import {useGridApiRef} from '@mui/x-data-grid'
 import {
-    DataGrid, gridClasses, GRID_CHECKBOX_SELECTION_COL_DEF
+    DataGrid, gridClasses, roRO, enUS
 } from '@mui/x-data-grid';
 import {useQuery, useMutation} from '@apollo/client'
 
@@ -13,7 +13,6 @@ import PendingRequestUIDefaultState from "./utils/PendingRequestUIDefaultState";
 import useColumnsInitializer from "../../../hooks/useColumnsInitializer";
 
 import {Typography, styled} from '@mui/material'
-import useMUILocales from "../../../hooks/useMUILocales";
 import CustomToolbar from "./components/CustomToolbar";
 import UpdateUserLeave from "../../../data/mutations/UpdateUserLeave";
 import GetUserLeaves from "../../../data/queries/GetUserLeaves";
@@ -21,6 +20,7 @@ import {getYear} from 'date-fns';
 import useOpenState from "../../../hooks/useOpenState";
 import RejectRequestDialog from "./components/RejectRequestDialog";
 import CreateNotification from "../../../data/mutations/CreateNotification";
+import ConfigsContext from "../../../contexts/ConfigsContext";
 
 const StyledGridOverlay = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -101,7 +101,7 @@ const DataGridStyledTable = styled(DataGrid)(({theme}) => ({
 
 const PendingRequestsTable = ({year, userId}) => {
     const gridApiRef = useGridApiRef()
-    const gridLocales = useMUILocales()
+    const {lng} = useContext(ConfigsContext)
     const { t } = useTranslation()
     const { open: showDialog, onShow: onShowDialog, onClose: onCloseDialog } = useOpenState()
 
@@ -267,8 +267,7 @@ const PendingRequestsTable = ({year, userId}) => {
                         },
                     },
                 }}
-                localeText={gridLocales}
-                checkboxSelection
+                localeText={lng === 'ro' ? roRO.components.MuiDataGrid.defaultProps.localeText : enUS.components.MuiDataGrid.defaultProps.localeText}                checkboxSelection
                 disableColumnMenu
             />
     {

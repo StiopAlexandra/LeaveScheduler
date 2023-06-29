@@ -4,6 +4,7 @@ import FullCalendar from '@fullcalendar/react' // must go before plugins
 import multiMonthPlugin from '@fullcalendar/multimonth'
 import interactionPlugin from '@fullcalendar/interaction'
 import { styled } from '@mui/material'
+import allLocales from '@fullcalendar/core/locales-all'
 import useOpenState from "../../../../hooks/useOpenState";
 import AddLeave from "./AddLeave";
 import {useQuery} from '@apollo/client'
@@ -41,7 +42,7 @@ const Leaves = ({userId}) => {
     const [start, setStart] = useState('')
     const [end, setEnd] = useState('')
     const [editItem, setEditItem] = useState({})
-    const {companySettings} = useContext(ConfigsContext);
+    const {companySettings, lng} = useContext(ConfigsContext);
 
     const calendarRef = createRef();
 
@@ -117,6 +118,8 @@ const Leaves = ({userId}) => {
             <CalendarHeader calendarRef={calendarRef} onShowAdd={onShowAdd} userLeaves={userLeaves}/>
             <FullCalendar
                 ref={calendarRef}
+                locales={allLocales}
+                locale={lng}
                 events={events}
                 height={'auto'}
                 plugins={[multiMonthPlugin, interactionPlugin]}

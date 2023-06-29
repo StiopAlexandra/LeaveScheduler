@@ -3,6 +3,7 @@ import {useTranslation} from 'react-i18next';
 import FullCalendar from '@fullcalendar/react' // must go before plugins
 import multiMonthPlugin from '@fullcalendar/multimonth'
 import interactionPlugin from '@fullcalendar/interaction'
+import allLocales from '@fullcalendar/core/locales-all'
 import { styled } from '@mui/material'
 import useOpenState from "../../hooks/useOpenState";
 import AddLeave from "./AddLeave";
@@ -39,7 +40,7 @@ const MyLeaves = ({id: userId}) => {
     const [start, setStart] = useState('')
     const [end, setEnd] = useState('')
 
-    const {companySettings} = useContext(ConfigsContext);
+    const {companySettings, lng} = useContext(ConfigsContext);
 
     const calendarRef = createRef();
 
@@ -97,6 +98,8 @@ const MyLeaves = ({id: userId}) => {
             <CalendarHeader calendarRef={calendarRef} onShowAdd={onShowAdd} userLeaves={acceptedUserLeaves} requests={requests} refetch={refetch}/>
             <FullCalendar
                 ref={calendarRef}
+                locales={allLocales}
+                locale={lng}
                 events={events}
                 height={'auto'}
                 plugins={[multiMonthPlugin, interactionPlugin]}

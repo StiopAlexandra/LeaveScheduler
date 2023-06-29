@@ -1,10 +1,10 @@
-import React, {useMemo, useCallback, memo, useState} from 'react'
+import React, {useMemo, useCallback, memo, useState, useContext} from 'react'
 import {useTranslation} from 'react-i18next'
 import {NetworkStatus} from '@apollo/client'
 
 import {useGridApiRef} from '@mui/x-data-grid'
 import {
-    DataGrid, gridClasses,
+    DataGrid, gridClasses, roRO, enUS
 } from '@mui/x-data-grid';
 import {useQuery, useMutation} from '@apollo/client'
 
@@ -14,10 +14,10 @@ import DepartmentUIDefaultState from "./utils/DepartmentUIDefaultState";
 import {Typography, styled} from '@mui/material'
 import GetDepartments from "../../../../data/queries/GetDepartments";
 import useColumnsInitializer from "../../../../hooks/useColumnsInitializer";
-import useMUILocales from "../../../../hooks/useMUILocales";
 import DeleteDepartment from "../../../../data/mutations/DeleteDepartment";
 import EditDepartment from "../EditDepartment";
 import useOpenState from "../../../../hooks/useOpenState";
+import ConfigsContext from "../../../../contexts/ConfigsContext";
 
 const StyledGridOverlay = styled('div')(({theme}) => ({
     display: 'flex',
@@ -93,7 +93,7 @@ const DataGridStyledTable = styled(DataGrid)(({theme}) => ({
 
 const DepartmentsTable = () => {
     const gridApiRef = useGridApiRef()
-    const gridLocales = useMUILocales()
+    const {lng} = useContext(ConfigsContext)
     const {t} = useTranslation()
     const [editItem, setEditItem] = useState({})
     const { open: showEdit, onShow: onShowEdit, onClose: onCloseEdit } = useOpenState()
@@ -181,7 +181,7 @@ const DepartmentsTable = () => {
                 },
             }}
             disableRowSelectionOnClick
-            localeText={gridLocales}
+            localeText={lng === 'ro' ? roRO.components.MuiDataGrid.defaultProps.localeText : enUS.components.MuiDataGrid.defaultProps.localeText}
             disableColumnMenu
             disableColumnSelector
             rowSelection={false}
