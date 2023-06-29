@@ -9,8 +9,9 @@ const StyledContainer = styled('div')(({theme}) => ({
     background: `${theme.palette.background.paper}`,
     padding: '20px',
     borderRadius: '10px',
-    minWidth: '300px',
-    margin: 'auto'
+    maxWidth: '300px',
+    margin: 'auto',
+    marginBottom: '35px'
 }))
 
 const HolidayChart = ({holiday}) => {

@@ -36,7 +36,7 @@ const StyledContainer = styled('div')(({theme}) => ({
     [theme?.breakpoints.down('md')]: {
         width: '100%',
     },
-    //margin: 'auto',
+    margin: 'auto',
 }))
 
 const DataGridStyledTable = styled(DataGrid)(({theme}) => ({

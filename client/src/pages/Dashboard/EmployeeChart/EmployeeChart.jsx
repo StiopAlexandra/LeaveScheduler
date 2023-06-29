@@ -9,7 +9,7 @@ const StyledContainer = styled('div')(({theme}) => ({
     background: `${theme.palette.background.paper}`,
     padding: '20px',
     borderRadius: '10px',
-    width: '300px',
+    maxWidth: '300px',
     margin: 'auto'
 }))
 

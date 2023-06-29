@@ -1,6 +1,6 @@
 import React from 'react'
 import {useTranslation} from 'react-i18next';
-import {styled, Typography} from '@mui/material'
+import {styled, Typography, Grid} from '@mui/material'
 import {useQuery} from '@apollo/client'
 import {getYear} from 'date-fns';
 
@@ -14,13 +14,12 @@ import DepartmentChart from "./DepartmentChart";
 import BirthdayCalendar from "./BirthdayCalendar";
 import GetUsersDashboard from "../../data/queries/GetUsersDashboard";
 import EmployeeChart from "./EmployeeChart";
+import GetUser from "../../data/queries/GetUser";
 
 const PREFIX = 'Dashboard'
 const classes = {
-    box: `${PREFIX}-box`,
-    table: `${PREFIX}-table`,
-    chart: `${PREFIX}-chart`,
     hello: `${PREFIX}-hello`,
+    grid: `${PREFIX}-grid`,
 }
 
 const StyledContainer = styled('div')(({theme}) => ({
@@ -39,40 +38,34 @@ const StyledContainer = styled('div')(({theme}) => ({
         width: '100%',
         padding: '30px 20px',
     },
-    [`& .${classes.box}`]: {
-        display: 'flex',
-        gap: '35px',
-        justifyContent: 'space-between',
+    [`& .${classes.hello}`]: {
+        background: `${theme.palette.background.paper}`,
+        padding: '20px',
+        borderRadius: '10px',
+        marginBottom: '35px'
+    },
+    [`& .${classes.grid}`]: {
         [theme?.breakpoints.up("md")]: {
             flexDirection: 'row'
         },
         [theme?.breakpoints.down("md")]: {
             flexDirection: 'column'
         },
-        width: '100%',
-    },
-    [`& .${classes.chart}`]: {
-        display: 'flex',
-        gap: '35px',
-        flexDirection: 'column',
-        boxSizing: 'border-box',
-        // margin: 'auto',
-        flex: '0 1 300px'
-    },
-    [`& .${classes.table}`]: {
-        display: 'flex',
-        flexDirection: 'column',
-        flexGrow: 1
-    },
-    [`& .${classes.hello}`]: {
-        background: `${theme.palette.background.paper}`,
-        padding: '20px',
-        borderRadius: '10px',
     },
 }))
 
 const Dashboard = ({id: userId}) => {
     const {t} = useTranslation();
+
+    const {
+        data: dataName
+    } = useQuery(GetUser, {
+        variables: {
+            id: userId
+        },
+        fetchPolicy: 'network-only',
+    })
+    const user = dataName?.getUser
 
     const {
         data: usersData,
@@ -172,26 +165,28 @@ const Dashboard = ({id: userId}) => {
 
     return (
         <StyledContainer>
-            <div className={classes.box}>
-                <div className={classes.table}>
-                    <div className={classes.hello}>
-                        <Typography variant={'h5'} align={'center'}>{t('Hello') + ',' + +'!'}</Typography>
-                    </div>
-                    <HistoryTable history={history}/>
-                </div>
-                <div className={classes.chart}>
-                    <HolidayChart holiday={holiday}/>
-                    <NextLeave nextLeave={nextLeave[0]}/>
-                </div>
-            </div>
-            <div className={classes.box}>
-                <div className={classes.chart}>
+                <Grid container spacing={3.5} className={classes.grid}>
+                    <Grid item xs={12} md={7}>
+                        <div className={classes.hello}>
+                            <Typography variant={'h5'} align={'center'}><span>&#128075;</span>{' ' + t('Hello') + ', ' + user?.name +'!'}</Typography>
+                        </div>
+                        <HistoryTable history={history}/>
+                    </Grid>
+                    <Grid item xs={12} md={5}>
+                        <HolidayChart holiday={holiday}/>
+                        <NextLeave nextLeave={nextLeave[0]}/>
+                    </Grid>
+                </Grid>
+
+            <Grid container spacing={3.5} className={classes.grid}>
+                <Grid item xs={12} md={5}>
                     <DepartmentChart users={users}/>
                     <EmployeeChart users={users}/>
-                </div>
-                <BirthdayCalendar users={users}/>
-            </div>
-
+                </Grid>
+                <Grid item xs={12} md={7}>
+                    <BirthdayCalendar users={users}/>
+                </Grid>
+            </Grid>
         </StyledContainer>
     )
 }

@@ -9,7 +9,6 @@ import tippy from 'tippy.js'
 
 const StyledContainer = styled('div')(({theme}) => ({
     width: '100%',
-    maxWidth: '665px',
     boxSizing: 'border-box',
     display: 'inline-block',
     background: `${theme.palette.background.paper}`,
