@@ -30,9 +30,9 @@ export const typeDefs = gql`
         manager: Boolean
     }
     extend type Query {
-        getUsers(filter: UserFilter): [User] @isAuthenticated,
-        getUser(id: ID!): User @isAuthenticated,
-        me: User @isAuthenticated,
+        getUsers(filter: UserFilter): [User],
+        getUser(id: ID!): User,
+        me: User,
     }
     extend type Mutation {
         signin(email: String!, password: String!): AuthData
