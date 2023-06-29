@@ -1,11 +1,16 @@
 import dotenv from 'dotenv'
 dotenv.config()
-const { PORT, MONGODB_URI, WORKERS, JWT_LIFE_TIME, JWT_SECRET } = process.env;
+const { PORT, WORKERS, MONGODB_URI, JWT_LIFE_TIME, JWT_SECRET, MAIL_USER, MAIL_PASSWORD, MAIL_HOST, MAIL_PORT, MAIL_SERVICE} = process.env;
 
 export default {
-    Port: PORT || 4000,
-    MongoDbURI: MONGODB_URI || '',
     Workers: WORKERS || 1,
-    JwtLifeTime: JWT_LIFE_TIME || '7d',
-    JwtSecret: JWT_SECRET || 'jkdhflkjhsd',
+    Port: PORT,
+    MongoDbURI: MONGODB_URI,
+    JwtLifeTime: JWT_LIFE_TIME,
+    JwtSecret: JWT_SECRET,
+    MailHost: MAIL_HOST,
+    MailPort: MAIL_PORT,
+    MailService: MAIL_SERVICE,
+    MailUser: MAIL_USER,
+    MailPassword: MAIL_PASSWORD,
 };

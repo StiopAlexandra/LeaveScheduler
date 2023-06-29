@@ -1,27 +1,18 @@
 import path from 'path'
 import nodemailer from 'nodemailer'
-import Email from 'email-templates'
 import {fileURLToPath} from "url";
 import fs from "fs";
 import handlebars from "handlebars";
-
-export const _transporter = nodemailer.createTransport({
-    host: process.env.MAIL_HOST,
-    port: process.env.MAIL_PORT,
-    auth: {
-        user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASSWORD
-    }
-})
+import config from "../config.js";
 
 export const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        host: 'smtp.gmail.com',
-        port: 465,
+        service: config.MailService,
+        host: config.MailHost,
+        port: config.MailPort,
         secure: true,
         auth: {
-            user: process.env.MAIL_USER,
-            pass: process.env.MAIL_PASSWORD
+            user: config.MailUser,
+            pass: config.MailPassword
         }
     }
 );
