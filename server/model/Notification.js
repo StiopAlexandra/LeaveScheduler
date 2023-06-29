@@ -1,21 +1,20 @@
-import mongoose from 'mongoose'
+import mongoose, {ObjectId} from 'mongoose'
 import Inc from 'mongoose-sequence'
 
 const AutoIncrement = Inc(mongoose);
 
 const notificationSchema = new mongoose.Schema({
-    _id: Number,
     company: {
-        type: Number,
+        type: ObjectId,
         ref: 'Company',
         required: true
     },
     sender: {
-        type: Number,
+        type: ObjectId,
         ref: 'User'
     },
     receiver: [{
-        type: Number,
+        type: ObjectId,
         ref: 'User'
     }],
     message: {
@@ -24,7 +23,7 @@ const notificationSchema = new mongoose.Schema({
     },
     read: [new mongoose.Schema({
         reader: {
-            type: Number,
+            type: ObjectId,
             ref: 'User'
         },
         readAt: {
@@ -38,6 +37,6 @@ const notificationSchema = new mongoose.Schema({
     },
 })
 
-notificationSchema.plugin(AutoIncrement, {id: 'notification_id', inc_field: '_id'});
+//notificationSchema.plugin(AutoIncrement, {id: 'notification_id', inc_field: '_id'});
 
 export default new mongoose.model('Notification', notificationSchema)

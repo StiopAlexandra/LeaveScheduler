@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, {ObjectId} from 'mongoose'
 import Inc from 'mongoose-sequence'
 
 const AutoIncrement = Inc(mongoose);
@@ -6,7 +6,6 @@ const AutoIncrement = Inc(mongoose);
 const Schema = mongoose.Schema
 
 const companyLeaveSchema = new Schema({
-    _id: Number,
     title: {
         type: String,
         required: true
@@ -20,17 +19,17 @@ const companyLeaveSchema = new Schema({
         required: true
     },
     company: {
-        type: Number,
+        type: ObjectId,
         ref: 'Company',
         required: true
     },
     leaveType: {
-        type: Number,
+        type: ObjectId,
         ref: 'LeaveType',
         required: true
     },
 })
 
-companyLeaveSchema.plugin(AutoIncrement, {id: 'company_leave_id', inc_field: '_id'});
+//companyLeaveSchema.plugin(AutoIncrement, {id: 'company_leave_id', inc_field: '_id'});
 
 export default new mongoose.model('CompanyLeave', companyLeaveSchema)

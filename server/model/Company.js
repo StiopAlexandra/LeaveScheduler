@@ -4,7 +4,6 @@ import Inc from 'mongoose-sequence'
 const AutoIncrement = Inc(mongoose);
 
 const companySchema = new mongoose.Schema({
-    _id: Number,
     name: {
         type: String,
         required: true
@@ -43,6 +42,6 @@ const companySchema = new mongoose.Schema({
     },
 })
 
-companySchema.plugin(AutoIncrement, {id: 'company_id', inc_field: '_id'});
+//companySchema.plugin(AutoIncrement, {id: 'company_id', inc_field: '_id'});
 
 export default new mongoose.model('Company', companySchema)

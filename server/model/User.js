@@ -1,13 +1,12 @@
-import mongoose from 'mongoose'
+import mongoose, {ObjectId} from 'mongoose'
 import Inc from 'mongoose-sequence'
-import UserLeave, {userLeaveSchema} from "./UserLeave.js";
+import {userLeaveSchema} from "./UserLeave.js";
 
 const AutoIncrement = Inc(mongoose);
 
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
-    _id: Number,
     name: {
         type: String,
         required: true
@@ -25,17 +24,16 @@ const userSchema = new Schema({
         default: false
     },
     company: {
-        type: Number,
+        type: ObjectId,
         ref: 'Company',
         required: true
     },
     department: {
-        type: Number,
+        type: ObjectId,
         ref: 'Department',
     },
     userLeave: {
         type: [userLeaveSchema],
-        //ref: 'UserLeave',
     },
     created: {
         type: Date,
@@ -56,7 +54,6 @@ const userSchema = new Schema({
     },
     dateOfEmployment: {
         type: Date,
-        //required: true
     },
     role: {
         type: String,
@@ -66,6 +63,6 @@ const userSchema = new Schema({
     },
 })
 
-userSchema.plugin(AutoIncrement, {id: 'user_id', inc_field: '_id'});
+//userSchema.plugin(AutoIncrement, {id: 'user_id', inc_field: '_id'});
 
 export default new mongoose.model('User', userSchema)

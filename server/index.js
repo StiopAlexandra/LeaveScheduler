@@ -3,12 +3,15 @@ import {ApolloServer} from 'apollo-server-express';
 import express from 'express';
 import cors from 'cors'
 import http from 'http';
+import * as cron from 'node-cron'
 
 import config from "./config.js";
 import schema from './schema/index.js';
 import getUser from "./utils/context.js";
 import User from "./model/User.js";
 import tokenUtil from "./utils/token.js";
+import markAsInactive from "./utils/markAsInactive.js";
+import markAsActive from "./utils/markAsActive.js";
 
 mongoose.set("strictQuery", true);
 
@@ -43,6 +46,8 @@ const server = new ApolloServer({
             }
         },
     },
+    introspection: true,
+    playground: true,
 });
 
 server.applyMiddleware({
@@ -62,6 +67,12 @@ mongoose.connect(config.MongoDbURI, {
 
         httpServer.listen(config.Port, () => {
             console.log(`GraphQL server running on http://localhost:${config.Port}/graphql`);
+        });
+    })
+    .then(() => {
+        cron.schedule('0 0 0 * * *', () => {
+            markAsActive();
+            markAsInactive()
         });
     })
     .catch((err) => {
