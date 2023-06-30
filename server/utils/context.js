@@ -1,6 +1,5 @@
 import User from '../model/User.js';
-
-import tokenUtil from './token.js';
+import {getDecodedToken} from './token.js';
 
 const getUser = async (req) => {
     if (!req) {
@@ -14,7 +13,7 @@ const getUser = async (req) => {
     }
 
     try {
-        const decodedToken = await tokenUtil.getDecodedToken(
+        const decodedToken = await getDecodedToken(
             authorizationHeader.replace('Bearer ', '')
         );
         return {

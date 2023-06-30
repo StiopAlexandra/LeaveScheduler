@@ -1,19 +1,19 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
-	query GetCompany {
-		getCompany {
-			_id
-			name
-			email
-			phone
-			country
-			address
-			timezone
-			dateFormat
-			timeFormat
-			weekStart
-			workingDays
-		}
-	}
-`
+  query GetCompany {
+    getCompany {
+      _id
+      name
+      email
+      phone
+      country
+      address
+      timezone
+      dateFormat
+      timeFormat
+      weekStart
+      workingDays
+    }
+  }
+`;

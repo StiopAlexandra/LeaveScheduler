@@ -1,1 +1,1 @@
-export {default} from './GroupTable'
+export { default } from './GroupTable';

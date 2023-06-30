@@ -1,1 +1,1 @@
-export { default as LeaveTypesTable } from './LeaveTypesTable'
+export { default as LeaveTypesTable } from './LeaveTypesTable';

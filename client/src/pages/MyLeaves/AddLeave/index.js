@@ -1,1 +1,1 @@
-export {default} from './AddLeave'
+export { default } from './AddLeave';

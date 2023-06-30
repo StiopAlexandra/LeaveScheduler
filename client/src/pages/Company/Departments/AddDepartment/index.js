@@ -1,1 +1,1 @@
-export {default} from './AddDepartment'
+export { default } from './AddDepartment';

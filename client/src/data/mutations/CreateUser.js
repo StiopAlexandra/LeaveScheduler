@@ -1,11 +1,11 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
-    mutation CreateUser($input: CreateUserInput!) {
-        createUser(input: $input) {
-            user{
-                _id
-            }
-        }
+  mutation CreateUser($input: CreateUserInput!) {
+    createUser(input: $input) {
+      user {
+        _id
+      }
     }
-`
+  }
+`;

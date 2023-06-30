@@ -1,9 +1,9 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
-    mutation CreateDepartment($input: CreateDepartmentInput!) {
-        createDepartment(input: $input) {
-            _id
-        }
+  mutation CreateDepartment($input: CreateDepartmentInput!) {
+    createDepartment(input: $input) {
+      _id
     }
-`
+  }
+`;

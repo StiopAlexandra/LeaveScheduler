@@ -1,1 +1,1 @@
-export { default as DepartmentsTable } from './PendingRequestTable'
+export { default as DepartmentsTable } from './PendingRequestTable';

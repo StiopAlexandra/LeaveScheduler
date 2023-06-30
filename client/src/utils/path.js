@@ -1,5 +1,5 @@
-import slugify from "slugify";
+import slugify from 'slugify';
 
 export const getPageRoutePath = ({ name }) => {
-    return `${slugify(name, { lower: true })}`
-}
+  return `${slugify(name, { lower: true })}`;
+};

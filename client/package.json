@@ -20,6 +20,7 @@
     "apollo-link-ws": "^1.0.20",
     "chart.js": "^2.9.4",
     "date-fns": "^2.29.3",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "fullcalendar": "^6.1.7",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
@@ -44,12 +45,24 @@
     "yup": "^1.0.2"
   },
   "devDependencies": {
-    "i18next-parser": "^3.3.0"
+    "eslint": "^8.43.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "i18next-parser": "^3.3.0",
+    "prettier": "^2.8.8"
   },
+  "files": [
+    "/src"
+  ],
   "scripts": {
     "start": "react-scripts start",
     "build": "BUILD_PATH=../server/public react-scripts build",
-    "extract:locale": "i18next"
+    "extract:locale": "i18next",
+    "lint:js": "eslint --color --ext .jsx --ext .js src",
+    "lint:js:fix": "eslint --color --ext .jsx --ext .js src --fix",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc.json"
   },
   "eslintConfig": {
     "extends": [

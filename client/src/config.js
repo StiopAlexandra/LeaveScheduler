@@ -1,5 +1,6 @@
 export const appConfigs = {
-    httpEndPoint: 'http://localhost:4000/graphql',
-    authToken: 'access_token',
-    authUser: 'user',
-}
+  httpEndPoint: process.env.REACT_APP_GRAPHQL_URL,
+  wsEndPoint: process.env.REACT_APP_GRAPHQL_WS_URL,
+  authToken: 'access_token',
+  authUser: 'user'
+};

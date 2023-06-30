@@ -9,7 +9,7 @@ import config from "./config.js";
 import schema from './schema/index.js';
 import getUser from "./utils/context.js";
 import User from "./model/User.js";
-import tokenUtil from "./utils/token.js";
+import {getDecodedToken} from "./utils/token.js";
 import markAsInactive from "./utils/markAsInactive.js";
 import markAsActive from "./utils/markAsActive.js";
 
@@ -36,7 +36,7 @@ const server = new ApolloServer({
         onConnect: async(connectionParams) => {
             const authParam = connectionParams[`Authorization`];
             if (authParam) {
-                const decodedToken = await tokenUtil.getDecodedToken(
+                const decodedToken = await getDecodedToken(
                     authParam.replace('Bearer ', '')
                 );
                 return {

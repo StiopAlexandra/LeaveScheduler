@@ -1,15 +1,15 @@
-import React from 'react'
-import { useEffect } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import React from 'react';
+import { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 const TableLayout = () => {
-	const navigate = useNavigate()
+  const navigate = useNavigate();
 
-	useEffect(() => {
-		navigate('/')
-	}, [])
+  useEffect(() => {
+    navigate('/');
+  }, []);
 
-	return <Outlet />
-}
+  return <Outlet />;
+};
 
-export default TableLayout
+export default TableLayout;

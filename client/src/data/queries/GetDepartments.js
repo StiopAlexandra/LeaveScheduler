@@ -1,12 +1,12 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
-    query GetDepartments{
-        getDepartments {
-            _id
-            name
-            maxAbsentEmployees
-            color
-        }
+  query GetDepartments {
+    getDepartments {
+      _id
+      name
+      maxAbsentEmployees
+      color
     }
-`
+  }
+`;

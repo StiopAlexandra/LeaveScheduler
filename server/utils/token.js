@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 import config from '../config.js';
 
-const create = (user) =>
+export const createToken = (user) =>
     new Promise((resolve, reject) => {
         jwt.sign(
             {
@@ -23,7 +23,7 @@ const create = (user) =>
         );
     });
 
-const getDecodedToken = (token) => {
+export const getDecodedToken = (token) => {
     return new Promise((resolve, reject) => {
         jwt.verify(token, config.JwtSecret, (error, decoded) => {
             const decodedToken = decoded;
@@ -38,9 +38,4 @@ const getDecodedToken = (token) => {
             resolve(decodedToken);
         });
     })
-};
-
-export default {
-    create,
-    getDecodedToken,
 };

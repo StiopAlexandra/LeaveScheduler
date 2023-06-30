@@ -1,9 +1,9 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
-    mutation DeleteUser($id: ID!) {
-        deleteUser(id: $id) {
-            _id
-        }
+  mutation DeleteUser($id: ID!) {
+    deleteUser(id: $id) {
+      _id
     }
-`
+  }
+`;

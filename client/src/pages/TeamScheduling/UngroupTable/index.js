@@ -1,1 +1,1 @@
-export {default} from './UngroupTable'
+export { default } from './UngroupTable';

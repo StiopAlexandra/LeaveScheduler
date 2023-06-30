@@ -1,1 +1,1 @@
-export {default} from './HolidayChart'
+export { default } from './HolidayChart';

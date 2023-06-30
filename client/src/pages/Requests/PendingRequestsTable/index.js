@@ -1,1 +1,1 @@
-export { default as RequestsTable } from './PendingRequestsTable'
+export { default as RequestsTable } from './PendingRequestsTable';

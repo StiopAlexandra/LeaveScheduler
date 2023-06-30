@@ -1,1 +1,1 @@
-export {default} from './EditDepartment'
+export { default } from './EditDepartment';

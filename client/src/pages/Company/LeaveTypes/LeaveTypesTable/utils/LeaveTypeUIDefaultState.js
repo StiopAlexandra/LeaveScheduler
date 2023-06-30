@@ -1,17 +1,17 @@
 const LeaveTypeUIDefaultState = {
-	LeaveTypesTableUIKey: {
-		columns: {
-			name: {},
-			color: {},
-			allowanceDays: {},
-			actions: {},
-		},
-		density: 'standard' // ENUM - standard / comfortable / compact
-	},
-	LeaveTypesFiltersUIKey: {
-		filters: []
-	},
-	LeaveTypesOrderUIKey: {}
-}
+  LeaveTypesTableUIKey: {
+    columns: {
+      name: {},
+      color: {},
+      allowanceDays: {},
+      actions: {}
+    },
+    density: 'standard' // ENUM - standard / comfortable / compact
+  },
+  LeaveTypesFiltersUIKey: {
+    filters: []
+  },
+  LeaveTypesOrderUIKey: {}
+};
 
-export default LeaveTypeUIDefaultState
+export default LeaveTypeUIDefaultState;

@@ -1,9 +1,9 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
-	subscription SubscriptionNotification{
-		notificationAdded {
-			message
-		}
-	}
-`
+  subscription SubscriptionNotification {
+    notificationAdded {
+      message
+    }
+  }
+`;

@@ -1,1 +1,1 @@
-export { default } from './UserLeavesTable'
+export { default } from './UserLeavesTable';

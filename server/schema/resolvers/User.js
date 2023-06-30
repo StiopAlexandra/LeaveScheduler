@@ -3,7 +3,7 @@ import User from '../../model/User.js'
 import bcrypt from 'bcryptjs'
 import generator from 'generate-password'
 
-import tokenUtil from '../../utils/token.js';
+import {createToken} from '../../utils/token.js';
 import {template, transporter} from "../../utils/nodemailer.js";
 import Department from "../../model/Department.js";
 import UserLeave from "../../model/UserLeave.js";
@@ -40,7 +40,7 @@ export const resolvers = {
             if (!isPasswordValid) {
                 throw new Error('Password is incorrect.');
             }
-            const token = await tokenUtil.create(user);
+            const token = await createToken(user);
 
             return {
                 user,
@@ -107,7 +107,7 @@ export const resolvers = {
                     company: companyId,
                 });
 
-                const resetToken = await tokenUtil.create(user);
+                const resetToken = await createToken(user);
 
                 const emailTemplate = template('resetPassword.hbs')
 
@@ -149,7 +149,7 @@ export const resolvers = {
                     throw new Error('User not found.')
                 }
 
-                const resetToken = await tokenUtil.create(user);
+                const resetToken = await createToken(user);
 
                 const emailTemplate = template('resetPassword.hbs')
 
@@ -165,15 +165,15 @@ export const resolvers = {
                 };
                 await transporter.sendMail(mailOptions, (error) => {
                     if (error) {
-                        console.error(error);
+                        return {
+                            message: 'An error occurred.'
+                        };
                     } else {
-                        console.log('Email sent!');
+                        return {
+                            message: 'Check your email.'
+                        };
                     }
                 });
-
-                return {
-                    message: 'Check your email'
-                };
             } catch (error) {
                 throw new Error(error);
             }

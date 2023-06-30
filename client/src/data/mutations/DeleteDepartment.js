@@ -1,9 +1,9 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
-    mutation DeleteDepartment($id: ID!) {
-        deleteDepartment(id: $id) {
-            _id
-        }
+  mutation DeleteDepartment($id: ID!) {
+    deleteDepartment(id: $id) {
+      _id
     }
-`
+  }
+`;

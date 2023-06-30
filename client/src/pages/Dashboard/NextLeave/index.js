@@ -1,1 +1,1 @@
-export {default} from './NextLeave'
+export { default } from './NextLeave';

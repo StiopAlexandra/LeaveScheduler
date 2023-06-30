@@ -1,1 +1,1 @@
-export { default } from './ConfigsProvider'
+export { default } from './ConfigsProvider';

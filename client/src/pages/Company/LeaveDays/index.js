@@ -1,1 +1,1 @@
-export {default} from './LeaveDays'
+export { default } from './LeaveDays';

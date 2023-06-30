@@ -1,1 +1,1 @@
-export {default} from './MyLeaves'
+export { default } from './MyLeaves';

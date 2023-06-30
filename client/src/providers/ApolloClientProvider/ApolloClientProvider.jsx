@@ -1,42 +1,46 @@
-import {ApolloProvider, InMemoryCache} from '@apollo/client'
-import React, {useContext, useEffect, useState, useCallback} from 'react'
+import { ApolloProvider, InMemoryCache } from '@apollo/client';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 
-import ErrorContext from "../../contexts/ErrorContext";
-import getClient from "../../data/ApolloClient";
+import ErrorContext from '../../contexts/ErrorContext';
+import getClient from '../../data/ApolloClient';
 
-const ApolloClientProvider = ({children, authToken}) => {
-    const { setError } = useContext(ErrorContext)
-    const cache = new InMemoryCache({
-        addTypename: false
-    })
-    const [client, setClient] = useState(null)
+const ApolloClientProvider = ({ children, authToken, wsEndPoint, httpEndPoint }) => {
+  const { setError } = useContext(ErrorContext);
+  const cache = new InMemoryCache({
+    addTypename: false
+  });
+  const [client, setClient] = useState(null);
 
-    const createClient = useCallback(
-        (cache) =>
-            getClient({
-                authToken,
-                setError,
-                cache
-            }),
-        [authToken, setError]
-    )
+  console.log(wsEndPoint, httpEndPoint);
 
-    useEffect(() => {
-        const {client} = createClient(cache)
-        setClient(client)
-    }, [])
+  const createClient = useCallback(
+    (cache) =>
+      getClient({
+        wsEndPoint,
+        httpEndPoint,
+        authToken,
+        setError,
+        cache
+      }),
+    [authToken, setError, wsEndPoint, httpEndPoint]
+  );
 
-    useEffect(() => {
-        return () => {
-            client?.stop()
-        }
-    }, [client])
+  useEffect(() => {
+    const { client } = createClient(cache);
+    setClient(client);
+  }, []);
 
-    if (!client) {
-        return null
-    }
+  useEffect(() => {
+    return () => {
+      client?.stop();
+    };
+  }, [client]);
 
-    return <ApolloProvider client={client}>{children}</ApolloProvider>
-}
+  if (!client) {
+    return null;
+  }
 
-export default ApolloClientProvider
+  return <ApolloProvider client={client}>{children}</ApolloProvider>;
+};
+
+export default ApolloClientProvider;

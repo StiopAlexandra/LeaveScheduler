@@ -1,1 +1,1 @@
-export { default as RequestsTable } from './ApprovedRequestsTable'
+export { default as RequestsTable } from './ApprovedRequestsTable';

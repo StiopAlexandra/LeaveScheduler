@@ -1,9 +1,9 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
-    mutation CreateCompanyLeave($input: CreateCompanyLeaveInput!) {
-        createCompanyLeave(input: $input) {
-            _id
-        }
+  mutation CreateCompanyLeave($input: CreateCompanyLeaveInput!) {
+    createCompanyLeave(input: $input) {
+      _id
     }
-`
+  }
+`;

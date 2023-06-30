@@ -1,1 +1,1 @@
-export {default} from './BirthdayCalendar'
+export { default } from './BirthdayCalendar';

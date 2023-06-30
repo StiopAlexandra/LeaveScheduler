@@ -1,9 +1,9 @@
-import gql from 'graphql-tag'
+import gql from 'graphql-tag';
 
 export default gql`
-    mutation UpdateUser($input: UpdateUserInput!) {
-        updateUser(input: $input) {
-            _id
-        }
+  mutation UpdateUser($input: UpdateUserInput!) {
+    updateUser(input: $input) {
+      _id
     }
-`
+  }
+`;

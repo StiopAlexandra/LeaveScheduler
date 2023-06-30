@@ -1,1 +1,1 @@
-export { default as EmployeesTable } from './ReportsTable'
+export { default as EmployeesTable } from './ReportsTable';

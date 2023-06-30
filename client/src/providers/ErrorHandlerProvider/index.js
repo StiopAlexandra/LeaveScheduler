@@ -1,1 +1,1 @@
-export { default } from './ErrorHandlerProvider'
+export { default } from './ErrorHandlerProvider';
