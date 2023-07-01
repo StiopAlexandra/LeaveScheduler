@@ -66,7 +66,6 @@ const ForgotPassword = () => {
 
   const onSubmit = useCallback(
     (data) => {
-      console.log(data);
       requestResetPassword({
         variables: {
           email: data.email

@@ -140,9 +140,6 @@ const Profile = ({ user, refetch, queryLoading, dateFormat = 'd/MM/Y' }) => {
       const { _id, department, dateOfEmployment, dateOfBirth, ...rest } = data;
       const departmentId = departments.find((item) => item.name === department)?._id;
 
-      console.log(user?._id);
-      console.log(_id);
-
       updateUser({
         variables: {
           input: {

@@ -4,6 +4,10 @@ export default gql`
   mutation UpdateCompany($input: UpdateCompanyInput!) {
     updateCompany(input: $input) {
       _id
+      dateFormat
+      timeFormat
+      weekStart
+      workingDays
     }
   }
 `;

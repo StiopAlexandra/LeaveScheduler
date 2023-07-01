@@ -2,7 +2,7 @@ import React, { useState, useCallback, useMemo } from 'react';
 
 import ConfigsContext from '../../contexts/ConfigsContext';
 
-const ConfigsProvider = ({ children, appConfigs }) => {
+const ConfigsProvider = ({ children }) => {
   const [companySettings, setCompanySettings] = useState({
     dateFormat: 'd/MM/Y',
     timeFormat: 'h:i a',
@@ -32,7 +32,6 @@ const ConfigsProvider = ({ children, appConfigs }) => {
 
   const contextValue = useMemo(
     () => ({
-      ...appConfigs,
       mode,
       changeTheme,
       lng,
@@ -40,7 +39,7 @@ const ConfigsProvider = ({ children, appConfigs }) => {
       companySettings,
       setCompanySettings
     }),
-    [appConfigs, mode, changeTheme, lng, changeLng, companySettings, setCompanySettings]
+    [mode, changeTheme, lng, changeLng, companySettings, setCompanySettings]
   );
 
   return <ConfigsContext.Provider value={contextValue}>{children}</ConfigsContext.Provider>;

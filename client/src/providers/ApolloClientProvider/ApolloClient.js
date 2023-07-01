@@ -5,7 +5,7 @@ import { RetryLink } from '@apollo/client/link/retry';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { WebSocketLink } from 'apollo-link-ws';
 
-import history from '../utils/history';
+import history from '../../utils/history';
 
 const getClient = ({ authToken, setError, cache, wsEndPoint, httpEndPoint }) => {
   const retryLink = new RetryLink({

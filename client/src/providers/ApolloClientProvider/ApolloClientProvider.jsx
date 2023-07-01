@@ -2,7 +2,7 @@ import { ApolloProvider, InMemoryCache } from '@apollo/client';
 import React, { useContext, useEffect, useState, useCallback } from 'react';
 
 import ErrorContext from '../../contexts/ErrorContext';
-import getClient from '../../data/ApolloClient';
+import getClient from './ApolloClient';
 
 const ApolloClientProvider = ({ children, authToken, wsEndPoint, httpEndPoint }) => {
   const { setError } = useContext(ErrorContext);
@@ -10,8 +10,6 @@ const ApolloClientProvider = ({ children, authToken, wsEndPoint, httpEndPoint })
     addTypename: false
   });
   const [client, setClient] = useState(null);
-
-  console.log(wsEndPoint, httpEndPoint);
 
   const createClient = useCallback(
     (cache) =>

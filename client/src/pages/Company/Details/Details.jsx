@@ -12,7 +12,7 @@ import {
   Box,
   CircularProgress
 } from '@mui/material';
-import React, { useCallback, useEffect, memo } from 'react';
+import React, { useCallback, useEffect, memo, useContext } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -27,6 +27,7 @@ import {
   timezones
 } from '../../../data/static/constants';
 import useResponsive from '../../../hooks/useResponsive';
+import ConfigsContext from '../../../contexts/ConfigsContext';
 
 const PREFIX = 'Details';
 const classes = {
@@ -88,6 +89,7 @@ const StyledDetails = styled('div')(({ theme }) => ({
 const Details = ({ company, refetch, queryLoading }) => {
   const { t } = useTranslation();
   const isSmallScreen = useResponsive('down', 'md');
+  const { setCompanySettings } = useContext(ConfigsContext);
 
   const {
     control,
@@ -123,11 +125,18 @@ const Details = ({ company, refetch, queryLoading }) => {
             ...rest
           }
         }
-      }).then(() => {
+      }).then(({ data }) => {
+        const company = data.updateCompany;
+        setCompanySettings({
+          dateFormat: company.dateFormat,
+          timeFormat: company.timeFormat,
+          weekStart: company.weekStart,
+          workingDays: company.workingDays
+        });
         refetch();
       });
     },
-    [updateCompany, refetch, isDirty]
+    [updateCompany, refetch, isDirty, setCompanySettings]
   );
 
   return (
