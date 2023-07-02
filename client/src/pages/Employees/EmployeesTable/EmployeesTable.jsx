@@ -99,7 +99,8 @@ const DataGridStyledTable = styled(DataGrid)(({ theme }) => ({
 
 const EmployeesTable = () => {
   const gridApiRef = useGridApiRef();
-  const { lng } = useContext(ConfigsContext);
+  const { lng, companySettings } = useContext(ConfigsContext);
+  const dateFormat = companySettings?.dateFormat;
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -116,7 +117,7 @@ const EmployeesTable = () => {
 
   const users = data?.getUsers || [];
 
-  const columnSpecificCellConfigs = useColumns();
+  const columnSpecificCellConfigs = useColumns({ dateFormat });
 
   const [columns] = useColumnsInitializer(
     UserUIDefaultState.UsersTableUIKey.columns,

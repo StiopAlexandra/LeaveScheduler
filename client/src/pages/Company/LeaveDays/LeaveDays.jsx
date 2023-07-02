@@ -5,7 +5,7 @@ import multiMonthPlugin from '@fullcalendar/multimonth';
 import FullCalendar from '@fullcalendar/react'; // must go before plugins
 import { styled } from '@mui/material';
 import React, { createRef, memo, useCallback, useContext, useState } from 'react';
-
+import { addDays, formatISO } from 'date-fns';
 import ConfigsContext from '../../../contexts/ConfigsContext';
 import GetCompanyLeaves from '../../../data/queries/GetCompanyLeaves';
 import useOpenState from '../../../hooks/useOpenState';
@@ -47,7 +47,7 @@ const LeaveDays = ({ company }) => {
       id,
       title,
       start: startDate,
-      end: endDate,
+      end: formatISO(addDays(new Date(endDate), 1), { representation: 'date' }),
       color: leaveType.color,
       groupId: leaveType._id
     };
@@ -67,7 +67,7 @@ const LeaveDays = ({ company }) => {
   const onSelect = useCallback(
     ({ start, end }) => {
       setStart(start);
-      setEnd(end);
+      setEnd(addDays(new Date(end), -1));
       onShowAdd();
     },
     [onShowAdd, setStart, setEnd]
@@ -79,7 +79,7 @@ const LeaveDays = ({ company }) => {
         id: event.id,
         title: event.title,
         startDate: event.start,
-        endDate: event.end
+        endDate: addDays(new Date(event.end), -1)
         //leaveType: event.groupId
       });
       onShowEdit();

@@ -1,20 +1,9 @@
 import { Button as MuiButton, CircularProgress } from '@mui/material';
 import clsx from 'clsx';
-import * as PropTypes from 'prop-types';
 import React, { memo, forwardRef } from 'react';
 
 const Button = forwardRef((props, ref) => {
-  const {
-    children,
-    loading,
-    color,
-    disabled,
-    countDown = 0,
-    sx,
-    className,
-    ...buttonProps
-  } = props;
-  const timeLeft = 0;
+  const { children, loading, color, disabled, sx, className, ...buttonProps } = props;
 
   return (
     <MuiButton
@@ -30,8 +19,8 @@ const Button = forwardRef((props, ref) => {
         },
         className
       ])}
-      disabled={disabled || loading || timeLeft > 0}>
-      {timeLeft ? `${children} (${timeLeft})` : children}
+      disabled={disabled || loading}>
+      {children}
       {loading && (
         <CircularProgress
           size={20}

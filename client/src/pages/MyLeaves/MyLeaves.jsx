@@ -6,7 +6,7 @@ import FullCalendar from '@fullcalendar/react'; // must go before plugins
 import { styled } from '@mui/material';
 import React, { useCallback, useState, createRef, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-
+import { addDays, formatISO } from 'date-fns';
 import ConfigsContext from '../../contexts/ConfigsContext';
 import GetCompanyLeaves from '../../data/queries/GetCompanyLeaves';
 import GetUserLeaves from '../../data/queries/GetUserLeaves';
@@ -70,7 +70,7 @@ const MyLeaves = ({ id: userId }) => {
         id: index,
         title: title || leaveType.name,
         start: startDate,
-        end: endDate,
+        end: formatISO(addDays(new Date(endDate), 1), { representation: 'date' }),
         color: leaveType.color,
         leaveType: leaveType.name,
         notes: notes
@@ -87,7 +87,7 @@ const MyLeaves = ({ id: userId }) => {
   const onSelect = useCallback(
     ({ start, end }) => {
       setStart(start);
-      setEnd(end);
+      setEnd(addDays(new Date(end), -1));
       onShowAdd();
     },
     [onShowAdd, setStart, setEnd]

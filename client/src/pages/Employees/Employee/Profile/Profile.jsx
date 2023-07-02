@@ -15,7 +15,7 @@ import {
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { formatISO } from 'date-fns';
 import pick from 'lodash.pick';
-import React, { useCallback, useEffect, memo } from 'react';
+import React, { useCallback, useEffect, memo, useContext } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -25,6 +25,7 @@ import UpdateUser from '../../../../data/mutations/UpdateUser';
 import GetDepartments from '../../../../data/queries/GetDepartments';
 import { userTypes } from '../../../../data/static/constants';
 import useResponsive from '../../../../hooks/useResponsive';
+import ConfigsContext from '../../../../contexts/ConfigsContext';
 
 const PREFIX = 'Profile';
 const classes = {
@@ -88,9 +89,11 @@ const StyledProfile = styled('div')(({ theme }) => ({
   }
 }));
 
-const Profile = ({ user, refetch, queryLoading, dateFormat = 'd/MM/Y' }) => {
+const Profile = ({ user, refetch, queryLoading }) => {
   const { t } = useTranslation();
   const isSmallScreen = useResponsive('down', 'md');
+  const { companySettings } = useContext(ConfigsContext);
+  const dateFormat = companySettings?.dateFormat;
 
   const {
     control,

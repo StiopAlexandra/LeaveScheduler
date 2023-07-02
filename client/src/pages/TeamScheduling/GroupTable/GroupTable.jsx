@@ -14,7 +14,7 @@ import {
   Stack,
   Tooltip
 } from '@mui/material';
-import { format, getDate } from 'date-fns';
+import { format, getDate, getMonth, isBefore, addDays } from 'date-fns';
 import React, { memo, useState, useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -97,7 +97,7 @@ const StyledDiv = styled('div')(({ theme }) => ({
   }
 }));
 
-const GroupTable = ({ daysOfMounth, daysInMonth, currentYearUserLeaves }) => {
+const GroupTable = ({ month, daysOfMounth, daysInMonth, currentYearUserLeaves }) => {
   const { t } = useTranslation();
   const [toggle, setToggle] = useState({});
 
@@ -196,23 +196,25 @@ const GroupTable = ({ daysOfMounth, daysInMonth, currentYearUserLeaves }) => {
                         <TableCell key={day} className={classes.cell}>
                           {day
                             ? user.userLeave.map((leave) => {
-                                if (
-                                  day >= getDate(new Date(leave.startDate)) &&
-                                  day <= getDate(new Date(leave.endDate))
+                                for (
+                                  let i = new Date(leave.startDate);
+                                  isBefore(i, new Date(leave.endDate));
+                                  i = addDays(i, 1)
                                 )
-                                  return (
-                                    <Tooltip
-                                      key={leave.leaveType.name}
-                                      title={t(leave.leaveType.name)}>
-                                      <div
-                                        className={classes.circle}
-                                        style={{
-                                          background: alpha(leave.leaveType.color, 0.3),
-                                          border: `1px solid ${leave.leaveType.color}`
-                                        }}
-                                      />
-                                    </Tooltip>
-                                  );
+                                  if (day === getDate(i) && month === getMonth(i))
+                                    return (
+                                      <Tooltip
+                                        key={leave.leaveType.name}
+                                        title={t(leave.leaveType.name)}>
+                                        <div
+                                          className={classes.circle}
+                                          style={{
+                                            background: alpha(leave.leaveType.color, 0.3),
+                                            border: `1px solid ${leave.leaveType.color}`
+                                          }}
+                                        />
+                                      </Tooltip>
+                                    );
                               })
                             : user.name}
                         </TableCell>

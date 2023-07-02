@@ -86,7 +86,8 @@ const DataGridStyledTable = styled(DataGrid)(({ theme }) => ({
 
 const PendingRequestTable = ({ requests, refetch, userLeaves }) => {
   const gridApiRef = useGridApiRef();
-  const { lng } = useContext(ConfigsContext);
+  const { lng, companySettings } = useContext(ConfigsContext);
+  const dateFormat = companySettings?.dateFormat;
   const { t } = useTranslation();
   const [editItem, setEditItem] = useState({});
   const { open: showEdit, onShow: onShowEdit, onClose: onCloseEdit } = useOpenState();
@@ -119,7 +120,7 @@ const PendingRequestTable = ({ requests, refetch, userLeaves }) => {
     [deleteUserLeave]
   );
 
-  const columnSpecificCellConfigs = useColumns({ onDelete, onEdit });
+  const columnSpecificCellConfigs = useColumns({ onDelete, onEdit, dateFormat });
 
   const [columns] = useColumnsInitializer(
     PendingRequestTableUIDefaultState.PendingRequestTableUIKey.columns,

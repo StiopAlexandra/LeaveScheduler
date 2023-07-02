@@ -169,7 +169,7 @@ const AddLeave = ({ open, onClose, start, end, dateFormat }) => {
               required: true,
               validate: {
                 lessThanendDate: (date) => {
-                  if (getValues('endDate')) return date < getValues('endDate');
+                  if (getValues('endDate')) return date <= getValues('endDate');
                 }
               }
             }}
@@ -195,7 +195,7 @@ const AddLeave = ({ open, onClose, start, end, dateFormat }) => {
               required: true,
               validate: {
                 moreThanStartDate: (date) => {
-                  if (getValues('startDate')) return date > getValues('startDate');
+                  if (getValues('startDate')) return date >= getValues('startDate');
                 }
               }
             }}

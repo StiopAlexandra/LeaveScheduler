@@ -19,7 +19,7 @@ import {
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { formatISO } from 'date-fns';
 import pick from 'lodash.pick';
-import React, { useCallback, memo } from 'react';
+import React, { useCallback, memo, useContext } from 'react';
 import FocusLock from 'react-focus-lock';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -30,6 +30,7 @@ import GetDepartments from '../../../data/queries/GetDepartments';
 import GetUsers from '../../../data/queries/GetUsers';
 import { userTypes } from '../../../data/static/constants';
 import useResponsive from '../../../hooks/useResponsive';
+import ConfigsContext from '../../../contexts/ConfigsContext';
 
 const PREFIX = 'AddEmployee';
 const classes = {
@@ -104,9 +105,11 @@ const StyledDialog = styled(Dialog)(({ theme }) => ({
     }
 }));
 
-const AddEmployee = ({ open, onClose, dateFormat = 'd/MM/Y' }) => {
+const AddEmployee = ({ open, onClose }) => {
   const { t } = useTranslation();
   const isSmallScreen = useResponsive('down', 'md');
+  const { companySettings } = useContext(ConfigsContext);
+  const dateFormat = companySettings?.dateFormat;
 
   const {
     control,

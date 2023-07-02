@@ -9,9 +9,10 @@ import {
   TimelineContent
 } from '@mui/lab';
 import { styled, Typography } from '@mui/material';
-import { formatISO, addDays } from 'date-fns';
-import React, { memo } from 'react';
+import { formatISO, parseISO, format } from 'date-fns';
+import React, { memo, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import ConfigsContext from '../../../contexts/ConfigsContext';
 
 const StyledContainer = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -19,7 +20,7 @@ const StyledContainer = styled('div')(({ theme }) => ({
   background: `${theme.palette.background.paper}`,
   padding: '20px',
   borderRadius: '10px',
-  maxWidth: '300px',
+  maxWidth: '340px',
   height: '190px',
   margin: 'auto'
 }));
@@ -36,6 +37,8 @@ const StyledOverlay = styled('div')(({ theme }) => ({
 
 const NextLeave = ({ nextLeave }) => {
   const { t } = useTranslation();
+  const { companySettings } = useContext(ConfigsContext);
+  const dateFormat = companySettings?.dateFormat;
 
   return (
     <StyledContainer>
@@ -46,12 +49,18 @@ const NextLeave = ({ nextLeave }) => {
         <Timeline position="left" sx={{ p: 0 }}>
           <TimelineItem sx={{ height: '100%' }}>
             <TimelineOppositeContent
-              sx={{ m: 'auto 0', color: (theme) => theme.palette.text.secondary }}
+              sx={{
+                m: 'auto 0',
+                color: (theme) => theme.palette.text.secondary,
+                whiteSpace: 'pre'
+              }}
               variant="body2">
-              {formatISO(addDays(new Date(nextLeave?.startDate), 1)) ===
-              formatISO(new Date(nextLeave?.endDate))
-                ? `${nextLeave?.startDate}`
-                : `${nextLeave?.startDate} - ${nextLeave?.endDate}`}
+              {formatISO(new Date(nextLeave?.startDate)) === formatISO(new Date(nextLeave?.endDate))
+                ? `${format(parseISO(nextLeave?.startDate), dateFormat)}`
+                : `${format(parseISO(nextLeave?.startDate), dateFormat)} - ${format(
+                    parseISO(nextLeave?.endDate),
+                    dateFormat
+                  )}`}
             </TimelineOppositeContent>
             <TimelineSeparator>
               <TimelineConnector />

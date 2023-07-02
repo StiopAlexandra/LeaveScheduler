@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
+import { parseISO, format } from 'date-fns';
 
 import Status from '../../../../components/common/Status/Status';
 
-const useColumns = () => {
+const useColumns = ({ dateFormat }) => {
   return useMemo(() => {
     return {
       user: {
@@ -45,14 +46,20 @@ const useColumns = () => {
         seq: 3,
         minWidth: 160,
         headerName: 'Start Date',
-        sortable: true
+        sortable: true,
+        renderCell: (params) => {
+          return format(parseISO(params.value), dateFormat);
+        }
       },
       endDate: {
         hide: false,
         seq: 4,
         minWidth: 160,
         headerName: 'End Date',
-        sortable: true
+        sortable: true,
+        renderCell: (params) => {
+          return format(parseISO(params.value), dateFormat);
+        }
       },
       days: {
         hide: false,
@@ -67,7 +74,7 @@ const useColumns = () => {
         headerName: 'Reason'
       }
     };
-  }, []);
+  }, [dateFormat]);
 };
 
 export default useColumns;

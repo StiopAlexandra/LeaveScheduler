@@ -71,9 +71,10 @@ const DataGridStyledTable = styled(DataGrid)(({ theme }) => ({
 const UserLeavesTable = ({ userLeaves }) => {
   const gridApiRef = useGridApiRef();
   const { t } = useTranslation();
-  const { lng } = useContext(ConfigsContext);
+  const { lng, companySettings } = useContext(ConfigsContext);
+  const dateFormat = companySettings?.dateFormat;
 
-  const columnSpecificCellConfigs = useColumns();
+  const columnSpecificCellConfigs = useColumns({ dateFormat });
 
   const [columns] = useColumnsInitializer(
     UserLeavesUIDefaultState.UserLeavesTableUIKey.columns,

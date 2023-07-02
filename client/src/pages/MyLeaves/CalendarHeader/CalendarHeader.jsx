@@ -87,18 +87,6 @@ const CalendarHeader = ({ calendarRef, onShowAdd, userLeaves, requests, refetch 
     }
   }, [calendarRef]);
 
-  const { data } = useQuery(GetLeaveTypes, {
-    variables: {
-      filter: {
-        name: 'Holiday',
-        default: true
-      }
-    },
-    fetchPolicy: 'network-only'
-  });
-
-  const holiday = data?.getLeaveTypes[0];
-
   const currentYearRequests = requests.filter(
     ({ startDate }) => getYear(date) === getYear(new Date(startDate))
   );

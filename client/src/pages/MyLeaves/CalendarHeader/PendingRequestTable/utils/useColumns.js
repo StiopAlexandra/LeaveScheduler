@@ -3,7 +3,9 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { GridActionsCellItem } from '@mui/x-data-grid';
 import React, { useMemo } from 'react';
-const useColumns = ({ onDelete, onEdit }) => {
+import { parseISO, format } from 'date-fns';
+
+const useColumns = ({ onDelete, onEdit, dateFormat }) => {
   return useMemo(() => {
     return {
       color: {
@@ -27,14 +29,20 @@ const useColumns = ({ onDelete, onEdit }) => {
         seq: 2,
         minWidth: 160,
         headerName: 'Start Date',
-        sortable: true
+        sortable: true,
+        renderCell: (params) => {
+          return format(parseISO(params.value), dateFormat);
+        }
       },
       endDate: {
         hide: false,
         seq: 3,
         minWidth: 160,
         headerName: 'End Date',
-        sortable: true
+        sortable: true,
+        renderCell: (params) => {
+          return format(parseISO(params.value), dateFormat);
+        }
       },
       days: {
         hide: false,
@@ -61,7 +69,7 @@ const useColumns = ({ onDelete, onEdit }) => {
         ]
       }
     };
-  }, [onDelete, onEdit]);
+  }, [onDelete, onEdit, dateFormat]);
 };
 
 export default useColumns;

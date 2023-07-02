@@ -1,5 +1,6 @@
 import { GRID_CHECKBOX_SELECTION_COL_DEF } from '@mui/x-data-grid';
 import React, { useMemo } from 'react';
+import { parseISO, format } from 'date-fns';
 
 import Status from '../../../../components/common/Status';
 
@@ -7,7 +8,7 @@ const CHECKBOX_COL_DEF = {
   ...GRID_CHECKBOX_SELECTION_COL_DEF,
   type: 'singleSelect'
 };
-const useColumns = () => {
+const useColumns = ({ dateFormat }) => {
   return useMemo(() => {
     return {
       [CHECKBOX_COL_DEF.field]: {
@@ -61,14 +62,20 @@ const useColumns = () => {
         seq: 4,
         minWidth: 160,
         headerName: 'Start Date',
-        sortable: true
+        sortable: true,
+        renderCell: (params) => {
+          return format(parseISO(params.value), dateFormat);
+        }
       },
       endDate: {
         hide: false,
         seq: 5,
         minWidth: 160,
         headerName: 'End Date',
-        sortable: true
+        sortable: true,
+        renderCell: (params) => {
+          return format(parseISO(params.value), dateFormat);
+        }
       },
       days: {
         hide: false,
@@ -83,7 +90,7 @@ const useColumns = () => {
         headerName: 'Notes'
       }
     };
-  }, []);
+  }, [dateFormat]);
 };
 
 export default useColumns;

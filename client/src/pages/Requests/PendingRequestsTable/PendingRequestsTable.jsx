@@ -96,7 +96,8 @@ const DataGridStyledTable = styled(DataGrid)(({ theme }) => ({
 
 const PendingRequestsTable = ({ year, userId }) => {
   const gridApiRef = useGridApiRef();
-  const { lng } = useContext(ConfigsContext);
+  const { lng, companySettings } = useContext(ConfigsContext);
+  const dateFormat = companySettings?.dateFormat;
   const { t } = useTranslation();
   const { open: showDialog, onShow: onShowDialog, onClose: onCloseDialog } = useOpenState();
 
@@ -153,7 +154,7 @@ const PendingRequestsTable = ({ year, userId }) => {
     onShowDialog();
   }, [onShowDialog]);
 
-  const columnSpecificCellConfigs = useColumns();
+  const columnSpecificCellConfigs = useColumns({ dateFormat });
 
   const [columns] = useColumnsInitializer(
     PendingRequestUIDefaultState.PendingRequestsTableUIKey.columns,

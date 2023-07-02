@@ -1,6 +1,8 @@
 import CircleIcon from '@mui/icons-material/Circle';
 import React, { useMemo } from 'react';
-const useColumns = () => {
+import { parseISO, format } from 'date-fns';
+
+const useColumns = ({ dateFormat }) => {
   return useMemo(() => {
     return {
       color: {
@@ -24,14 +26,20 @@ const useColumns = () => {
         seq: 2,
         minWidth: 160,
         headerName: 'Start Date',
-        sortable: true
+        sortable: true,
+        renderCell: (params) => {
+          return format(parseISO(params.value), dateFormat);
+        }
       },
       endDate: {
         hide: false,
         seq: 3,
         minWidth: 160,
         headerName: 'End Date',
-        sortable: true
+        sortable: true,
+        renderCell: (params) => {
+          return format(parseISO(params.value), dateFormat);
+        }
       },
       days: {
         hide: false,
@@ -40,7 +48,7 @@ const useColumns = () => {
         headerName: 'Working Days'
       }
     };
-  }, []);
+  }, [dateFormat]);
 };
 
 export default useColumns;

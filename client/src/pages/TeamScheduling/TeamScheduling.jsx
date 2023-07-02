@@ -59,10 +59,11 @@ const TeamScheduling = () => {
 
   const currentYearUserLeaves = usersLeaves.map(({ userLeave, ...rest }) => {
     const userLeaveFiltered = userLeave.filter(
-      ({ startDate, status }) =>
+      ({ startDate, endDate, status }) =>
         status === 'accepted' &&
         getYear(date) === getYear(new Date(startDate)) &&
-        getMonth(date) === getMonth(new Date(startDate))
+        (getMonth(date) === getMonth(new Date(startDate)) ||
+          getMonth(date) === getMonth(new Date(endDate)))
     );
     return {
       userLeave: userLeaveFiltered,
@@ -124,6 +125,7 @@ const TeamScheduling = () => {
             daysInMonth={daysInMonth}
             daysOfMounth={daysOfMounth}
             currentYearUserLeaves={currentYearUserLeaves}
+            month={getMonth(date)}
           />
         )}
         {type === 'ungroup' && (
@@ -131,6 +133,7 @@ const TeamScheduling = () => {
             daysInMonth={daysInMonth}
             daysOfMounth={daysOfMounth}
             currentYearUserLeaves={currentYearUserLeaves}
+            month={getMonth(date)}
           />
         )}
       </div>

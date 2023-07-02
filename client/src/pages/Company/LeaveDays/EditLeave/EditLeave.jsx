@@ -186,7 +186,7 @@ const EditLeave = ({ open, onClose, editItem, dateFormat }) => {
               required: true,
               validate: {
                 lessThanendDate: (date) => {
-                  if (getValues('endDate')) return new Date(date) < new Date(getValues('endDate'));
+                  if (getValues('endDate')) return new Date(date) <= new Date(getValues('endDate'));
                 }
               }
             }}
@@ -213,7 +213,7 @@ const EditLeave = ({ open, onClose, editItem, dateFormat }) => {
               validate: {
                 moreThanStartDate: (date) => {
                   if (getValues('startDate'))
-                    return new Date(date) > new Date(getValues('startDate'));
+                    return new Date(date) >= new Date(getValues('startDate'));
                 }
               }
             }}

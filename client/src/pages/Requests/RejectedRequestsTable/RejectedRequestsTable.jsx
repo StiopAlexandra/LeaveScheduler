@@ -92,7 +92,8 @@ const DataGridStyledTable = styled(DataGrid)(({ theme }) => ({
 
 const RejectedRequestsTable = ({ year }) => {
   const gridApiRef = useGridApiRef();
-  const { lng } = useContext(ConfigsContext);
+  const { lng, companySettings } = useContext(ConfigsContext);
+  const dateFormat = companySettings?.dateFormat;
   const { t } = useTranslation();
 
   const [isFilterActive, setFilterActive] = useState(false);
@@ -111,7 +112,7 @@ const RejectedRequestsTable = ({ year }) => {
   const allUserLeaves = data?.getUserLeaves || [];
   const userLeaves = allUserLeaves.filter(({ startDate }) => year === getYear(new Date(startDate)));
 
-  const columnSpecificCellConfigs = useColumns();
+  const columnSpecificCellConfigs = useColumns({ dateFormat });
 
   const [columns] = useColumnsInitializer(
     RejectedRequestsUIDefaultState.RejectedRequestsTableUIKey.columns,

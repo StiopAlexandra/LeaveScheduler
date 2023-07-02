@@ -34,7 +34,7 @@ const MenuItem = ({ item }) => {
   const { t } = useTranslation();
 
   return (
-    <StyledNavItem component={RouterLink} to={getPageRoutePath({ name })} sx={{}}>
+    <StyledNavItem component={RouterLink} to={getPageRoutePath({ name })}>
       <StyledNavItemIcon>{icon && icon}</StyledNavItemIcon>
       <ListItemText disableTypography primary={t(name)} />
     </StyledNavItem>
