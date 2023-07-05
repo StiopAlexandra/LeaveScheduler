@@ -70,9 +70,11 @@ const ForgotPassword = () => {
         variables: {
           email: data.email
         }
-      }).then(({ data }) => {
-        setOpen(data.requestResetPassword.message);
-      });
+      })
+        .then(({ data }) => {
+          setOpen(data.requestResetPassword.message);
+        })
+        .catch(() => {});
     },
     [requestResetPassword, setOpen]
   );

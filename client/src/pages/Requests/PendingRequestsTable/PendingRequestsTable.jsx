@@ -132,17 +132,19 @@ const PendingRequestsTable = ({ year, userId }) => {
                 status: 'accepted'
               }
             }
-          }).then(() => {
-            createNotification({
-              variables: {
-                input: {
-                  receiver: user._id,
-                  message: `accepted your "${leaveType.name}" leave request.`,
-                  sender: userId
-                }
-              }
-            });
           })
+            .then(() => {
+              createNotification({
+                variables: {
+                  input: {
+                    receiver: user._id,
+                    message: `accepted your "${leaveType.name}" leave request.`,
+                    sender: userId
+                  }
+                }
+              }).catch(() => {});
+            })
+            .catch(() => {})
         )
       );
     } finally {

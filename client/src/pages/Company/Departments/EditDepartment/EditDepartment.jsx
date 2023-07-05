@@ -112,9 +112,11 @@ const EditDepartment = ({ data, open, onClose }) => {
             color: selectedColor
           }
         }
-      }).then(() => {
-        onClose();
-      });
+      })
+        .then(() => {
+          onClose();
+        })
+        .catch(() => {});
     },
     [onClose, updateDepartment, selectedColor, id, isDirty, color]
   );

@@ -125,9 +125,11 @@ const EditLeave = ({ open, onClose, editItem, dateFormat }) => {
             endDate: formatISO(new Date(endDate), { representation: 'date' })
           }
         }
-      }).then(() => {
-        onClose();
-      });
+      })
+        .then(() => {
+          onClose();
+        })
+        .catch(() => {});
     },
     [onClose, updateCompanyLeave, id, isDirty]
   );
@@ -137,9 +139,11 @@ const EditLeave = ({ open, onClose, editItem, dateFormat }) => {
       variables: {
         id
       }
-    }).then(() => {
-      onClose();
-    });
+    })
+      .then(() => {
+        onClose();
+      })
+      .catch(() => {});
   }, [id, deleteCompanyLeave, onClose]);
 
   return (

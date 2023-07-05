@@ -128,7 +128,7 @@ const LeaveTypesTable = () => {
         variables: {
           id
         }
-      });
+      }).catch(() => {});
     },
     [deleteLeaveType]
   );

@@ -111,9 +111,11 @@ const EditLeaveType = ({ data, open, onClose }) => {
             ...data
           }
         }
-      }).then(() => {
-        onClose();
-      });
+      })
+        .then(() => {
+          onClose();
+        })
+        .catch(() => {});
     },
     [onClose, updateLeaveType, selectedColor, id, isDirty, color]
   );

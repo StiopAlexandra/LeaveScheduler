@@ -8,7 +8,7 @@ const HolidayChart = ({ totalHoliday, holiday }) => {
   const { t } = useTranslation();
 
   const data = {
-    labels: ['Taken', 'Available'],
+    labels: [t('Taken'), t('Available')],
     datasets: [
       {
         data: [totalHoliday, holiday?.allowanceDays - totalHoliday],

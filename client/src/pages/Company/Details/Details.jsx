@@ -125,16 +125,18 @@ const Details = ({ company, refetch, queryLoading }) => {
             ...rest
           }
         }
-      }).then(({ data }) => {
-        const company = data.updateCompany;
-        setCompanySettings({
-          dateFormat: company.dateFormat,
-          timeFormat: company.timeFormat,
-          weekStart: company.weekStart,
-          workingDays: company.workingDays
-        });
-        refetch();
-      });
+      })
+        .then(({ data }) => {
+          const company = data.updateCompany;
+          setCompanySettings({
+            dateFormat: company.dateFormat,
+            timeFormat: company.timeFormat,
+            weekStart: company.weekStart,
+            workingDays: company.workingDays
+          });
+          refetch();
+        })
+        .catch(() => {});
     },
     [updateCompany, refetch, isDirty, setCompanySettings]
   );

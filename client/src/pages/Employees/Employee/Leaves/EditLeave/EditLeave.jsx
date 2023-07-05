@@ -130,10 +130,12 @@ const EditLeave = ({ open, onClose, editItem, dateFormat, refetch }) => {
             days: days
           }
         }
-      }).then(() => {
-        refetch();
-        onClose();
-      });
+      })
+        .then(() => {
+          refetch();
+          onClose();
+        })
+        .catch(() => {});
     },
     [onClose, updateUserLeave, leaveTypes, id, isDirty, companySettings?.workingDays]
   );
@@ -143,10 +145,12 @@ const EditLeave = ({ open, onClose, editItem, dateFormat, refetch }) => {
       variables: {
         id
       }
-    }).then(() => {
-      refetch();
-      onClose();
-    });
+    })
+      .then(() => {
+        refetch();
+        onClose();
+      })
+      .catch(() => {});
   }, [id, deleteUserLeave, onClose, refetch]);
 
   return (

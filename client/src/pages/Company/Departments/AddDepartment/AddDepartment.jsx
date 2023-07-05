@@ -105,9 +105,11 @@ const AddDepartment = ({ open, onClose }) => {
             color: selectedColor
           }
         }
-      }).then(() => {
-        onClose();
-      });
+      })
+        .then(() => {
+          onClose();
+        })
+        .catch(() => {});
     },
     [onClose, createDepartment, selectedColor]
   );

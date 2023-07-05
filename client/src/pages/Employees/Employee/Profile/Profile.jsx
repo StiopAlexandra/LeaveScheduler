@@ -153,9 +153,11 @@ const Profile = ({ user, refetch, queryLoading }) => {
             dateOfBirth: formatISO(new Date(dateOfBirth), { representation: 'date' })
           }
         }
-      }).then(() => {
-        refetch();
-      });
+      })
+        .then(() => {
+          refetch();
+        })
+        .catch(() => {});
     },
     [updateUser, user?._id, refetch, isDirty, dirtyFields, departments]
   );

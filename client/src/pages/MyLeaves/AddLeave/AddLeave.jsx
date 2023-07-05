@@ -160,19 +160,21 @@ const AddLeave = ({ open, onClose, userId, start, end, refetch, userLeaves }) =>
             days: days
           }
         }
-      }).then(() => {
-        createNotification({
-          variables: {
-            input: {
-              receiver: admins,
-              message: 'send a leave request.',
-              sender: userId
+      })
+        .then(() => {
+          createNotification({
+            variables: {
+              input: {
+                receiver: admins,
+                message: 'send a leave request.',
+                sender: userId
+              }
             }
-          }
-        });
-        refetch();
-        onClose();
-      });
+          }).catch(() => {});
+          refetch();
+          onClose();
+        })
+        .catch(() => {});
     },
     [onClose, createUserLeave, leaveTypes, userId, companySettings, admins, createNotification]
   );

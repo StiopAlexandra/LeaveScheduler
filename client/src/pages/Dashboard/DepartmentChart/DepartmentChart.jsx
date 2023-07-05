@@ -25,7 +25,7 @@ const DepartmentChart = ({ users }) => {
       groupsByDepartment[name] = [];
     }
     groupsByDepartment[name].push({
-      color: name === 'Undefined' ? theme.palette.grey[500] : department?.color
+      color: !department?.name ? theme.palette.grey[500] : department?.color
     });
   });
 

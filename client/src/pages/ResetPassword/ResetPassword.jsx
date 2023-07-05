@@ -77,9 +77,11 @@ const ResetPassword = () => {
           id: id,
           password: data.password
         }
-      }).then(() => {
-        navigate('/login', { replace: true });
-      });
+      })
+        .then(() => {
+          navigate('/login', { replace: true });
+        })
+        .catch(() => {});
     },
     [id, resetPassword, navigate]
   );

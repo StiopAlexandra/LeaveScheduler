@@ -154,10 +154,12 @@ const EditLeave = ({ data, open, onClose, refetch, userLeaves }) => {
             days: days
           }
         }
-      }).then(() => {
-        refetch();
-        onClose();
-      });
+      })
+        .then(() => {
+          refetch();
+          onClose();
+        })
+        .catch(() => {});
     },
     [onClose, updateUserLeave, leaveTypes, id, companySettings, isDirty]
   );

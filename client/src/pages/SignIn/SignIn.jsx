@@ -26,7 +26,6 @@ import Login from '../../data/mutations/SignIn';
 import { ReactComponent as LogoDark } from '../../resources/icons/logo-dark.svg';
 import { ReactComponent as LogoLight } from '../../resources/icons/logo-light.svg';
 
-
 const StyledForm = styled('form')(() => ({
   width: '100%',
   display: 'flex',
@@ -87,13 +86,15 @@ const SignIn = () => {
           email: data.email,
           password: data.password
         }
-      }).then((response) => {
-        const { token, user } = response.data.signin;
-        const { company, ...rest } = user;
-        signIn(rest, token);
-        setCompanySettings(company);
-        navigate('/dashboard', { replace: true });
-      });
+      })
+        .then((response) => {
+          const { token, user } = response.data.signin;
+          const { company, ...rest } = user;
+          signIn(rest, token);
+          setCompanySettings(company);
+          navigate('/dashboard', { replace: true });
+        })
+        .catch(() => {});
     },
     [signin, signIn, setCompanySettings, navigate]
   );
@@ -106,7 +107,7 @@ const SignIn = () => {
             paddingBottom: '25px'
           }}>
           <Typography variant={'h4'} align={'center'}>
-            Login to
+            {t('Login to')}
           </Typography>
           {theme.palette.mode === 'light' ? <LogoLight /> : <LogoDark />}
         </div>
@@ -175,7 +176,7 @@ const SignIn = () => {
               marginTop: '-15px'
             }}>
             <Link component={RouterLink} to="/forgot-password" variant={'body1'} underline={'none'}>
-              Forgot password?
+              {t('Forgot password?')}
             </Link>
           </div>
           <Button

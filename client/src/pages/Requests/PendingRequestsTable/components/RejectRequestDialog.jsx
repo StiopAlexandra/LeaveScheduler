@@ -104,17 +104,19 @@ const RejectRequestDialog = ({ open, onClose, selectedItems, refetch, userId }) 
                   status: 'rejected'
                 }
               }
-            }).then(() => {
-              createNotification({
-                variables: {
-                  input: {
-                    receiver: user._id,
-                    message: `rejected your "${leaveType.name}" leave request, because "${reason}".`,
-                    sender: userId
-                  }
-                }
-              });
             })
+              .then(() => {
+                createNotification({
+                  variables: {
+                    input: {
+                      receiver: user._id,
+                      message: `rejected your "${leaveType.name}" leave request, because "${reason}".`,
+                      sender: userId
+                    }
+                  }
+                }).catch(() => {});
+              })
+              .catch(() => {})
           )
         );
       } finally {

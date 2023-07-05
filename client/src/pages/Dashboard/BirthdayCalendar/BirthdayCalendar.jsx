@@ -71,7 +71,7 @@ const BirthdayCalendar = ({ users }) => {
   return (
     <StyledContainer>
       <Typography align={'center'} variant={'h5'} sx={{ paddingBottom: '25px' }}>
-        {t('Birthday in ') + t(format(new Date(), 'MMMM yyyy'))}
+        {t('Birthdays in ') + t(format(new Date(), 'MMMM yyyy'))}
       </Typography>
       <FullCalendar
         ref={calendarRef}

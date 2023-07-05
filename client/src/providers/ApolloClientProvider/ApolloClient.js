@@ -71,7 +71,15 @@ const getClient = ({ authToken, setError, cache, wsEndPoint, httpEndPoint }) => 
   return {
     client: new ApolloClient({
       link: from([authLink, retryLink, errorLink, transportLink]),
-      cache: cache
+      cache: cache,
+      defaultOptions: {
+        // query: {
+        //   errorPolicy: 'all'
+        // },
+        // mutate: {
+        //   errorPolicy: 'all'
+        // }
+      }
     })
   };
 };

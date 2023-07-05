@@ -128,7 +128,7 @@ const DepartmentsTable = () => {
         variables: {
           id
         }
-      });
+      }).catch(() => {});
     },
     [deleteDepartment]
   );

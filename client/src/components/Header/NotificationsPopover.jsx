@@ -82,7 +82,7 @@ export default function NotificationsPopover() {
                 reader: id
               }
             }
-          })
+          }).catch(() => {})
         )
       );
     } finally {

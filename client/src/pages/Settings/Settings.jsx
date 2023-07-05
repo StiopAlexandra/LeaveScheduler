@@ -115,7 +115,7 @@ const Settings = ({ id }) => {
             dateOfBirth: formatISO(new Date(dateOfBirth), { representation: 'date' })
           }
         }
-      });
+      }).catch(() => {});
     },
     [updateUser, id, isDirty]
   );

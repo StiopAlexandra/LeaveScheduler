@@ -93,7 +93,7 @@ const useColumns = ({ dateFormat }) => {
         headerName: 'Date Of Employment',
         sortable: true,
         renderCell: (params) => {
-          return format(parseISO(params.value), dateFormat);
+          return params.value ? format(parseISO(params.value), dateFormat) : '-';
         }
       },
       dateOfBirth: {
@@ -103,7 +103,7 @@ const useColumns = ({ dateFormat }) => {
         headerName: 'Date Of Birthday',
         sortable: true,
         renderCell: (params) => {
-          return format(parseISO(params.value), dateFormat);
+          return params.value ? format(parseISO(params.value), dateFormat) : '-';
         }
       },
       phone: {

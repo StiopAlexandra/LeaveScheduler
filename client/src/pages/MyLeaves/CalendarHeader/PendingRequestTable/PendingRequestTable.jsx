@@ -113,9 +113,11 @@ const PendingRequestTable = ({ requests, refetch, userLeaves }) => {
         variables: {
           id
         }
-      }).then(() => {
-        refetch();
-      });
+      })
+        .then(() => {
+          refetch();
+        })
+        .catch(() => {});
     },
     [deleteUserLeave]
   );

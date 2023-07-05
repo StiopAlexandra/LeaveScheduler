@@ -152,9 +152,11 @@ const AddEmployee = ({ open, onClose }) => {
             dateOfBirth: formatISO(new Date(dateOfBirth), { representation: 'date' })
           }
         }
-      }).then(() => {
-        onClose();
-      });
+      })
+        .then(() => {
+          onClose();
+        })
+        .catch(() => {});
     },
     [onClose, dirtyFields, createUser, departments]
   );

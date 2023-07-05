@@ -19,7 +19,7 @@ const HolidayChart = ({ holiday }) => {
   const { t } = useTranslation();
 
   const data = {
-    labels: ['Taken', 'Available'],
+    labels: [t('Taken'), t('Available')],
     datasets: [
       {
         data: [holiday?.days, holiday?.available],

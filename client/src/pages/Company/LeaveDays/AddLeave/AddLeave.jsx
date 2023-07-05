@@ -118,9 +118,11 @@ const AddLeave = ({ open, onClose, start, end, dateFormat }) => {
             leaveType: leaveType._id
           }
         }
-      }).then(() => {
-        onClose();
-      });
+      })
+        .then(() => {
+          onClose();
+        })
+        .catch(() => {});
     },
     [onClose, createCompanyLeave, leaveType]
   );

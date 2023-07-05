@@ -117,10 +117,12 @@ const AddLeave = ({ open, onClose, dateFormat, userId, start, end, refetch }) =>
             days: days
           }
         }
-      }).then(() => {
-        refetch();
-        onClose();
-      });
+      })
+        .then(() => {
+          refetch();
+          onClose();
+        })
+        .catch(() => {});
     },
     [onClose, createUserLeave, leaveTypes, userId, companySettings]
   );

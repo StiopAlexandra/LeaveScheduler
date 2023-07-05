@@ -9,7 +9,7 @@ import {
   TableRow,
   Tooltip
 } from '@mui/material';
-import { format, getDate, getMonth, isBefore, addDays } from 'date-fns';
+import { format, getDate, getMonth, isBefore, isEqual, addDays } from 'date-fns';
 import React, { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -92,7 +92,6 @@ const UngroupTable = ({ daysOfMounth, daysInMonth, currentYearUserLeaves, month 
       userLeave
     });
   });
-  console.log(month);
 
   return (
     <StyledDiv>
@@ -122,7 +121,8 @@ const UngroupTable = ({ daysOfMounth, daysInMonth, currentYearUserLeaves, month 
                         {user.userLeave.map((leave) => {
                           for (
                             let i = new Date(leave.startDate);
-                            isBefore(i, new Date(leave.endDate));
+                            isBefore(i, new Date(leave.endDate)) ||
+                            isEqual(i, new Date(leave.endDate));
                             i = addDays(i, 1)
                           ) {
                             if (day === getDate(i) && month === getMonth(i)) {

@@ -15,7 +15,6 @@ import Register from '../../data/mutations/SignUp';
 import { ReactComponent as LogoDark } from '../../resources/icons/logo-dark.svg';
 import { ReactComponent as LogoLight } from '../../resources/icons/logo-light.svg';
 
-
 const StyledForm = styled('form')(() => ({
   width: '100%',
   display: 'flex',
@@ -87,9 +86,11 @@ const SignUp = () => {
             manager: true,
             company: response.data.addCompany._id
           }
-        }).then(() => {
-          navigate('/login', { replace: true });
-        });
+        })
+          .then(() => {
+            navigate('/login', { replace: true });
+          })
+          .catch(() => {});
       });
     },
     [addCompany, signup, navigate]
@@ -103,7 +104,7 @@ const SignUp = () => {
             paddingBottom: '25px'
           }}>
           <Typography variant={'h4'} align={'center'}>
-            Register with
+            {t('Register in')}
           </Typography>
           {theme.palette.mode === 'light' ? <LogoLight /> : <LogoDark />}
         </div>

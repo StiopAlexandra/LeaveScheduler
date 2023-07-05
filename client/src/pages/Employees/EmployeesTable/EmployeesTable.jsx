@@ -150,7 +150,7 @@ const EmployeesTable = () => {
             variables: {
               id
             }
-          })
+          }).catch(() => {})
         )
       );
     } finally {
