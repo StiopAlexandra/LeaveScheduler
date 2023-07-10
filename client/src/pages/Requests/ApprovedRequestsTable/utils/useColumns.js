@@ -15,7 +15,7 @@ const useColumns = ({ dateFormat }) => {
       },
       department: {
         hide: false,
-        seq: 2,
+        seq: 1,
         width: 170,
         headerName: 'Department',
         sortable: true,
@@ -27,23 +27,9 @@ const useColumns = ({ dateFormat }) => {
           );
         }
       },
-      leaveType: {
-        hide: false,
-        seq: 3,
-        minWidth: 170,
-        headerName: 'Leave Type',
-        sortable: true,
-        renderCell: (params) => {
-          return params.value ? (
-            <Status name={params.value?.name} color={params.value?.color} />
-          ) : (
-            ''
-          );
-        }
-      },
       startDate: {
         hide: false,
-        seq: 3,
+        seq: 2,
         minWidth: 160,
         headerName: 'Start Date',
         sortable: true,
@@ -53,12 +39,26 @@ const useColumns = ({ dateFormat }) => {
       },
       endDate: {
         hide: false,
-        seq: 4,
+        seq: 3,
         minWidth: 160,
         headerName: 'End Date',
         sortable: true,
         renderCell: (params) => {
           return format(parseISO(params.value), dateFormat);
+        }
+      },
+      leaveType: {
+        hide: false,
+        seq: 4,
+        minWidth: 170,
+        headerName: 'Leave Type',
+        sortable: true,
+        renderCell: (params) => {
+          return params.value ? (
+            <Status name={params.value?.name} color={params.value?.color} />
+          ) : (
+            ''
+          );
         }
       },
       days: {

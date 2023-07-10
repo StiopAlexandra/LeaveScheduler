@@ -43,23 +43,9 @@ const useColumns = ({ dateFormat }) => {
           );
         }
       },
-      leaveType: {
-        hide: false,
-        seq: 3,
-        minWidth: 170,
-        headerName: 'Leave Type',
-        sortable: true,
-        renderCell: (params) => {
-          return params.value ? (
-            <Status name={params.value?.name} color={params.value?.color} />
-          ) : (
-            ''
-          );
-        }
-      },
       startDate: {
         hide: false,
-        seq: 4,
+        seq: 3,
         minWidth: 160,
         headerName: 'Start Date',
         sortable: true,
@@ -69,12 +55,26 @@ const useColumns = ({ dateFormat }) => {
       },
       endDate: {
         hide: false,
-        seq: 5,
+        seq: 4,
         minWidth: 160,
         headerName: 'End Date',
         sortable: true,
         renderCell: (params) => {
           return format(parseISO(params.value), dateFormat);
+        }
+      },
+      leaveType: {
+        hide: false,
+        seq: 5,
+        minWidth: 170,
+        headerName: 'Leave Type',
+        sortable: true,
+        renderCell: (params) => {
+          return params.value ? (
+            <Status name={params.value?.name} color={params.value?.color} />
+          ) : (
+            ''
+          );
         }
       },
       days: {
